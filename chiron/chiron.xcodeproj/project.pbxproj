@@ -12,6 +12,7 @@
 		64C2472B2DAD376D00AD3ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472A2DAD376D00AD3ECC /* Assets.xcassets */; };
 		64C2472E2DAD376D00AD3ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */; };
 		AD8D9AED2DAE90140065A9B8 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8D9AEC2DAE90140065A9B8 /* PlannerView.swift */; };
+		ED2FF9EC2DAFCE5E00155E22 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2FF9EB2DAFCE5E00155E22 /* TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		64C2472A2DAD376D00AD3ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD8D9AEC2DAE90140065A9B8 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
+		ED2FF9EB2DAFCE5E00155E22 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				64C247262DAD376A00AD3ECC /* chironApp.swift */,
 				64C247282DAD376A00AD3ECC /* ContentView.swift */,
 				AD8D9AEC2DAE90140065A9B8 /* PlannerView.swift */,
+				ED2FF9EB2DAFCE5E00155E22 /* TabBar.swift */,
 				64C2472A2DAD376D00AD3ECC /* Assets.xcassets */,
 				64C2472C2DAD376D00AD3ECC /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 				64C247292DAD376A00AD3ECC /* ContentView.swift in Sources */,
 				64C247272DAD376A00AD3ECC /* chironApp.swift in Sources */,
 				AD8D9AED2DAE90140065A9B8 /* PlannerView.swift in Sources */,
+				ED2FF9EC2DAFCE5E00155E22 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
