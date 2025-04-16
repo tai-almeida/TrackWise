@@ -21,70 +21,36 @@ let AppColor = Color(
                 blue: 125/255);
 
 let inactiveTabColor: Color = Color(red: 0.7, green: 0.7, blue: 0.7)
+
+
 struct TabBar: View {
     
-    @Binding var selectedTab: Tabs          // verifies wich tab bar button was selected
-    @State var isLinkActive: Bool = false   // verifies if the button was clicked
+   // @Binding var selectedTab: Tabs          // verifies wich tab bar button was selected
+   // @State var isLinkActive: Bool = false   // verifies if the button was clicked
     
     var body: some View {
        
-        HStack (alignment: .center, spacing: 56){
-            Button {
-                // goes to planner screen
-                selectedTab = .planner
-            } label: {
-                
-                    VStack (alignment: .center, spacing: 0){
-                       
-                      Image(systemName: "book")
-                            //.resizable()
-                            //.scaledToFit()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(selectedTab == .planner ? AppColor : inactiveTabColor)
-                        Text("Planner")
-                            .foregroundColor(selectedTab == .planner ? AppColor : inactiveTabColor)
-                    }
-            }
-            Button {
-                // goes to calendar screen
-                selectedTab = .calendar
-            } label: {
+        TabView {
+            PlannerView()
+                .tabItem{
+                    Label("Planner", systemImage: "book")}
 
-                
-                VStack (alignment: .center, spacing: 0){
-                    Image(systemName: "calendar")
-                        //.resizable()
-                        //.scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(selectedTab == .calendar ? AppColor : inactiveTabColor)
-                    Text("Calendário")
-                        .foregroundColor(selectedTab == .calendar ? AppColor : inactiveTabColor)
-                }
-                
-            }
-            Button {
-                // goes to profile screen
-                selectedTab = .perfil
-            } label: {
-                VStack (alignment: .center, spacing: 0){
-                    Image(systemName: "person")
-                        //.resizable()
-                        //.scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(selectedTab == .perfil ? AppColor : inactiveTabColor)
-                    Text("Perfil")
-                        .foregroundColor(selectedTab == .perfil ? AppColor : inactiveTabColor)
-                }
-                
-            }
-        }
+            Text("Tela 2")
+                .tabItem{
+                    Label("Calendário", systemImage: "calendar")}
+            
 
+            Text("Tela 3")
+                .tabItem{
+                    Label("Pendentes", systemImage: "clock.badge.exclamationmark")}
+                        }
     }
 }
 
     
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
-        TabBar(selectedTab: .constant(.planner))
+       // TabBar(selectedTab: .constant(.planner))
+        TabBar()
     }
 }

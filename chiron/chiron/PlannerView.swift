@@ -14,19 +14,22 @@ struct PlannerView: View {
     // by default, the first tab selected is the planner (main frame)
     @State var selectedTab: Tabs = .planner
     var body: some View {
-        VStack {
-            Text("Planner")
-                .padding()
-            
-            Spacer()
-            
-            TabBar(selectedTab: $selectedTab)
+        NavigationView {
+            VStack {
+                Text("Tela do Planner")
+                    .padding()
+                NavigationLink.init("Clique aqui", destination: Text("Proxima Tela").navigationTitle("Boas vindas a nova tela!"))
+                
+                Spacer()
+                
+                //TabBar()
+            }.navigationTitle("Planner")
+        }
     }
-}
-
-struct PlannerView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlannerView()
+    
+    struct PlannerView_Previews: PreviewProvider {
+        static var previews: some View {
+            PlannerView()
+        }
     }
-}
 }

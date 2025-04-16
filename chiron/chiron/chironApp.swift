@@ -11,7 +11,8 @@ import SwiftUI
 struct chironApp: App {
     var body: some Scene {
         WindowGroup {
-            PlannerView()
+            //Text("Ola")
+           TabBar()
         }
     }
 }
