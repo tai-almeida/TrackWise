@@ -34,6 +34,21 @@ struct Task: Identifiable {
     var difficulty: Difficulty
     var checklist: [String]
     var isCompleted: Bool
+    var averageTime: Int //?
+    
+    var formattedData: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat="dd/MM/YYYY"
+        return formatter.string(from: startTime)
+    }
+    
+    var formattedRangeTime: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat="HH:mm"
+        let start = formatter.string(from: startTime)
+        let end = formatter.string(from: endTime)
+        return "\(start) - \(end)"
+    }
     
     static let exampleTask = Task(
         id: 0,
@@ -45,6 +60,7 @@ struct Task: Identifiable {
         category: .estudos,
         difficulty: .dificil,
         checklist: ["Assistir aula", "Fazer exercícios", "Revisar"],
-        isCompleted: false
+        isCompleted: false,
+        averageTime: 47
     )
 }
