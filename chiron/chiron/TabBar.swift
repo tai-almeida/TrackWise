@@ -14,11 +14,7 @@ enum Tabs: Int {
     case perfil = 2
 }
 
-// Declares AppColor as a global variable
-let AppColor = Color(
-                red: 102/255,
-                green: 130/255,
-                blue: 125/255);
+
 
 let inactiveTabColor: Color = Color(red: 0.7, green: 0.7, blue: 0.7)
 
@@ -31,7 +27,7 @@ struct TabBar: View {
     var body: some View {
        
         TabView {
-            PlannerView()
+            PlannerView(week:Week.exampleWeek)
                 .tabItem{
                     Label("Planner", systemImage: "book")}
 
