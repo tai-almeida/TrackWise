@@ -2,19 +2,23 @@
 //  InfoView.swift
 //  chiron
 //
-//  Created by Aluno 33 on 22/04/25.
+//  Created by Laris on 22/04/25.
 //
 
 import SwiftUI
 
 struct InfoView: View {
+    let item: RoutineItem
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct InfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoView()
+        switch item {
+        case .Task: {
+            TaskInfoView()
+        }
+        case .Event: {
+            EventInfoView()
+        }
+        case .Travel: {
+            TravelInfoView()
+        }
     }
 }

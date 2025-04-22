@@ -11,7 +11,9 @@ import SwiftUI
 struct chironApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                TaskInfoView(task: Task.exampleTask)
+            }
         }
     }
 }

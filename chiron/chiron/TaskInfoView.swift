@@ -86,7 +86,7 @@ struct TaskInfoView: View {
                         .fontWeight(.light)
                         .padding(.horizontal)
                     VStack (alignment: .leading){
-                        ForEach(task.checklist, id: \.self) { item in
+                        ForEach(Array(task.checklist.keys), id: \.self) { item in
                             Divider()
                             Text(item)
                         }
