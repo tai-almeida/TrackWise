@@ -89,3 +89,12 @@ struct Task: Identifiable {
         averageTime: 47
     )
 }
+
+func setTime(hour: Int, minute: Int) -> Date {
+    var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+    components.hour = hour
+    components.minute = minute
+    components.second = 0
+    
+    return Calendar.current.date(from:components)!
+}
