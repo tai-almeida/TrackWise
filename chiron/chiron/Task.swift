@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 // CaseIterable permite acessar os valores como lista,
 // necessario para criar a seleçao na criaçao de Task
 enum Difficulty: String, CaseIterable, Identifiable {
@@ -18,7 +20,7 @@ enum Difficulty: String, CaseIterable, Identifiable {
 }
 
 enum Category: String, CaseIterable, Identifiable {
-    case estudos, lazer, faxina, social
+    case estudos, lazer, faxina, social, atv_fisica
     
     var id: String { self.rawValue }
 }
@@ -64,6 +66,14 @@ struct Task: Identifiable {
         let end = formatter.string(from: endTime)
         return "\(start) - \(end)"
     }
+    
+    var formattedTime: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        return formatter.string(from: startTime)
+    }
+    
     
     static let exampleTask = Task(
         id: 0,

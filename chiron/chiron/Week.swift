@@ -7,8 +7,45 @@
 
 import Foundation
 
+// tasks de exemplo (estaticas)
+var task1 = Task(
+            id: 0,
+            title: "Estudar Calculo",
+            location: "Biblioteca Central",
+            date: Date(),
+            startTime: Date(),
+            endTime: Date().addingTimeInterval(3600),
+            category: .estudos,
+            difficulty: .dificil,
+            checklist: ["Assistir aula":false, "Fazer exercícios":false, "Revisar":false],
+            isCompleted: false,
+            averageTime: 47)
 
-var task1 = Task(id: 0, title: "Estudar Calculo", location: "Biblioteca Central", date: Date(), startTime: Date(), endTime: Date().addingTimeInterval(3600), category: .estudos, difficulty: .dificil, checklist: ["Assistir aula":false, "Fazer exercícios":false, "Revisar":false], isCompleted: false, averageTime: 47)
+var task2 = Task(
+            id: 1,
+            title: "Lavar Roupa",
+            location: "Casa",
+            date: Date(),
+            startTime: Date(),
+            endTime: Date().addingTimeInterval(3600),
+            category: .faxina,
+            difficulty: .facil,
+            checklist: ["Lavar Roupas" : false, "Estender Roupas": false],
+            isCompleted: false,
+            averageTime: 58)
+
+var task3 = Task(
+            id: 2,
+            title: "Academia",
+            location: "Academia",
+            date: Date(),
+            startTime: Date(),
+            endTime: Date().addingTimeInterval(3600),
+            category: .atv_fisica,
+            difficulty: .medio,
+            checklist: ["Treinar" : false, "Tomar banho": false],
+            isCompleted: false,
+            averageTime: 80)
 
 struct Week: Identifiable {
     var id: Int
@@ -20,7 +57,7 @@ struct Week: Identifiable {
     static let exampleWeek = Week(
         id: 0,
         date: Date(),
-        tasks: [task1],
+        tasks: [task1, task2, task3],
         events: ["Aniversário de Cont", "Prova de Física", "Checkpoint Design"]
     )
 

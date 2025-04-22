@@ -12,7 +12,7 @@ import SwiftUI
 struct PlannerView: View {
     
     // by default, the first tab selected is the planner (main frame)
-    @State var selectedTab: Tabs = .planner
+    //@State var selectedTab: Tabs = .planner
     var week: Week
     var body: some View {
         ZStack {
@@ -40,15 +40,40 @@ struct PlannerView: View {
                             
                             // impressao de cada evento do dia
                             VStack (alignment: .leading){
+                                
                                 ForEach(week.events, id: \.self) { item in
                                     Divider()
+                                        .padding(.horizontal, 20)
+                                    //Rectangle()
+                                        //.foregroundColor(Color(hex: 0xFCFFEF))
+                                        //.cornerRadius(10)
+                                        //.padding(.leading, 20)
+                                    //.padding(.trailing, 20)
                                     Text(item)
+                                        .padding(.horizontal, 20)
+                                        
                                 }
+                            }
+                            
+                            // impressao das tarefas do dia
+                            VStack (alignment: .leading) {
+                                Text("Atividades")
+                                    .padding(.top, 20)
+                                    .font(.body.bold())
+                                    .multilineTextAlignment(.leading)
                                 
+                                ForEach(week.tasks, id: \.id) { task in
+                                    HStack {
+                                        Spacer()
+                                        Text(task.formattedTime)
+                                        
+                                    }
+                                }
                             }
                             
                         }
                     }
+                    
                     
                 }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-enum Tabs: Int {
-    case planner = 0
-    case calendar = 1
-    case perfil = 2
-}
+//enum Tabs: Int {
+    //case planner = 0
+    //case calendar = 1
+    //case perfil = 2
+//}
 
 
 
