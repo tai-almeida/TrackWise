@@ -66,11 +66,25 @@ struct PlannerView: View {
                                     HStack {
                                         Spacer()
                                         Text(task.formattedTime)
+                                            .padding(.trailing, 10)
                                         
+                                    }
+                                    
+                                    Divider()
+                                        .padding(.horizontal, 10)
+                                    
+                                    
+                                    NavigationLink(destination: TaskInfoView()) {
+                                        Text(task.title)
+                                            .padding(10)
+                                            .foregroundColor(.black)
+                                            .background(Color(hex: 0xF8F6ED))
+                                            .cornerRadius(8)
+                                            .foregroundStyle(.black)
+                                            .padding(.leading, 5)
                                     }
                                 }
                             }
-                            
                         }
                     }
                     

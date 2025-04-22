@@ -16,6 +16,8 @@
 		ED86CF3B2DB7BB2300635744 /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86CF3A2DB7BB2300635744 /* Week.swift */; };
 		ED86CF3D2DB7BB3100635744 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86CF3C2DB7BB3100635744 /* Task.swift */; };
 		ED86CF3F2DB7BB6100635744 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86CF3E2DB7BB6100635744 /* ColorExtension.swift */; };
+		ED86CF412DB7E48700635744 /* TaskInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86CF402DB7E48700635744 /* TaskInfoView.swift */; };
+		ED86CF432DB7E4B700635744 /* IniciarTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86CF422DB7E4B700635744 /* IniciarTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		ED86CF3A2DB7BB2300635744 /* Week.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		ED86CF3C2DB7BB3100635744 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		ED86CF3E2DB7BB6100635744 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		ED86CF402DB7E48700635744 /* TaskInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoView.swift; sourceTree = "<group>"; };
+		ED86CF422DB7E4B700635744 /* IniciarTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IniciarTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				64C247262DAD376A00AD3ECC /* chironApp.swift */,
 				64C247282DAD376A00AD3ECC /* ContentView.swift */,
 				AD8D9AEC2DAE90140065A9B8 /* PlannerView.swift */,
+				ED86CF402DB7E48700635744 /* TaskInfoView.swift */,
+				ED86CF422DB7E4B700635744 /* IniciarTaskView.swift */,
 				ED2FF9EB2DAFCE5E00155E22 /* TabBar.swift */,
 				ED86CF3A2DB7BB2300635744 /* Week.swift */,
 				ED86CF3C2DB7BB3100635744 /* Task.swift */,
@@ -155,10 +161,12 @@
 				64C247292DAD376A00AD3ECC /* ContentView.swift in Sources */,
 				64C247272DAD376A00AD3ECC /* chironApp.swift in Sources */,
 				ED86CF3B2DB7BB2300635744 /* Week.swift in Sources */,
+				ED86CF432DB7E4B700635744 /* IniciarTaskView.swift in Sources */,
 				AD8D9AED2DAE90140065A9B8 /* PlannerView.swift in Sources */,
 				ED86CF3D2DB7BB3100635744 /* Task.swift in Sources */,
 				ED86CF3F2DB7BB6100635744 /* ColorExtension.swift in Sources */,
 				ED2FF9EC2DAFCE5E00155E22 /* TabBar.swift in Sources */,
+				ED86CF412DB7E48700635744 /* TaskInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
