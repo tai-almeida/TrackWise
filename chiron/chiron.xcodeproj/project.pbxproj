@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		643B2F3C2DB7D4640036AE1B /* TaskNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B2F3B2DB7D4640036AE1B /* TaskNow.swift */; };
 		64C247272DAD376A00AD3ECC /* chironApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C247262DAD376A00AD3ECC /* chironApp.swift */; };
 		64C247292DAD376A00AD3ECC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C247282DAD376A00AD3ECC /* ContentView.swift */; };
 		64C2472B2DAD376D00AD3ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472A2DAD376D00AD3ECC /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		643B2F3B2DB7D4640036AE1B /* TaskNow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNow.swift; sourceTree = "<group>"; };
 		64C247232DAD376A00AD3ECC /* chiron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chiron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C247262DAD376A00AD3ECC /* chironApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chironApp.swift; sourceTree = "<group>"; };
 		64C247282DAD376A00AD3ECC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				64C247262DAD376A00AD3ECC /* chironApp.swift */,
 				64C247282DAD376A00AD3ECC /* ContentView.swift */,
+				643B2F3B2DB7D4640036AE1B /* TaskNow.swift */,
 				64C2472A2DAD376D00AD3ECC /* Assets.xcassets */,
 				64C2472C2DAD376D00AD3ECC /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64C247292DAD376A00AD3ECC /* ContentView.swift in Sources */,
+				643B2F3C2DB7D4640036AE1B /* TaskNow.swift in Sources */,
 				64C247272DAD376A00AD3ECC /* chironApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
