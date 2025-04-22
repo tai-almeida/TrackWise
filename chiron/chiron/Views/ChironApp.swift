@@ -13,6 +13,9 @@ struct chironApp: App {
         WindowGroup {
             NavigationView {
                 TaskInfoView(task: Task.exampleTask)
+                //EventInfoView(event: Event.exampleEvent)
+                // TravelInfoView(travel: Travel.exampleTravel)
+
             }
         }
     }

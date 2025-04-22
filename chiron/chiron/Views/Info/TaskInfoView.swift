@@ -18,7 +18,6 @@ struct TaskInfoView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     
-                    
                     // bloco infos principais
                     VStack (alignment: .leading){
                         Text(task.title)
@@ -35,9 +34,8 @@ struct TaskInfoView: View {
                         Text("Tempo médio: \(task.averageTime) min")
                             .font(.subheadline)
                     }
-                    .padding()
                     
-                    // bloco infos secundarias
+                    // bloco infos secundárias
                     VStack {
                         HStack {
                             Text("Data")
@@ -76,41 +74,41 @@ struct TaskInfoView: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF1ECDB))
+                            .fill(Color(hex: 0xF8F6ED))
                     )
-                    .padding(.bottom)
-                    
+
                     // bloco checklist
-                    Text("Checklist")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .padding(.horizontal)
-                    VStack (alignment: .leading){
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Checklist")
+                            .font(.caption)
+                            .fontWeight(.light)
+                        
                         ForEach(Array(task.checklist.keys), id: \.self) { item in
                             Divider()
                             Text(item)
                         }
                     }
-                    .padding([.horizontal, .bottom])
+                    .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF1ECDB))
+                            .fill(Color(hex: 0xF8F6ED))
                     )
-                
-                }
-                
-            }
-            Spacer()
 
-            NavigationLink(destination: IniciarTaskView()) {
-                Text("Começar Tarefa")
-                    .padding(.horizontal, 100)
-                    .padding(.vertical, 15)
-                    .background(Color(hex: 0x91A394))
-                    .foregroundStyle(.white)
-                    .cornerRadius(8)
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
+
+                }
+                .padding()
+            Spacer()
+        }
+            
+        NavigationLink(destination: IniciarTaskView()) {
+            Text("Começar Tarefa")
+                .padding(.horizontal, 100)
+                .padding(.vertical, 15)
+                .background(Color(hex: 0x91A394))
+                .foregroundStyle(.white)
+                .cornerRadius(8)
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
             
         }
         .background(Color(hex: 0xEFE8D8))
@@ -124,6 +122,7 @@ struct TaskInfoView: View {
                 }
             }
         }
+        
     }
 }
 

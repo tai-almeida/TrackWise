@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EventInfo: View {
+struct EventInfoView: View {
     var event: Event
     
     var body: some View {
@@ -61,5 +61,11 @@ struct EventInfo: View {
                 }
             }
         }
+    }
+}
+
+struct EventInfoView_Previews: PreviewProvider {
+    static var previews: some View {
+        EventInfoView(event: Event.exampleEvent)
     }
 }

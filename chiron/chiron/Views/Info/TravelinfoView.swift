@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TravelInfo: View {
+struct TravelInfoView: View {
     var travel: Travel
     
     var body: some View {
@@ -24,9 +24,13 @@ struct TravelInfo: View {
                             .font(.title.bold())
                             .padding(.bottom, 10)
                         
-                        Text(travel.time)
+                        Text(travel.formattedTime)
                             .font(.headline)
                             .padding(.bottom, 5)
+                        
+                        Text("Duração: \(travel.duration) min")
+                            .font(.subheadline)
+
                     }
                     .padding()
                     
@@ -63,3 +67,10 @@ struct TravelInfo: View {
         }
     }
 }
+
+struct TravelInfoView_Previews: PreviewProvider {
+    static var previews: some View {
+        TravelInfoView(travel: Travel.exampleTravel)
+    }
+}
+

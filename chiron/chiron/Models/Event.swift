@@ -25,4 +25,11 @@ struct Event: Identifiable {
         formatter.dateFormat="dd/MM/YYYY"
         return formatter.string(from: date)
     }
+    
+    static let exampleEvent = Event(
+        id: 0,
+        title: "Aniversário do Cont",
+        location: "Morro do Bombom",
+        date: Date()
+    )
 }

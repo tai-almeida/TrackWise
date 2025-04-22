@@ -8,8 +8,7 @@
 import Foundation
 
 enum RoutineItem {
-    case .Task
-    case .Event
-    case .Travel
-    
+    case Task
+    case Event
+    case Travel
 }
