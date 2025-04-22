@@ -11,14 +11,14 @@ import SwiftUI
 extension Category {
     var color: Color {
         switch self {
-        case .estudos:
-            return .purple
-        case .lazer:
-            return .blue
-        case .faxina:
-            return .orange
-        case .social:
-            return .pink
+            case .estudos:
+                return .purple
+            case .lazer:
+                return .blue
+            case .faxina:
+                return .orange
+            case .social:
+                return .pink
         }
     }
 }
