@@ -2,19 +2,64 @@
 //  EventInfo .swift
 //  chiron
 //
-//  Created by Aluno 33 on 22/04/25.
+//  Created by Laris on 22/04/25.
 //
 
 import SwiftUI
 
-struct EventInfo_: View {
+struct EventInfo: View {
+    var event: Event
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct EventInfo__Previews: PreviewProvider {
-    static var previews: some View {
-        EventInfo_()
+        
+        VStack (alignment: .leading){
+            
+            ScrollView {
+                VStack(alignment: .leading) {
+                    
+                    
+                    // bloco infos principais
+                    VStack (alignment: .leading){
+                        Text(event.title)
+                            .font(.title.bold())
+                            .padding(.bottom, 10)
+                        
+                        Text(event.location)
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                    }
+                    .padding()
+                    
+                    // bloco infos secundarias
+                    VStack {
+                        HStack {
+                            Text("Data")
+                            Spacer()
+                            Text(event.formattedData)
+                        }
+                                            
+                    }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color(hex: 0xF1ECDB))
+                    )
+                    .padding(.bottom)
+                }
+                
+            }
+            Spacer()
+        }
+        .background(Color(hex: 0xEFE8D8))
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Detalhes do Evento")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}) {
+                    Text("Editar")
+                        .foregroundColor(Color(hex: 0x91A394))
+                }
+            }
+        }
     }
 }
