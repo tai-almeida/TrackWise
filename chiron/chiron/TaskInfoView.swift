@@ -18,6 +18,7 @@ struct TaskInfoView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     
+                    
                     // bloco infos principais
                     VStack (alignment: .leading){
                         Text(task.title)
@@ -50,7 +51,7 @@ struct TaskInfoView: View {
                             Text("Categoria")
                             Spacer()
                             Text(task.category.rawValue.capitalized)
-                                .font(.caption)
+                                .font(.callout)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 4)
                                 .background(task.category.color)
@@ -64,7 +65,7 @@ struct TaskInfoView: View {
                             Text("Dificuldade")
                             Spacer()
                             Text(task.difficulty.rawValue)
-                                .font(.caption)
+                                .font(.callout)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 4)
                                 .background(task.difficulty.color)
@@ -90,12 +91,12 @@ struct TaskInfoView: View {
                             Text(item)
                         }
                     }
-                    .padding(.horizontal)
+                    .padding([.horizontal, .bottom])
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(hex: 0xF1ECDB))
                     )
-                    
+                
                 }
                 
             }
@@ -113,6 +114,16 @@ struct TaskInfoView: View {
             
         }
         .background(Color(hex: 0xEFE8D8))
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Detalhes da Tarefa")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}) {
+                    Text("Editar")
+                        .foregroundColor(Color(hex: 0x91A394))
+                }
+            }
+        }
     }
 }
 
