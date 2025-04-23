@@ -61,9 +61,9 @@
 		2A1BAB4B2DB8007900524A11 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2A1BAB4C2DB8009A00524A11 /* Info */,
 				2A4C32302DB9318C00F400AE /* chironApp.swift */,
 				2A4C322F2DB9318C00F400AE /* PlannerView.swift */,
-				2A1BAB4C2DB8009A00524A11 /* Info */,
 			);
 			path = Views;
 			sourceTree = "<group>";
