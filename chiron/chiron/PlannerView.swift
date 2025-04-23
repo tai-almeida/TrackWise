@@ -51,6 +51,7 @@ struct PlannerView: View {
                                     //.padding(.trailing, 20)
                                     Text(item)
                                         .padding(.horizontal, 20)
+                                    
                                         
                                 }
                             }
@@ -62,29 +63,41 @@ struct PlannerView: View {
                                     .font(.body.bold())
                                     .multilineTextAlignment(.leading)
                                 
-                                ForEach(week.tasks, id: \.id) { task in
-                                    HStack {
-                                        Spacer()
-                                        Text(task.formattedTime)
-                                            .padding(.trailing, 10)
+                                Section {
+                                    ForEach(week.tasks, id: \.id) { task in
+                                        HStack {
+                                            Spacer()
+                                            Text(task.formattedTime)
+                                                .padding(.trailing, 10)
+                                            
+                                        }
                                         
-                                    }
-                                    
-                                    Divider()
+                                        Divider()
+                                            //.padding(.horizontal, 10)
+                                        
+                                        
+                                        NavigationLink(destination: TaskInfoView(task: Task.exampleTask)) {
+                                            HStack {
+                                                Rectangle()
+                                                    .foregroundColor(task.category.color)
+                                                    .frame(width:10)
+                                                    
+                                            Text(task.title)
+                                                //.padding(.horizontal, 100)
+                                                .padding(.vertical, 15)
+                                                .foregroundStyle(.black)
+                                                .padding(.leading, 5)
+                                            }
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .background(Color(hex: 0xF8F6ED))
+                                        .cornerRadius(8)
                                         .padding(.horizontal, 10)
-                                    
-                                    
-                                    NavigationLink(destination: TaskInfoView()) {
-                                        Text(task.title)
-                                            .padding(10)
-                                            .foregroundColor(.black)
-                                            .background(Color(hex: 0xF8F6ED))
-                                            .cornerRadius(8)
-                                            .foregroundStyle(.black)
-                                            .padding(.leading, 5)
                                     }
+                                    .padding(.horizontal, 10)
                                 }
                             }
+                                
                         }
                     }
                     

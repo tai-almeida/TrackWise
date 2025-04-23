@@ -34,9 +34,8 @@ struct TaskInfoView: View {
                         Text("Tempo médio: \(task.averageTime) min")
                             .font(.subheadline)
                     }
-                    .padding()
                     
-                    // bloco infos secundarias
+                    // bloco infos secundárias
                     VStack {
                         HStack {
                             Text("Data")
@@ -50,7 +49,7 @@ struct TaskInfoView: View {
                             Text("Categoria")
                             Spacer()
                             Text(task.category.rawValue.capitalized)
-                                .font(.caption)
+                                .font(.callout)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 4)
                                 .background(task.category.color)
@@ -64,7 +63,7 @@ struct TaskInfoView: View {
                             Text("Dificuldade")
                             Spacer()
                             Text(task.difficulty.rawValue)
-                                .font(.caption)
+                                .font(.callout)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 4)
                                 .background(task.difficulty.color)
@@ -75,44 +74,55 @@ struct TaskInfoView: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF1ECDB))
+                            .fill(Color(hex: 0xF8F6ED))
                     )
-                    .padding(.bottom)
-                    
+
                     // bloco checklist
-                    Text("Checklist")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .padding(.horizontal)
-                    VStack (alignment: .leading){
-                        ForEach(task.checklist, id: \.self) { item in
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Checklist")
+                            .font(.caption)
+                            .fontWeight(.light)
+                        
+                        ForEach(Array(task.checklist.keys), id: \.self) { item in
                             Divider()
                             Text(item)
                         }
                     }
-                    .padding(.horizontal)
+                    .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF1ECDB))
+                            .fill(Color(hex: 0xF8F6ED))
                     )
-                    
-                }
-                
-            }
-            Spacer()
 
-            NavigationLink(destination: IniciarTaskView()) {
-                Text("Começar Tarefa")
-                    .padding(.horizontal, 100)
-                    .padding(.vertical, 15)
-                    .background(Color(hex: 0x91A394))
-                    .foregroundStyle(.white)
-                    .cornerRadius(8)
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
+
+                }
+                .padding()
+            Spacer()
+        }
+            
+        NavigationLink(destination: IniciarTaskView()) {
+            Text("Começar Tarefa")
+                .padding(.horizontal, 100)
+                .padding(.vertical, 15)
+                .background(Color(hex: 0x91A394))
+                .foregroundStyle(.white)
+                .cornerRadius(8)
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
             
         }
         .background(Color(hex: 0xEFE8D8))
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Detalhes da Tarefa")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}) {
+                    Text("Editar")
+                        .foregroundColor(Color(hex: 0x91A394))
+                }
+            }
+        }
+        
     }
 }
 
