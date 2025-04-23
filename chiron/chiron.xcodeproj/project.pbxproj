@@ -154,6 +154,64 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		ED2605172DB92987008FA8B7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ED26051C2DB929FE008FA8B7 /* ColorExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ED2605182DB9299D008FA8B7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ED26051E2DB92A1C008FA8B7 /* Event.swift */,
+				ED2605202DB92A29008FA8B7 /* RoutineItem.swift */,
+				ED2605222DB92A34008FA8B7 /* Task.swift */,
+				ED2605242DB92A3E008FA8B7 /* Travel.swift */,
+				ED2605262DB92A47008FA8B7 /* Week.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ED2605192DB929A8008FA8B7 /* Styling */ = {
+			isa = PBXGroup;
+			children = (
+				ED2605282DB92AAB008FA8B7 /* TaskStyle.swift */,
+			);
+			path = Styling;
+			sourceTree = "<group>";
+		};
+		ED26051A2DB929B5008FA8B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED26051B2DB929D1008FA8B7 /* Info */,
+				ED26052A2DB92B0B008FA8B7 /* PlannerView.swift */,
+				ED26052C2DB92B53008FA8B7 /* ChironApp.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED26051B2DB929D1008FA8B7 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				ED26052E2DB92B7A008FA8B7 /* EventInfoView.swift */,
+				ED2605302DB92B86008FA8B7 /* InfoView.swift */,
+				ED2605322DB92B97008FA8B7 /* IniciarTaskView.swift */,
+				ED2605342DB92BA7008FA8B7 /* TravelInfoView.swift */,
+				ED26053A2DB92C23008FA8B7 /* TaskInfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		ED2605372DB92BC1008FA8B7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ED2605382DB92BD1008FA8B7 /* TabBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,6 +244,7 @@
 				TargetAttributes = {
 					64C247222DAD376A00AD3ECC = {
 						CreatedOnToolsVersion = 13.2;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -366,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"chiron/Preview Content\"";
@@ -385,6 +445,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = atrapalhados.chiron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -395,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"chiron/Preview Content\"";

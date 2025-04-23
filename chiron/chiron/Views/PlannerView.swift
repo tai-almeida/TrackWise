@@ -81,12 +81,23 @@ struct PlannerView: View {
                                                 Rectangle()
                                                     .foregroundColor(task.category.color)
                                                     .frame(width:10)
+                                                
+                                                VStack(alignment: .leading) {
+                                                    Text(task.title)
+                                                        //.padding(.horizontal, 100)
+                                                        .padding(.top, 10)
+                                                        .foregroundStyle(.black)
+                                                        .padding(.leading, 5)
                                                     
-                                            Text(task.title)
-                                                //.padding(.horizontal, 100)
-                                                .padding(.vertical, 15)
-                                                .foregroundStyle(.black)
-                                                .padding(.leading, 5)
+                                                    Text(task.difficulty.rawValue)
+                                                        .font(.system(size:12))
+                                                        .padding(.horizontal, 10)
+                                                        .padding(.vertical, 4)
+                                                        .background(task.difficulty.color)
+                                                        .foregroundStyle(.white)
+                                                        .clipShape(Capsule())
+                                                }
+                                                .padding(.bottom, 5)
                                             }
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
