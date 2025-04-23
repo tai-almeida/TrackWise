@@ -20,7 +20,7 @@ extension Category {
         case .social:
             return .pink
         case .atv_fisica:
-            return .orange
+            return .cyan
         }
     }
 }
