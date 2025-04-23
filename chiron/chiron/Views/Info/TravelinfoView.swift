@@ -54,7 +54,7 @@ struct TravelInfoView: View {
             }
             Spacer()
         }
-        .background(Color(hex: 0xEFE8D8))
+        .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes do Deslocamento")
         .toolbar {

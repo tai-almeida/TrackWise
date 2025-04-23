@@ -99,26 +99,27 @@ struct TaskInfoView: View {
                 .padding()
             Spacer()
         }
-            
+        
+        // conferir se o horario bate com o da tarefa
         NavigationLink(destination: IniciarTaskView()) {
             Text("Começar Tarefa")
                 .padding(.horizontal, 100)
                 .padding(.vertical, 15)
-                .background(Color(hex: 0x91A394))
+                .background(Color("AccentColor"))
                 .foregroundStyle(.white)
                 .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, alignment: .center)
             
         }
-        .background(Color(hex: 0xEFE8D8))
+        .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {}) {
                     Text("Editar")
-                        .foregroundColor(Color("BackgroundScreenColor"))
+                        .foregroundColor(Color("AccentColor"))
                 }
             }
         }

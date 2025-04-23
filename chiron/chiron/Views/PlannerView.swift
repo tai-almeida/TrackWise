@@ -16,7 +16,7 @@ struct PlannerView: View {
     var week: Week
     var body: some View {
         ZStack {
-            screenColor.ignoresSafeArea()
+            Color("BackgroundScreenColor").ignoresSafeArea()
             
             NavigationView {
                 
@@ -104,13 +104,13 @@ struct PlannerView: View {
                     
                 }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(screenColor)
+                    .background(Color("BackgroundScreenColor"))
                     
             }
             
             
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(screenColor)
+            .background(Color("BackgroundScreenColor"))
             .padding()
         }
     }
