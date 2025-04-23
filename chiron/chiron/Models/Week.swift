@@ -50,15 +50,7 @@ var task3 = Task(
 struct Week: Identifiable {
     var id: Int
     var date: Date
-    let days: [String] = [
-                        "Segunda-feira",
-                        "Terça-feira",
-                        "Quarta-feira",
-                        "Quinta-feira",
-                        "Sexta-feira",
-                        "Sábado",
-                        "Domingo"
-                        ]
+    let days: [String] = ["Segunda-feira", "Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado","Domingo"]
     var tasks: [Task]
     var events: [String]
     

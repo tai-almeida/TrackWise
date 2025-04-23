@@ -11,12 +11,8 @@ import SwiftUI
 struct chironApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                TaskInfoView(task: Task.exampleTask)
-                //EventInfoView(event: Event.exampleEvent)
-                // TravelInfoView(travel: Travel.exampleTravel)
-
-            }
+            //Text("Ola")
+           TabBar()
         }
     }
 }

@@ -118,7 +118,7 @@ struct TaskInfoView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {}) {
                     Text("Editar")
-                        .foregroundColor(Color(hex: 0x91A394))
+                        .foregroundColor(Color("BackgroundScreenColor"))
                 }
             }
         }
