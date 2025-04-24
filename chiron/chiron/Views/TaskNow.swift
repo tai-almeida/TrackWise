@@ -71,7 +71,7 @@ struct TaskNow: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: IniciarTaskView()) {
                                 Text("Finalizar Tarefa")
                                     .padding(.horizontal, 100)
                                     .padding(.vertical, 15)
