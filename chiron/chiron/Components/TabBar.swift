@@ -39,7 +39,9 @@ struct TabBar: View {
             Text("Tela 3")
                 .tabItem{
                     Label("Pendentes", systemImage: "clock.badge.exclamationmark")}
-                        }
+        }
+        // altera cor do item selecionado na TabBar
+        .accentColor(Color("AccentColor"))
     }
 }
 
