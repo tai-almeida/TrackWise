@@ -98,3 +98,21 @@ func setTime(hour: Int, minute: Int) -> Date {
     
     return Calendar.current.date(from:components)!
 }
+
+func convertsTime(duration: Int) -> String {
+    /* Converte o tempo da tarefa de minutos para uma string no formato HhMIN*/
+    let totalMinutes = duration
+    let hours = totalMinutes / 60
+    let minutes = totalMinutes % 60
+    
+    if hours > 0 {
+        if minutes > 0 {
+            return "\(hours)h\(minutes)"
+        } else {
+            return "\(hours)h"
+        }
+        
+    } else {
+        return "\(minutes)min"
+    }
+}
