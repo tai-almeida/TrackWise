@@ -98,14 +98,34 @@ struct PlannerView: View {
                                                         .clipShape(Capsule())
                                                 }
                                                 .padding(.bottom, 5)
+                                                Spacer()
+                                                VStack(alignment: .trailing) {
+                                                    Image(systemName: "play.fill")
+                                                        //.font(.system(size:12))
+                                                        .padding(.horizontal, 10)
+                                                        .padding(.vertical, 4)
+                                                        .background(Color("AccentColor"))
+                                                        .foregroundStyle(.white)
+                                                        .clipShape(Capsule())
+                                                    
+                                                    //let duration: Int = task.averageTime
+                                                    Text(convertsTime(duration: task.averageTime))
+                                                        .font(.system(size:12))
+                                                        .padding(.horizontal, 10)
+                                                        .padding(.vertical, 4)
+                                                        .background(Color(hex: 0xEFE8D8))
+                                                        .foregroundStyle(.black)
+                                                        .clipShape(Capsule())
+                                                }
+                                                .padding(.trailing, 5)
                                             }
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .background(Color(hex: 0xF8F6ED))
                                         .cornerRadius(8)
-                                        .padding(.horizontal, 10)
+                                        .padding(.horizontal, 5)
                                     }
-                                    .padding(.horizontal, 10)
+                                    //.padding(.horizontal, 10)
                                 }
                             }
                                 
