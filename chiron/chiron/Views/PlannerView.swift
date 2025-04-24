@@ -31,7 +31,10 @@ struct PlannerView: View {
                             ForEach(week.days) { day in
                                 // imprime o dia da semana e a data abaixo
                                 Text(day.name)
+<<<<<<< HEAD
                                     .padding(.top, 5)
+=======
+>>>>>>> a7eb216 (verificar link com calendario)
                                     .font(.body.bold())
                                     .multilineTextAlignment(.leading)
                                 
