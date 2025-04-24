@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2A4C322E2DB9318000F400AE /* IniciarTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4C322D2DB9318000F400AE /* IniciarTaskView.swift */; };
 		2A4C32312DB9318C00F400AE /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4C322F2DB9318C00F400AE /* PlannerView.swift */; };
-		2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4C32302DB9318C00F400AE /* chironApp.swift */; };
 		2A4C32342DB931A400F400AE /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4C32332DB931A400F400AE /* TabBar.swift */; };
 		2A5E7C942DB7D61500B10322 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C932DB7D61500B10322 /* EventInfoView.swift */; };
 		2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C952DB7D72600B10322 /* InfoView.swift */; };
@@ -23,6 +22,7 @@
 		2AC416662DAE8FE9008E4538 /* TaskInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */; };
 		2AC416692DAE9262008E4538 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC416682DAE9262008E4538 /* Task.swift */; };
 		6400F1F72DBA7648004EE832 /* TaskNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6400F1F62DBA7648004EE832 /* TaskNow.swift */; };
+		6400F1F92DBA7BE0004EE832 /* ChironApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6400F1F82DBA7BE0004EE832 /* ChironApp.swift */; };
 		64C2472B2DAD376D00AD3ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472A2DAD376D00AD3ECC /* Assets.xcassets */; };
 		64C2472E2DAD376D00AD3ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */; };
 		ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE11D2A2DB9511D00C5833E /* AddItemView.swift */; };
@@ -31,7 +31,6 @@
 /* Begin PBXFileReference section */
 		2A4C322D2DB9318000F400AE /* IniciarTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IniciarTaskView.swift; sourceTree = "<group>"; };
 		2A4C322F2DB9318C00F400AE /* PlannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
-		2A4C32302DB9318C00F400AE /* chironApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chironApp.swift; sourceTree = "<group>"; };
 		2A4C32332DB931A400F400AE /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		2A5E7C932DB7D61500B10322 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		2A5E7C952DB7D72600B10322 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -45,6 +44,7 @@
 		2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoView.swift; sourceTree = "<group>"; };
 		2AC416682DAE9262008E4538 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6400F1F62DBA7648004EE832 /* TaskNow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNow.swift; sourceTree = "<group>"; };
+		6400F1F82DBA7BE0004EE832 /* ChironApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChironApp.swift; sourceTree = "<group>"; };
 		643B2F3B2DB7D4640036AE1B /* TaskNow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNow.swift; sourceTree = "<group>"; };
 		64C247232DAD376A00AD3ECC /* chiron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chiron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C2472A2DAD376D00AD3ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,10 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				2A1BAB4C2DB8009A00524A11 /* Info */,
-				2A4C32302DB9318C00F400AE /* chironApp.swift */,
 				6400F1F62DBA7648004EE832 /* TaskNow.swift */,
 				ADE11D2A2DB9511D00C5833E /* AddItemView.swift */,
 				2A4C322F2DB9318C00F400AE /* PlannerView.swift */,
+				6400F1F82DBA7BE0004EE832 /* ChironApp.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,11 +251,11 @@
 				2A9930792DB016EF00C393AF /* ColorExtension.swift in Sources */,
 				2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */,
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
+				6400F1F92DBA7BE0004EE832 /* ChironApp.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
 				2A4C322E2DB9318000F400AE /* IniciarTaskView.swift in Sources */,
 				6400F1F72DBA7648004EE832 /* TaskNow.swift in Sources */,
 				2AC416692DAE9262008E4538 /* Task.swift in Sources */,
-				2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */,
 				2A5E7C9F2DB7E11700B10322 /* RoutineItem.swift in Sources */,
 				ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */,
 			);
