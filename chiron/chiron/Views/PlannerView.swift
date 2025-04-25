@@ -1,8 +1,8 @@
 //
-//  PlannerView.swift
-//  chiron
+// PlannerView.swift
+// chiron
 //
-//  Created by Aluno 41 on 15/04/25.
+// Created by Aluno 41 on 15/04/25.
 //
 
 import SwiftUI
@@ -127,21 +127,44 @@ struct PlannerView: View {
                             }
                             
                         }
+                        .padding(.bottom, 5)
+                      }
                     }
-                }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline) //titulo da tela
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color("BackgroundScreenColor"))
-                    
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color(hex: 0xF8F6ED))
+                    .cornerRadius(8)
+                    .padding(.horizontal, 10)
+                  }
+                  .padding(.horizontal, 10)
+                }
+              }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("BackgroundScreenColor"))
-            //.padding()
-        }
+          }
+          NavigationLink.init("",
+                    destination: AddItemView(),
+                    isActive: $navigateToAddItem)
+        }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .background(Color("BackgroundScreenColor"))
+          .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              Button(action: {
+                navigateToAddItem = true
+              }) {
+                Text("+")
+                  .foregroundColor(Color("AccentColor"))
+              }
+            }
+          }
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(Color("BackgroundScreenColor"))
+      .padding()
     }
-    
-    struct PlannerView_Previews: PreviewProvider {
-        static var previews: some View {
-            PlannerView(week: Week.exampleWeek)
-        }
+  }
+  struct PlannerView_Previews: PreviewProvider {
+    static var previews: some View {
+      PlannerView(week: Week.exampleWeek)
     }
+  }
 }
