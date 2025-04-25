@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IniciarTaskView: View {
     var body: some View {
-        Text("Tela tarefa iniciada")
+        TaskNow(task: Task.exampleTask)
     }
 }
 

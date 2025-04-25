@@ -7,41 +7,39 @@
 
 import SwiftUI
 
-var checklist: [String] =
-    ["Revisar capítulo 2", "Fazer Exercícios", "Corrigir exercícios"]
-var tarefa = "Estudar Cálculo"
-var local = "Biblioteca Central"
-var horario_ini = DateComponents(hour: 8, minute: 0)
-var horario_fim = DateComponents(hour: 9, minute: 0)
-var tempo_restante = 30
-
 func terminarTarefa() { }
 
 
 struct TaskNow: View {
     
+    var task: Task
+    
     @State private var tarefaFeita = false
-    init() {
+    @State private var checklistState: [String: Bool] = [:]
+    
+    init(task: Task) {
         UITableView.appearance().backgroundColor = .clear
+        self.task = task
+        _checklistState = State(initialValue: task.checklist)
     }
     
     var body: some View {
-        NavigationView {
+        //NavigationView {
             VStack (alignment: .leading) {
                 
                 VStack (alignment: .leading) {
-                    Text(tarefa)
+                    Text(task.title)
                         .font(.title.bold())
                         .padding(.bottom, 10)
                     
-                    Text(local)
+                    Text(task.location)
                         .font(.headline)
                         .padding(.bottom, 5)
                     
-                    Text("8:00 - 9:00")
+                    Text(task.formattedRangeTime)
                         .padding(.bottom, 5)
                     
-                    Text("Tempo restante: \(tempo_restante) min")
+                    Text("Tempo restante: \(task.formattedTime) min")
                         .font(.subheadline)
                         .padding(.bottom, 10)
                 }
@@ -49,17 +47,17 @@ struct TaskNow: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Form {
                     Section(header: Text("Checklist")) {
-                        ForEach(checklist, id: \.self) { item in
+                        ForEach(Array(checklistState), id: \.key) { item, isDone in
                             HStack {
                                 Text(item)
-                                    .strikethrough(tarefaFeita)
-                                    .foregroundColor(tarefaFeita ? .gray : .primary)
+                                    .strikethrough(isDone)
+                                    .foregroundColor(isDone ? .gray : .primary)
                                 Spacer()
                                 Button {
-                                    tarefaFeita.toggle()
+                                    checklistState[item]?.toggle()
                                 } label:{
-                                    Image(systemName: tarefaFeita ? "checkmark.circle.fill" : "circle")
-                                        .foregroundColor(tarefaFeita ? .green : .gray)
+                                    Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
+                                        .foregroundColor(isDone ? .green : .gray)
                                 }
                             }
                             .listRowBackground(Color(hex:0xF8F6ED))
@@ -71,7 +69,7 @@ struct TaskNow: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: IniciarTaskView()) {
+                    NavigationLink(destination: TaskInfoView(task: Task.exampleTask)) {
                                 Text("Finalizar Tarefa")
                                     .padding(.horizontal, 100)
                                     .padding(.vertical, 15)
@@ -83,18 +81,16 @@ struct TaskNow: View {
                 }
             }
             .background(Color(hex: 0xEFE8D8))
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Tarefa de Agora")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {}) {
-                        Text("Voltar")
+                        Text("Cancelar")
                             .foregroundColor(Color(hex: 0x91A394))
                     }
                 }
             }
         }
-    }
+    //}
 }
 
 
@@ -102,6 +98,6 @@ struct TaskNow: View {
 
 struct TaskNow_Previews: PreviewProvider {
     static var previews: some View {
-            TaskNow()
+        TaskNow(task: Task.exampleTask)
     }
 }
