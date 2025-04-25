@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct TaskInfoView: View {
+    
+    @State private var modal = false // !!!!! add !!!!!!!
     var task: Task
     
     var body: some View {
@@ -100,16 +102,21 @@ struct TaskInfoView: View {
             Spacer()
         }
         
-        // conferir se o horario bate com o da tarefa
-        NavigationLink(destination: IniciarTaskView()) {
-            Text("Começar Tarefa")
-                .padding(.horizontal, 100)
-                .padding(.vertical, 15)
-                .background(Color("AccentColor"))
-                .foregroundStyle(.white)
-                .cornerRadius(8)
+        // !!!!!!!!! trocar !!!!!!!!!
+        VStack {
+            Button {
+                modal.toggle()
+            } label: {
+                Text("Iniciar Tarefa")
+                    .padding(.horizontal, 100)
+                    .padding(.vertical, 15)
+                    .background(Color(hex: 0x91A394))
+                    .foregroundStyle(.white)
+                    .cornerRadius(8)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .sheet(isPresented: $modal, content: {TaskNow(task: Task.exampleTask)})
             
         }
         .background(Color("BackgroundScreenColor"))

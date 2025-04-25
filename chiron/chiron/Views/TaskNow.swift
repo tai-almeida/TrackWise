@@ -14,7 +14,7 @@ struct TaskNow: View {
     
     var task: Task
     
-    @State private var modal = false
+    @Environment(\.dismiss) var dismiss
     @State private var checklistState: [String: Bool] = [:]
     
     init(task: Task) {
@@ -24,7 +24,7 @@ struct TaskNow: View {
     }
     
     var body: some View {
-        //NavigationView {
+        NavigationView {
             VStack (alignment: .leading) {
                 
                 VStack (alignment: .leading) {
@@ -70,7 +70,7 @@ struct TaskNow: View {
                 
                 VStack {
                     Button {
-                        modal.toggle()
+                        dismiss()
                     } label: {
                         Text("Finalizar Tarefa")
                             .padding(.horizontal, 100)
@@ -81,19 +81,27 @@ struct TaskNow: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .sheet(isPresented: $modal, content: {FullScreenModalView()})
             }
             .background(Color(hex: 0xEFE8D8))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
+                    Button {
+                        dismiss()
+                    } label: {
                         Text("Cancelar")
                             .foregroundColor(Color(hex: 0x91A394))
                     }
                 }
+                ToolbarItem(placement: .principal) {
+                        // Indicador central do modal
+                        RoundedRectangle(cornerRadius: 3)
+                            .fill(Color.secondary)
+                            .frame(width: 80, height: 5)
+                            .padding(.top, 4)
+                    }
             }
         }
-    //}
+    }
 }
 
 
@@ -105,7 +113,7 @@ struct TaskNow_Previews: PreviewProvider {
     }
 }
 
-
+/*
 
 import SwiftUI
 
@@ -131,7 +139,7 @@ struct FullScreenModalView: View {
     }
 }
 
-
+*/
 /*
 
 struct ContentView: View {
