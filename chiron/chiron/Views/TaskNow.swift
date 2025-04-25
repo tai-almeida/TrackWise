@@ -14,7 +14,7 @@ struct TaskNow: View {
     
     var task: Task
     
-    @State private var tarefaFeita = false
+    @State private var modal = false
     @State private var checklistState: [String: Bool] = [:]
     
     init(task: Task) {
@@ -69,16 +69,19 @@ struct TaskNow: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: TaskInfoView(task: Task.exampleTask)) {
-                                Text("Finalizar Tarefa")
-                                    .padding(.horizontal, 100)
-                                    .padding(.vertical, 15)
-                                    .background(Color(hex: 0x91A394))
-                                    .foregroundStyle(.white)
-                                    .cornerRadius(8)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
+                    Button {
+                        modal.toggle()
+                    } label: {
+                        Text("Finalizar Tarefa")
+                            .padding(.horizontal, 100)
+                            .padding(.vertical, 15)
+                            .background(Color(hex: 0x91A394))
+                            .foregroundStyle(.white)
+                            .cornerRadius(8)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
                 }
+                .sheet(isPresented: $modal, content: {FullScreenModalView()})
             }
             .background(Color(hex: 0xEFE8D8))
             .toolbar {
@@ -101,3 +104,52 @@ struct TaskNow_Previews: PreviewProvider {
         TaskNow(task: Task.exampleTask)
     }
 }
+
+
+
+import SwiftUI
+
+struct FullScreenModalView: View {
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                Spacer()
+                VStack(spacing: 20) {
+                    Button("Dismiss") {
+                        dismiss()
+                    }
+                }
+                .frame(width: geometry.size.width,
+                       height: geometry.size.height * 1.0)
+                .background(Color.white)
+                .cornerRadius(20)
+            }
+
+        }
+    }
+}
+
+
+/*
+
+struct ContentView: View {
+    @State private var isPresented = false
+
+    var body: some View {
+        Button("Show") {
+            isPresented.toggle()
+        }
+        .sheet(isPresented: $isPresented) {
+            FullScreenModalView()
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+*/
