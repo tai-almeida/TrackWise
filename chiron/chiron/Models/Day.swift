@@ -19,8 +19,8 @@ struct Day: Identifiable {
         Calendar.current.isDate(date, inSameDayAs: Date())
     }
     
-    init(name: String, tasks: [Task], events: [String], date: Date) {
-        self.date = date
+    init(name: String, tasks: [Task], events: [String]) {
+        self.date = Date()
         self.name = name
         self.tasks = tasks
         self.events = events
