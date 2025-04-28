@@ -7,20 +7,37 @@
 
 import SwiftUI
 
-func terminarTarefa() { }
-
-
 struct TaskNow: View {
     
+    @Binding
     var task: Task
     
-    @Environment(\.dismiss) var dismiss
-    @State private var checklistState: [String: Bool] = [:]
+    let startTime = Date()
     
-    init(task: Task) {
-        UITableView.appearance().backgroundColor = .clear
-        self.task = task
-        _checklistState = State(initialValue: task.checklist)
+    @Environment(\.dismiss) var dismiss
+    //@State private var checklistState: [String: Bool] = [:]
+    @State private var alertFim = false
+    @State private var otimizarRotina = false
+    
+    
+    func iniciarTimer() {
+       // fazer se der tempo
+    }
+    
+    func pararTimer() {
+       // fazer se der tempo
+    }
+    
+    func observarHora() {
+        // codigo real
+        if (startTime == task.endTime) {
+            alertFim = true
+        }
+        //codigo de teste:
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            alertFim = true
+            
+        }
     }
     
     var body: some View {
@@ -39,7 +56,7 @@ struct TaskNow: View {
                     Text(task.formattedRangeTime)
                         .padding(.bottom, 5)
                     
-                    Text("Tempo restante: \(task.formattedTime) min")
+                    Text("Tempo restante: \(task.averageTime) min")
                         .font(.subheadline)
                         .padding(.bottom, 10)
                 }
@@ -47,14 +64,14 @@ struct TaskNow: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Form {
                     Section(header: Text("Checklist")) {
-                        ForEach(Array(checklistState), id: \.key) { item, isDone in
+                        ForEach(Array(task.checklist), id: \.key) { item, isDone in
                             HStack {
                                 Text(item)
                                     .strikethrough(isDone)
                                     .foregroundColor(isDone ? .gray : .primary)
                                 Spacer()
                                 Button {
-                                    checklistState[item]?.toggle()
+                                    task.checklist[item]?.toggle()
                                 } label:{
                                     Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
                                         .foregroundColor(isDone ? .green : .gray)
@@ -70,7 +87,7 @@ struct TaskNow: View {
                 
                 VStack {
                     Button {
-                        dismiss()
+                        otimizarRotina = true
                     } label: {
                         Text("Finalizar Tarefa")
                             .padding(.horizontal, 100)
@@ -79,6 +96,12 @@ struct TaskNow: View {
                             .foregroundStyle(.white)
                             .cornerRadius(8)
                     }
+                    .alert("Otimizar Rotina?", isPresented: $otimizarRotina, actions: {
+                        Button("Sim", role: .cancel) { dismiss() }
+                        Button("Não") { dismiss() }
+                    }, message: {
+                        Text("Passaram-se 20 minutos do tempo programado\nDeseja atualizar a tarefa?")
+                    })
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
@@ -100,6 +123,19 @@ struct TaskNow: View {
                             .padding(.top, 4)
                     }
             }
+            .onAppear {
+                UITableView.appearance().backgroundColor = .clear
+                iniciarTimer()
+                observarHora()
+            }
+            .alert("Está na hora de finalizar!", isPresented: $alertFim, actions: {
+                Button("Continuar") { }
+                Button("Próxima", role: .cancel) { dismiss() }
+                //procurar como colocar para abrir a proxima tarefa
+            }, message: {
+                Text("Continuar essa tarefa?\nA próxima tarefa é\nLavar Roupa às 10:00")
+            })
+            
         }
     }
 }
@@ -109,55 +145,7 @@ struct TaskNow: View {
 
 struct TaskNow_Previews: PreviewProvider {
     static var previews: some View {
-        TaskNow(task: Task.exampleTask)
+        TaskNow(task: $task)
     }
 }
 
-/*
-
-import SwiftUI
-
-struct FullScreenModalView: View {
-    @Environment(\.dismiss) var dismiss
-
-    var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                Spacer()
-                VStack(spacing: 20) {
-                    Button("Dismiss") {
-                        dismiss()
-                    }
-                }
-                .frame(width: geometry.size.width,
-                       height: geometry.size.height * 1.0)
-                .background(Color.white)
-                .cornerRadius(20)
-            }
-
-        }
-    }
-}
-
-*/
-/*
-
-struct ContentView: View {
-    @State private var isPresented = false
-
-    var body: some View {
-        Button("Show") {
-            isPresented.toggle()
-        }
-        .sheet(isPresented: $isPresented) {
-            FullScreenModalView()
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-*/

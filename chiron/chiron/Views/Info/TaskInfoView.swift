@@ -11,7 +11,8 @@ import SwiftUI
 struct TaskInfoView: View {
     
     @State private var modal = false // !!!!! add !!!!!!!
-    var task: Task
+    
+    @Binding var task: Task
     
     var body: some View {
         
@@ -116,8 +117,8 @@ struct TaskInfoView: View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
-        .sheet(isPresented: $modal, content: {TaskNow(task: Task.exampleTask)})
-            
+        .sheet(isPresented: $modal, content: {
+            TaskNow(task: $task)})
         }
         .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
@@ -136,6 +137,6 @@ struct TaskInfoView: View {
 
 struct TaskInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskInfoView(task: Task.exampleTask)
+        TaskInfoView(task: $task)
     }
 }
