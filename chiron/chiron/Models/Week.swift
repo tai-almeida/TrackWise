@@ -47,10 +47,11 @@ var task3 = Task(
             isCompleted: false,
             averageTime: 80)
 
-struct Week: Identifiable {
+class Week: Identifiable, ObservableObject {
     var id: Int
     var date: Date
     let days: [String] = ["Segunda-feira", "Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado","Domingo"]
+    @Published
     var tasks: [Task]
     var events: [String]
     
@@ -60,5 +61,12 @@ struct Week: Identifiable {
         tasks: [task1, task2, task3],
         events: ["Aniversário de Cont", "Prova de Física", "Checkpoint Design"]
     )
+    
+    init(id:Int, date:Date, tasks: [Task], events: [String] = exampleWeek.events) {
+        self.id = id
+        self.date = date
+        self.tasks = tasks
+        self.events = events
+    }
 
 }
