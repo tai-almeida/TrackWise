@@ -23,6 +23,8 @@
 		2AC416662DAE8FE9008E4538 /* TaskInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */; };
 		2AC416692DAE9262008E4538 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC416682DAE9262008E4538 /* Task.swift */; };
 		4E51FCA82DBA774E007A7304 /* GreenButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E51FCA72DBA774E007A7304 /* GreenButtonStyle.swift */; };
+		4E51FCAA2DBBB79E007A7304 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E51FCA92DBBB79E007A7304 /* EditTaskView.swift */; };
+		4E51FCAC2DBBD2E1007A7304 /* ColorfulShapeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E51FCAB2DBBD2E1007A7304 /* ColorfulShapeStyle.swift */; };
 		64C2472B2DAD376D00AD3ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472A2DAD376D00AD3ECC /* Assets.xcassets */; };
 		64C2472E2DAD376D00AD3ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */; };
 		ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE11D2A2DB9511D00C5833E /* AddItemView.swift */; };
@@ -46,6 +48,8 @@
 		2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoView.swift; sourceTree = "<group>"; };
 		2AC416682DAE9262008E4538 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		4E51FCA72DBA774E007A7304 /* GreenButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonStyle.swift; sourceTree = "<group>"; };
+		4E51FCA92DBBB79E007A7304 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		4E51FCAB2DBBD2E1007A7304 /* ColorfulShapeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulShapeStyle.swift; sourceTree = "<group>"; };
 		64C247232DAD376A00AD3ECC /* chiron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chiron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C2472A2DAD376D00AD3ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 				2A4C32302DB9318C00F400AE /* chironApp.swift */,
 				ADE11D2A2DB9511D00C5833E /* AddItemView.swift */,
 				2A4C322F2DB9318C00F400AE /* PlannerView.swift */,
+				4E51FCA92DBBB79E007A7304 /* EditTaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			children = (
 				4E51FCA72DBA774E007A7304 /* GreenButtonStyle.swift */,
 				2AC357182DAFF22800429D10 /* TaskStyle.swift */,
+				4E51FCAB2DBBD2E1007A7304 /* ColorfulShapeStyle.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -240,9 +246,11 @@
 				2A5E7C9D2DB7E08F00B10322 /* Week.swift in Sources */,
 				2AC357192DAFF22800429D10 /* TaskStyle.swift in Sources */,
 				2A5E7C942DB7D61500B10322 /* EventInfoView.swift in Sources */,
+				4E51FCAC2DBBD2E1007A7304 /* ColorfulShapeStyle.swift in Sources */,
 				2AC416662DAE8FE9008E4538 /* TaskInfoView.swift in Sources */,
 				2A9930792DB016EF00C393AF /* ColorExtension.swift in Sources */,
 				2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */,
+				4E51FCAA2DBBB79E007A7304 /* EditTaskView.swift in Sources */,
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
 

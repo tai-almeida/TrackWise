@@ -9,10 +9,19 @@ import Foundation
 import SwiftUI
 
 struct TaskInfoView: View {
+    
+    @Binding
+    var originalTask:Task
+    
     var task: Task
     
     @State
     var navigateToCurrentTaskView: Bool = false
+    
+    @State
+    var navigateToEditTaskView: Bool = false
+    
+
     
     var body: some View {
         
@@ -35,6 +44,7 @@ struct TaskInfoView: View {
                     
                     Text("Tempo médio: \(task.averageTime) min")
                         .font(.subheadline)
+                        .padding(.bottom, 5)
                 }
                 
                 // bloco infos secundárias
@@ -52,12 +62,7 @@ struct TaskInfoView: View {
                         Text("Categoria")
                         Spacer()
                         Text(task.category.rawValue.capitalized)
-                            .font(.callout)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                            .background(task.category.color)
-                            .foregroundStyle(.white)
-                            .clipShape(Capsule())
+                            .modifier(ColorfulShapeStyle(backgroundColor: task.category.color))
                     }
                     
                     Divider()
@@ -66,12 +71,7 @@ struct TaskInfoView: View {
                         Text("Dificuldade")
                         Spacer()
                         Text(task.difficulty.rawValue)
-                            .font(.callout)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                            .background(task.difficulty.color)
-                            .foregroundStyle(.white)
-                            .clipShape(Capsule())
+                            .modifier(ColorfulShapeStyle(backgroundColor: task.difficulty.color))
                     }
                 }
                 .padding()
@@ -106,12 +106,13 @@ struct TaskInfoView: View {
                             Text("Não há subtarefas!")
                                 .padding(.vertical, 10)
                                 .foregroundColor(.secondary)
-                        }
-                        else {
+                        } else {
                             ForEach(Array(task.checklist.keys), id: \.self) { item in
                                 Divider()
                                 Text(item)
+                                    .strikethrough(task.checklist[item] == true , color: .gray)
                                     .padding(.vertical, 10)
+                                    .foregroundColor(task.checklist[item] == true ? .gray : .primary)
                             }
                         }
                     }
@@ -151,23 +152,31 @@ struct TaskInfoView: View {
 //        .frame(maxWidth: .infinity, alignment: .center)
             
         }
+        .padding(.top, 15)
         .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}) {
+                Button(action: {
+                    navigateToEditTaskView = true
+                }) {
                     Text("Editar")
                         .foregroundColor(Color("AccentColor"))
                 }
             }
         }
         
+        NavigationLink.init("",
+                            destination: EditTaskView(task: $originalTask,
+                                                      taskData: task),
+                            isActive: $navigateToEditTaskView)
+
     }
 }
 
-struct TaskInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskInfoView(task: Task.exampleTask)
-    }
-}
+//struct TaskInfoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TaskInfoView(task: Task.exampleTask)
+//    }
+//}
