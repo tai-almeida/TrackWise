@@ -47,18 +47,25 @@ var task3 = Task(
             isCompleted: false,
             averageTime: 80)
 
+
+var segunda = Day(name:"Segunda-feira", tasks:[task1, task2], events:["Aniversário de Cont", "Prova de Física", "Checkpoint Design"])
+var terca = Day(name:"Terça-feira", tasks:[task1], events:["SwiftUI Session"])
+var quarta = Day(name:"Quarta-feira", tasks:[task3], events:["Entrega projeto MC202", "Palestra Design"])
+var quinta = Day(name:"Quinta-feira", tasks:[task2, task3], events:[])
+var sexta = Day(name:"Sexta-feira", tasks:[task1, task2, task3], events:["Festa Mãe"])
+var sabado = Day(name:"Sábado", tasks:[task3], events:[])
+var domingo = Day(name:"Domingo", tasks:[], events:["Entrega projeto final MC613"])
+
 struct Week: Identifiable {
     var id: Int
-    var date: Date
-    let days: [String] = ["Segunda-feira", "Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado","Domingo"]
-    var tasks: [Task]
-    var events: [String]
+    var startDate: Date
+    let days: [Day]
+    
     
     static let exampleWeek = Week(
         id: 0,
-        date: Date(),
-        tasks: [task1, task2, task3],
-        events: ["Aniversário de Cont", "Prova de Física", "Checkpoint Design"]
+        startDate: Date(),
+        days: [segunda, terca, quarta, quinta, sexta, sabado, domingo]
     )
 
 }

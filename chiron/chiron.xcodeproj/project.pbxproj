@@ -26,6 +26,7 @@
 		64C2472B2DAD376D00AD3ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472A2DAD376D00AD3ECC /* Assets.xcassets */; };
 		64C2472E2DAD376D00AD3ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */; };
 		ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE11D2A2DB9511D00C5833E /* AddItemView.swift */; };
+		ED8F03372DBA79CF009135DA /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F03362DBA79CF009135DA /* Day.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		64C2472A2DAD376D00AD3ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ADE11D2A2DB9511D00C5833E /* AddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		ED8F03362DBA79CF009135DA /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				2A5E7C992DB7DD9500B10322 /* Travel.swift */,
 				2A5E7C9C2DB7E08F00B10322 /* Week.swift */,
 				2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */,
+				ED8F03362DBA79CF009135DA /* Day.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -242,7 +245,12 @@
 				2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */,
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
+<<<<<<< HEAD
 				2A4C322E2DB9318000F400AE /* CurrentTaskView.swift in Sources */,
+=======
+				ED8F03372DBA79CF009135DA /* Day.swift in Sources */,
+				2A4C322E2DB9318000F400AE /* IniciarTaskView.swift in Sources */,
+>>>>>>> c238f97627134883d78bf588caf90605c9715324
 				2AC416692DAE9262008E4538 /* Task.swift in Sources */,
 				2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */,
 				4E51FCA82DBA774E007A7304 /* GreenButtonStyle.swift in Sources */,
