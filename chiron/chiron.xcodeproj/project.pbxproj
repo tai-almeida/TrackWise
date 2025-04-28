@@ -245,12 +245,10 @@
 				2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */,
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
-<<<<<<< HEAD
-				2A4C322E2DB9318000F400AE /* CurrentTaskView.swift in Sources */,
-=======
+
 				ED8F03372DBA79CF009135DA /* Day.swift in Sources */,
 				2A4C322E2DB9318000F400AE /* IniciarTaskView.swift in Sources */,
->>>>>>> c238f97627134883d78bf588caf90605c9715324
+
 				2AC416692DAE9262008E4538 /* Task.swift in Sources */,
 				2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */,
 				4E51FCA82DBA774E007A7304 /* GreenButtonStyle.swift in Sources */,
