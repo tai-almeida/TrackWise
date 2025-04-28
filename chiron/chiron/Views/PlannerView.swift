@@ -59,7 +59,7 @@ struct PlannerView: View {
                                                     .padding(.trailing, 10)
                                             }
                                             Divider()
-                                                NavigationLink(destination: TaskInfoView(task: Task.exampleTask)) {
+                                                NavigationLink(destination: TaskInfoView(task: task)) {
                                                     HStack {
                                                         Rectangle()
                                                             .foregroundColor(task.category.color)
