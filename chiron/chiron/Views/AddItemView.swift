@@ -30,7 +30,7 @@ struct AddItemView: View {
     }
     
     
-    // Instancias que representam o estado de variaveis que mudar com o input
+    // Instancias que representam o estado de variaveis que mudam com o input
     @State var SelectedPicker = 1
     
     @State var TaskName = ""
@@ -39,41 +39,40 @@ struct AddItemView: View {
     @State var EventLocation = ""
     @State var EventDate = ""
     @State var StartDate = Date()
-    @State var EndDate = Date()
-   
+    @State var StartTime = Date()
+    @State var EndTime = Date()
+    @State var selectedCategoria = "Nenhuma"
+    @State var selectedDificuldade = "Nenhuma"
+
     
     var body: some View {
         
         
             
-            VStack {
-                Spacer()
-                Text("Mais um texto")
-                Picker(selection: $SelectedPicker, label: Text("Picker"), content: {
+            ZStack {
+            
+                Color("BackgroundScreenColor")
+                    .ignoresSafeArea()
+                
+                VStack {
+                Picker(selection: $SelectedPicker, label: Text("Picker")) {
                 Text("Tarefa").tag(1)
                 Text("Evento").tag(2)
                 
                     
-                })
+                }
                     .pickerStyle(SegmentedPickerStyle())
                     .background(Color(hex: 0xF8F6ED))
-                        
+                    .padding()
             
                 if SelectedPicker == 1 {
                     
                     // Tudo que representa a secao tarefa
-                    
-                    ZStack {
-                        
-                        Color("BackgroundScreenColor")
-                        .ignoresSafeArea()
-                        
-                        VStack(alignment: .leading){
                             
                             Form {
                                 Section {
                             TextField("Nome da Tarefa", text: $TaskName)
-                            TextField("Localizacao", text: $TaskName)
+                            TextField("Localizacao", text: $TaskLocation)
                                 }
                                 .listRowBackground(Color(hex: 0xF8F6ED))
                             
@@ -81,10 +80,12 @@ struct AddItemView: View {
                             
                             
                                 Section{
-                                DatePicker(selection: $StartDate, in: ...Date(), label: {
-                                    Text("Inicio")})
+                                    DatePicker(selection: $StartDate, in: Date()..., displayedComponents: [.date], label: {
+                                    Text("Data")})
                                 
-                                DatePicker(selection: $EndDate, in: ...Date(), label: {
+                                    DatePicker(selection: $StartTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
+                                    Text("Início")})
+                                    DatePicker(selection: $EndTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
                                     Text("Fim")})
                                 }
                                 .listRowBackground(Color(hex: 0xF8F6ED))
@@ -95,14 +96,24 @@ struct AddItemView: View {
                             HStack {
                                 
                                 Text("Categoria")
+                                Spacer()
+                               Text("\(selectedCategoria)")
+                                    .foregroundStyle(.secondary)
                                 
-                             Spacer()
+                           
                                 
                                 Menu {
-                                            Button("Adicionar", action: TagAdicionar)
-                                            Button("Lazer", action: TagLazer)
-                                            Button("Estudos", action: TagEstudo)
-                                            Button("Domestico", action: TagDomestico)
+                                  
+                                    Section{
+                                    Button {
+                                            selectedCategoria = "Adicionar"
+                                        } label: {
+                                            Label("Adicionar", systemImage: "plus.circle")
+                                        }
+                                    }
+                                    Button("Lazer") { selectedCategoria = "Lazer" } 
+                                    Button("Estudos") { selectedCategoria = "Estudos" }
+                                    Button("Domestico") { selectedCategoria = "Domestico" }
                                             
                                         } label: {
                                             Image(systemName: "chevron.up.chevron.down")
@@ -115,23 +126,21 @@ struct AddItemView: View {
                                 Text("Dificuldade")
                                 
                                 Spacer()
+                               Text("\(selectedDificuldade)")
+                                    .foregroundStyle(.secondary)
+                                
                                 
                                 Menu {
                                
-                                            Button("Fácil", action: CatFacil)
-                                            Button("Médio", action: CatMedio)
-                                            Button("Difícil", action: CatDificil)
+                                    Button("Fácil") { selectedDificuldade = "Fácil" }
+                                    Button("Médio") { selectedDificuldade = "Médio" }
+                                    Button("Difícil") { selectedDificuldade = "Difícil" }
                                 } label: {
                                     Image(systemName: "chevron.up.chevron.down")
                                       
                                 }
-                            
-                            
-                                    
-                            
-                                
-                                }
                             }
+                        }
                                 .listRowBackground(Color(hex: 0xF8F6ED))
                           
                                 Section(header: Text("Checklist")){
@@ -143,31 +152,40 @@ struct AddItemView: View {
                             
                             }
                             
-                    }
+                    
                 }
-                }
-                if SelectedPicker == 2 {
-                    // Tudo que reperesenta eventos
-                    ZStack {
+                
+                    else if SelectedPicker == 2 {
+                        // Tudo que representa a secao evento
                         
-                        Color("BackgroundScreenColor")
                         
-                        .ignoresSafeArea()
-                        
-                    VStack(alignment: .leading){
-                        Form {
-                            Section {
-                        TextField("Nome do evento", text: $EventName)
-                        TextField("Data", text: $EventDate)
-                        TextField("Localizacao", text: $EventLocation)
+                        VStack(spacing: 0) {
+                            VStack(spacing: 0) {
+                                Group {
+                                    TextField("Nome do evento", text: $EventName)
+                                        .padding()
+                                    Divider()
+
+                                    TextField("Data", text: $EventDate)
+                                        .padding()
+                                    Divider()
+
+                                    TextField("Localizacao", text: $EventLocation)
+                                        .padding()
+                                }
                             }
-                            .listRowBackground(Color(hex:0xF8F6ED))
+                            .background(Color(hex: 0xF8F6ED))
+                            .cornerRadius(10)
+                            .padding()
+                            
+                            Spacer()
                         }
                     }
-                    }
+
+                    
                 }
         }
-           // .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Adicionar Tarefa")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -177,9 +195,9 @@ struct AddItemView: View {
                     }
                 }
         }
-        
+    }
 }
-}
+
 // Atribuir as funcoes a tarefas e init
     func TagLazer() { }
     func TagEstudo() { }
