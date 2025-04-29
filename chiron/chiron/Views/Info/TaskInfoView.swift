@@ -10,133 +10,173 @@ import SwiftUI
 
 struct TaskInfoView: View {
     
-    @State private var modal = false // !!!!! add !!!!!!!
+    @Binding
+    var originalTask:Task
     
-    @Binding var task: Task
+    var task: Task
+    
+    @State
+    var navigateToCurrentTaskView: Bool = false
+    
+    @State
+    var navigateToEditTaskView: Bool = false
+    
+
     
     var body: some View {
         
         VStack (alignment: .leading){
             
+            VStack(alignment: .leading) {
+                
+                // bloco infos principais
+                VStack (alignment: .leading){
+                    Text(task.title)
+                        .font(.title.bold())
+                        .padding(.bottom, 10)
+                    
+                    Text(task.location)
+                        .font(.headline)
+                        .padding(.bottom, 5)
+                    
+                    Text(task.formattedRangeTime)
+                        .padding(.bottom, 5)
+                    
+                    Text("Tempo médio: \(task.averageTime) min")
+                        .font(.subheadline)
+                        .padding(.bottom, 5)
+                }
+                
+                // bloco infos secundárias
+                VStack {
+                    HStack {
+                        Text("Data")
+                        Spacer()
+                        Text(task.formattedData)
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        Text("Categoria")
+                        Spacer()
+                        Text(task.category.rawValue.capitalized)
+                            .modifier(ColorfulShapeStyle(backgroundColor: task.category.color))
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        Text("Dificuldade")
+                        Spacer()
+                        Text(task.difficulty.rawValue)
+                            .modifier(ColorfulShapeStyle(backgroundColor: task.difficulty.color))
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(hex: 0xF8F6ED))
+                )
+            }
+//                // bloco checklist
+//                List {
+//                    Text("Checklist")
+//                        .font(.caption)
+//                        .fontWeight(.light)
+//
+//                    ForEach(Array(task.checklist.keys), id: \.self) { item in
+//                        Text(item)
+//
+//                    }
+//                }
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//
             ScrollView {
-                VStack(alignment: .leading) {
-                    
-                    // bloco infos principais
-                    VStack (alignment: .leading){
-                        Text(task.title)
-                            .font(.title.bold())
-                            .padding(.bottom, 10)
-                        
-                        Text(task.location)
-                            .font(.headline)
-                            .padding(.bottom, 5)
-                        
-                        Text(task.formattedRangeTime)
-                            .padding(.bottom, 5)
-                        
-                        Text("Tempo médio: \(task.averageTime) min")
-                            .font(.subheadline)
-                    }
-                    
-                    // bloco infos secundárias
-                    VStack {
-                        HStack {
-                            Text("Data")
-                            Spacer()
-                            Text(task.formattedData)
-                        }
-                        
-                        Divider()
-                        
-                        HStack {
-                            Text("Categoria")
-                            Spacer()
-                            Text(task.category.rawValue.capitalized)
-                                .font(.callout)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 4)
-                                .background(task.category.color)
-                                .foregroundStyle(.white)
-                                .clipShape(Capsule())
-                        }
-                        
-                        Divider()
-                        
-                        HStack {
-                            Text("Dificuldade")
-                            Spacer()
-                            Text(task.difficulty.rawValue)
-                                .font(.callout)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 4)
-                                .background(task.difficulty.color)
-                                .foregroundStyle(.white)
-                                .clipShape(Capsule())
-                        }
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF8F6ED))
-                    )
-
                     // bloco checklist
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 0) {
                         Text("Checklist")
                             .font(.caption)
                             .fontWeight(.light)
+                            .padding(.bottom, 4)
                         
-                        ForEach(Array(task.checklist.keys), id: \.self) { item in
+                        if (task.checklist.count == 0) {
                             Divider()
-                            Text(item)
+                            Text("Não há subtarefas!")
+                                .padding(.vertical, 10)
+                                .foregroundColor(.secondary)
+                        } else {
+                            ForEach(Array(task.checklist.keys), id: \.self) { item in
+                                Divider()
+                                Text(item)
+                                    .strikethrough(task.checklist[item] == true , color: .gray)
+                                    .padding(.vertical, 10)
+                                    .foregroundColor(task.checklist[item] == true ? .gray : .primary)
+                            }
                         }
                     }
-                    .padding()
+                    .padding(.top, 10)
+                    .padding(.bottom, 5)
+                    .padding(.horizontal)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(hex: 0xF8F6ED))
                     )
-
-
-                }
-                .padding()
-            Spacer()
-        }
-        
-        // !!!!!!!!! trocar !!!!!!!!!
-        VStack {
-            Button {
-                modal.toggle()
-            } label: {
-                Text("Iniciar Tarefa")
-                    .padding(.horizontal, 100)
-                    .padding(.vertical, 15)
-                    .background(Color(hex: 0x91A394))
-                    .foregroundStyle(.white)
-                    .cornerRadius(8)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 10)
+
+            Spacer()
+            
+        NavigationLink.init("",
+                      destination: CurrentTaskView(),
+                      isActive: $navigateToCurrentTaskView)
+        
+        // conferir se o horario bate com o da tarefa
+        Button(action: {
+            navigateToCurrentTaskView = true
+        }) {
+          Text("Começar Tarefa")
         }
-        .sheet(isPresented: $modal, content: {
-            TaskNow(task: $task)})
+        .buttonStyle(GreenButtonStyle())
+
+            
+//        NavigationLink(destination: IniciarTaskView()) {
+//            Text("Começar Tarefa")
+//                .padding(.horizontal, 100)
+//                .padding(.vertical, 15)
+//                .background(Color("AccentColor"))
+//                .foregroundStyle(.white)
+//                .cornerRadius(8)
+//        }
+//        .frame(maxWidth: .infinity, alignment: .center)
+            
         }
+        .padding(.top, 15)
         .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}) {
+                Button(action: {
+                    navigateToEditTaskView = true
+                }) {
                     Text("Editar")
                         .foregroundColor(Color("AccentColor"))
                 }
             }
         }
         
+        NavigationLink.init("",
+                            destination: EditTaskView(task: $originalTask,
+                                                      taskData: task),
+                            isActive: $navigateToEditTaskView)
+
     }
 }
 
-struct TaskInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskInfoView(task: $task)
-    }
-}
+//struct TaskInfoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TaskInfoView(task: Task.exampleTask)
+//    }
+//}
