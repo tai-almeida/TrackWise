@@ -22,9 +22,9 @@ struct TabBar: View {
                 .tabItem{
                     Label("Planner", systemImage: "book")}
 
-            Text("Tela 2")
-                .tabItem{
-                    Label("Calendário", systemImage: "calendar")}
+//            Text("Tela 2")
+//                .tabItem{
+//                    Label("Calendário", systemImage: "calendar")}
             
 
             Text("Tela 3")
