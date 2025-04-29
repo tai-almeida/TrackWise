@@ -10,10 +10,9 @@ import SwiftUI
 struct TabBar: View {
     
     @ObservedObject
-    var week = Week(id: Week.exampleWeek.id,
-                    date: Week.exampleWeek.date,
-                    tasks: Week.exampleWeek.tasks,
-                    events: Week.exampleWeek.events)
+        var week = Week(id: Week.exampleWeek.id,
+                        startDate: Week.exampleWeek.startDate,
+                        days: Week.exampleWeek.days)
     
     /* TabBar com 3 elementos - planner, calendario e pendentes */
     var body: some View {

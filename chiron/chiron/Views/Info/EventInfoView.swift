@@ -1,71 +1,64 @@
 //
-//  EventInfo .swift
-//  chiron
+// EventInfo .swift
+// chiron
 //
-//  Created by Laris on 22/04/25.
+// Created by Laris on 22/04/25.
 //
-
 import SwiftUI
-
 struct EventInfoView: View {
-    var event: Event
-    
-    var body: some View {
-        
-        VStack (alignment: .leading){
-            
-            ScrollView {
-                VStack(alignment: .leading) {
-                    
-                    
-                    // bloco infos principais
-                    VStack (alignment: .leading){
-                        Text(event.title)
-                            .font(.title.bold())
-                            .padding(.bottom, 10)
-                        
-                        Text(event.location)
-                            .font(.headline)
-                            .padding(.bottom, 5)
-                    }
-                    .padding()
-                    
-                    // bloco infos secundarias
-                    VStack {
-                        HStack {
-                            Text("Data")
-                            Spacer()
-                            Text(event.formattedData)
-                        }
-                                            
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF1ECDB))
-                    )
-                    .padding(.bottom)
-                }
-                
+  var event: Event
+  var body: some View {
+    VStack (alignment: .leading){
+      ScrollView {
+        VStack(alignment: .leading) {
+          // bloco infos principais
+          VStack (alignment: .leading){
+            Text(event.title)
+              .font(.title.bold())
+              .padding(.bottom, 10)
+            Text(event.location)
+              .font(.headline)
+              .padding(.bottom, 5)
+          }
+          .padding()
+          // bloco infos secundarias
+          VStack {
+            HStack {
+              Text("Data")
+              Spacer()
+              Text(event.formattedData)
             }
-            Spacer()
+          }
+          .padding()
+          .background(
+            RoundedRectangle(cornerRadius: 10)
+              .fill(Color(hex: 0xF1ECDB))
+          )
+          .padding(.bottom)
         }
-        .background(Color("BackgroundScreenColor"))
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Detalhes do Evento")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}) {
-                    Text("Editar")
-                        .foregroundColor(Color(hex: 0x91A394))
-                }
-            }
-        }
+      }
+      Spacer()
     }
+    .background(Color("BackgroundScreenColor"))
+    .navigationBarTitleDisplayMode(.inline)
+    .navigationTitle("Detalhes do Evento")
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: {}) {
+          Text("Editar")
+            .foregroundColor(Color("AccentColor"))
+        }
+      }
+    }
+  }
+}
+struct EventInfoView_Previews: PreviewProvider {
+  static var previews: some View {
+    EventInfoView(event: Event.exampleEvent)
+  }
 }
 
-struct EventInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventInfoView(event: Event.exampleEvent)
-    }
-}
+
+
+
+

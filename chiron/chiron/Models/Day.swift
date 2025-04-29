@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct Day: Identifiable {
+class Day: Identifiable, ObservableObject {
     let id = UUID()
     var date: Date
     var name: String
+    @Published
     var tasks: [Task]
     var events: [String]
     

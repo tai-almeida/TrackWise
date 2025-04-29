@@ -27,7 +27,13 @@
 		4E51FCAC2DBBD2E1007A7304 /* ColorfulShapeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E51FCAB2DBBD2E1007A7304 /* ColorfulShapeStyle.swift */; };
 		64C2472B2DAD376D00AD3ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472A2DAD376D00AD3ECC /* Assets.xcassets */; };
 		64C2472E2DAD376D00AD3ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */; };
+		ADC4CE1B2DBBD28500941F2C /* IniciarTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC4CE1A2DBBD28500941F2C /* IniciarTaskView.swift */; };
 		ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE11D2A2DB9511D00C5833E /* AddItemView.swift */; };
+		ED7F62CD2DC0FA4D00E2BDAE /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62CC2DC0FA4D00E2BDAE /* EditTaskView.swift */; };
+		ED7F62CF2DC0FB4A00E2BDAE /* GreenButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62CE2DC0FB4A00E2BDAE /* GreenButtonStyle.swift */; };
+		ED7F62D12DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */; };
+		ED7F62D32DC0FB8500E2BDAE /* ShapeColorfulStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */; };
+		ED7F62D52DC0FC7200E2BDAE /* CurrentTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D42DC0FC7200E2BDAE /* CurrentTaskView.swift */; };
 		ED8F03372DBA79CF009135DA /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F03362DBA79CF009135DA /* Day.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +59,13 @@
 		64C247232DAD376A00AD3ECC /* chiron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chiron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C2472A2DAD376D00AD3ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ADC4CE1A2DBBD28500941F2C /* IniciarTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IniciarTaskView.swift; sourceTree = "<group>"; };
 		ADE11D2A2DB9511D00C5833E /* AddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		ED7F62CC2DC0FA4D00E2BDAE /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		ED7F62CE2DC0FB4A00E2BDAE /* GreenButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonStyle.swift; sourceTree = "<group>"; };
+		ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulShapeStyle.swift; sourceTree = "<group>"; };
+		ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeColorfulStyle.swift; sourceTree = "<group>"; };
+		ED7F62D42DC0FC7200E2BDAE /* CurrentTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTaskView.swift; sourceTree = "<group>"; };
 		ED8F03362DBA79CF009135DA /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +87,8 @@
 				2A4C32302DB9318C00F400AE /* chironApp.swift */,
 				ADE11D2A2DB9511D00C5833E /* AddItemView.swift */,
 				2A4C322F2DB9318C00F400AE /* PlannerView.swift */,
-				4E51FCA92DBBB79E007A7304 /* EditTaskView.swift */,
+				ED7F62CC2DC0FA4D00E2BDAE /* EditTaskView.swift */,
+				ED7F62D42DC0FC7200E2BDAE /* CurrentTaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -88,6 +101,7 @@
 				2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */,
 				2A5E7C932DB7D61500B10322 /* EventInfoView.swift */,
 				2A5E7CA02DB7E72200B10322 /* TravelinfoView.swift */,
+				ADC4CE1A2DBBD28500941F2C /* IniciarTaskView.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -113,7 +127,9 @@
 			children = (
 				4E51FCA72DBA774E007A7304 /* GreenButtonStyle.swift */,
 				2AC357182DAFF22800429D10 /* TaskStyle.swift */,
-				4E51FCAB2DBBD2E1007A7304 /* ColorfulShapeStyle.swift */,
+				ED7F62CE2DC0FB4A00E2BDAE /* GreenButtonStyle.swift */,
+				ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */,
+				ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -241,8 +257,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A5E7C9A2DB7DD9500B10322 /* Travel.swift in Sources */,
+				ED7F62CD2DC0FA4D00E2BDAE /* EditTaskView.swift in Sources */,
 				2A5E7CA12DB7E72200B10322 /* TravelinfoView.swift in Sources */,
+				ED7F62CF2DC0FB4A00E2BDAE /* GreenButtonStyle.swift in Sources */,
+				ED7F62D12DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift in Sources */,
+				ED7F62D52DC0FC7200E2BDAE /* CurrentTaskView.swift in Sources */,
 				2A4C32312DB9318C00F400AE /* PlannerView.swift in Sources */,
+				ADC4CE1B2DBBD28500941F2C /* IniciarTaskView.swift in Sources */,
 				2A5E7C9D2DB7E08F00B10322 /* Week.swift in Sources */,
 				2AC357192DAFF22800429D10 /* TaskStyle.swift in Sources */,
 				2A5E7C942DB7D61500B10322 /* EventInfoView.swift in Sources */,
@@ -250,7 +271,7 @@
 				2AC416662DAE8FE9008E4538 /* TaskInfoView.swift in Sources */,
 				2A9930792DB016EF00C393AF /* ColorExtension.swift in Sources */,
 				2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */,
-				4E51FCAA2DBBB79E007A7304 /* EditTaskView.swift in Sources */,
+				ED7F62D32DC0FB8500E2BDAE /* ShapeColorfulStyle.swift in Sources */,
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
 

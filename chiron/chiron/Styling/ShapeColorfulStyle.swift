@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ColorfulShapeStyle: ViewModifier {
+struct ShapeColorfulStyle: ViewModifier {
     var backgroundColor: Color
     
     func body(content: Content) -> some View {
