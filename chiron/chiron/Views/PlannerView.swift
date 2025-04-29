@@ -110,22 +110,7 @@ struct PlannerView: View {
                                                 .padding(.horizontal, 5)
                                             }
                                         }
-                                        
-                                        Divider()
-                                            //.padding(.horizontal, 10)
-                                        
-                                        
-                                        NavigationLink(destination: TaskInfoView(originalTask: $task,
-                                                                                 task: task)) {
-                                                LinkView(task: $task)
-                                                .padding(.trailing, 5)
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color(hex: 0xF8F6ED))
-                                        .cornerRadius(8)
-                                        .padding(.horizontal, 5)
                                     }
-                                    //.padding(.horizontal, 10)
                                 }
                             }
                             
@@ -150,8 +135,6 @@ struct PlannerView: View {
                     }
                 }
             }
-            
-            
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("BackgroundScreenColor"))
         }
@@ -161,56 +144,4 @@ struct PlannerView: View {
             PlannerView(week: Week.exampleWeek)
         }
     }
-}
-
-
-struct LinkView:View {
-    
-    @Binding
-    var task:Task
-    
-    var body:some View {
-        HStack {
-            Rectangle()
-                .foregroundColor(task.category.color)
-                .frame(width:10)
-            
-            VStack(alignment: .leading) {
-                Text(task.title)
-                    //.padding(.horizontal, 100)
-                    .padding(.top, 10)
-                    .foregroundStyle(.black)
-                    .padding(.leading, 5)
-                
-                Text(task.difficulty.rawValue)
-                    .font(.system(size:12))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(task.difficulty.color)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
-            }
-            .padding(.bottom, 5)
-            Spacer()
-            VStack(alignment: .trailing) {
-                Image(systemName: "play.fill")
-                    //.font(.system(size:12))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(Color("AccentColor"))
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
-                
-                //let duration: Int = task.averageTime
-                Text(convertsTime(duration: task.averageTime))
-                    .font(.system(size:12))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(Color(hex: 0xEFE8D8))
-                    .foregroundStyle(.black)
-                    .clipShape(Capsule())
-            }
-        }
-    }
-    
 }

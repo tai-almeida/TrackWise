@@ -65,9 +65,10 @@ class Week: Identifiable, ObservableObject {
     
     static let exampleWeek = Week(
         id: 0,
-        date: Date(),
-        tasks: [task1, task2, task3],
-        events: ["Aniversário de Cont", "Prova de Física", "Checkpoint Design"]
+        startDate: Date(),
+        days: [segunda, terca, quarta, quinta, sexta, sabado, domingo]
+        //tasks: [task1, task2, task3],
+        //events: ["Aniversário de Cont", "Prova de Física", "Checkpoint Design"]
     )
     
     init(id:Int, startDate: Date, days:[Day]) {
