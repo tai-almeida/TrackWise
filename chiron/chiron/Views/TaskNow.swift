@@ -145,7 +145,7 @@ struct TaskNow: View {
 
 struct TaskNow_Previews: PreviewProvider {
     static var previews: some View {
-        TaskNow(task: $task)
+        TaskNow(task: .constant(Task.exampleTask))
     }
 }
 

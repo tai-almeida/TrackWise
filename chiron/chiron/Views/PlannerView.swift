@@ -80,6 +80,7 @@ struct PlannerView: View {
                                                                                  task: task)) {
                                                 LinkView(task: $task)
                                                 .padding(.trailing, 5)
+                                                .environmentObject(week)
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .background(Color(hex: 0xF8F6ED))
