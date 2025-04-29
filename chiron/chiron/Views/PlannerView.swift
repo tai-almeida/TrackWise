@@ -9,7 +9,9 @@ struct PlannerView: View {
     @State
       var navigateToAddItem:Bool = false
     // by default, the first tab selected is the planner (main frame)
+    @ObservedObject
     var week: Week
+    
     var body: some View {
         ZStack {
             Color("BackgroundScreenColor").ignoresSafeArea()
@@ -26,7 +28,7 @@ struct PlannerView: View {
                                 .multilineTextAlignment(.leading)
                                 .padding(.leading, 10)
                             
-                            ForEach(week.days) { day in
+                            ForEach($week.days) { $day in
                                 // imprime o dia da semana e a data abaixo
                                 Text(day.name)
                                     .padding(.top, 5)
@@ -51,7 +53,7 @@ struct PlannerView: View {
                                         .font(.body.bold())
                                         .multilineTextAlignment(.leading)
                                     Section {
-                                        ForEach(day.tasks, id: \.id) { task in
+                                        ForEach($day.tasks, id: \.id) { $task in
                                             HStack {
                                                 // cada tarefa separada por um divisor abaixo do horario setado (formatado)
                                                 Spacer()
@@ -59,7 +61,8 @@ struct PlannerView: View {
                                                     .padding(.trailing, 10)
                                             }
                                             Divider()
-                                                NavigationLink(destination: TaskInfoView(task: task)) {
+                                                NavigationLink(destination: TaskInfoView(originalTask: $task,
+                                                                                         task: task)) {
                                                     HStack {
                                                         Rectangle()
                                                             .foregroundColor(task.category.color)

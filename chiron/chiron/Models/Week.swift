@@ -56,10 +56,11 @@ var sexta = Day(name:"Sexta-feira", tasks:[task1, task2, task3], events:["Festa 
 var sabado = Day(name:"Sábado", tasks:[task3], events:[])
 var domingo = Day(name:"Domingo", tasks:[], events:["Entrega projeto final MC613"])
 
-struct Week: Identifiable {
+class Week: Identifiable, ObservableObject {
     var id: Int
     var startDate: Date
-    let days: [Day]
+    @Published
+    var days: [Day]
     
     
     static let exampleWeek = Week(
@@ -67,5 +68,11 @@ struct Week: Identifiable {
         startDate: Date(),
         days: [segunda, terca, quarta, quinta, sexta, sabado, domingo]
     )
+    
+    init(id:Int, startDate: Date, days:[Day]) {
+        self.id = id
+        self.startDate = startDate
+        self.days = days
+    }
 
 }
