@@ -86,12 +86,14 @@ func convertsTime(duration: Int) -> String {
     let totalMinutes = duration
     let hours = totalMinutes / 60
     let minutes = totalMinutes % 60
+    
     if hours > 0 {
         if minutes > 0 {
             return "\(hours)h\(minutes)"
         } else {
             return "\(hours)h"
         }
+        
     } else {
         return "\(minutes)min"
     }
