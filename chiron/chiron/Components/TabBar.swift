@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabBar: View {
     
-    @ObservedObject
+    @StateObject
     var week = Week(id: Week.exampleWeek.id,
                     date: Week.exampleWeek.date,
                     tasks: Week.exampleWeek.tasks,
@@ -19,7 +19,7 @@ struct TabBar: View {
     var body: some View {
        
         TabView {
-            PlannerView(week: week)
+            PlannerView()
                 .tabItem{
                     Label("Planner", systemImage: "book")}
 
@@ -34,6 +34,7 @@ struct TabBar: View {
         }
         // altera cor do item selecionado na TabBar
         .accentColor(Color("AccentColor"))
+        .environmentObject(week)
     }
 }
 

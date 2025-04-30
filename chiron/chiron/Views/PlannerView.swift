@@ -10,7 +10,7 @@ import SwiftUI
 struct PlannerView: View {
     // by default, the first tab selected is the planner (main frame)
     //@State var selectedTab: Tabs = .planner
-    @ObservedObject
+    @EnvironmentObject
     var week: Week
     
     var body: some View {
@@ -113,11 +113,12 @@ struct PlannerView: View {
         }
     }
     
-    struct PlannerView_Previews: PreviewProvider {
-        static var previews: some View {
-            PlannerView(week: Week.exampleWeek)
-        }
-    }
+//    struct PlannerView_Previews: PreviewProvider {
+//        static var previews: some View {
+//            PlannerView()
+//                .environmentObject(week)
+//        }
+//    }
 }
 
 

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct EditTaskView: View {
     
+    @EnvironmentObject
+    var week:Week
+    
     @Binding
     var task:Task
     
@@ -23,6 +26,8 @@ struct EditTaskView: View {
         //_task = State(initialValue: task)
         self._task = task
         self._editableTask = State(initialValue: taskData)
+//Talvez isso tire a necessidade do taskData ...:-P
+       // self._editableTask = State(initialValue: task.wrappedValue)
         //self.editableTask.title = week.tasks[index].title
     }
         
@@ -37,7 +42,7 @@ struct EditTaskView: View {
             
             Form {
                 Section {
-                    TextField("Titulo", text: $editableTask.title)
+                     TextField("Titulo", text: $editableTask.title)
                     TextField("Localização", text: $editableTask.location)
                 }
                 .listRowBackground(Color(hex: 0xF8F6ED))

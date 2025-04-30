@@ -173,9 +173,9 @@ struct TaskInfoView: View {
                 }
             }
         }
-        .environmentObject(week)  // add e arrumar!!
+       // .environmentObject(week)  // add e arrumar!!
         .sheet(isPresented: $modal, content: {
-                            CurrentTaskView(task: $originalTask)
+            CurrentTaskView(task: $originalTask, week: week)
         })
         
         NavigationLink.init("",
