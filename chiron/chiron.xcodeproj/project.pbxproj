@@ -26,6 +26,7 @@
 		64C2472E2DAD376D00AD3ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */; };
 		ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE11D2A2DB9511D00C5833E /* AddItemView.swift */; };
 		ED49657C2DC108ED00A52B09 /* IniciarTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED49657B2DC108ED00A52B09 /* IniciarTaskView.swift */; };
+		ED66D9B62DC261B5009E96E1 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED66D9B52DC261B5009E96E1 /* Schedule.swift */; };
 		ED7F62CD2DC0FA4D00E2BDAE /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62CC2DC0FA4D00E2BDAE /* EditTaskView.swift */; };
 		ED7F62D12DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */; };
 		ED7F62D32DC0FB8500E2BDAE /* ShapeColorfulStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */; };
@@ -54,6 +55,7 @@
 		64C2472D2DAD376D00AD3ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ADE11D2A2DB9511D00C5833E /* AddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		ED49657B2DC108ED00A52B09 /* IniciarTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IniciarTaskView.swift; sourceTree = "<group>"; };
+		ED66D9B52DC261B5009E96E1 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		ED7F62CC2DC0FA4D00E2BDAE /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulShapeStyle.swift; sourceTree = "<group>"; };
 		ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeColorfulStyle.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				2A5E7C9C2DB7E08F00B10322 /* Week.swift */,
 				2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */,
 				ED8F03362DBA79CF009135DA /* Day.swift */,
+				ED66D9B52DC261B5009E96E1 /* Schedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */,
 				4E51FCA82DBA774E007A7304 /* GreenButtonStyle.swift in Sources */,
 				2A5E7C9F2DB7E11700B10322 /* RoutineItem.swift in Sources */,
+				ED66D9B62DC261B5009E96E1 /* Schedule.swift in Sources */,
 				ADE11D2B2DB9511D00C5833E /* AddItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

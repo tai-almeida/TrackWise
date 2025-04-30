@@ -60,21 +60,21 @@ class Week: Identifiable, ObservableObject {
     var id: Int
     var startDate: Date
     @Published
-    var days: [Day]
+    var tasks: [Task]
+    //var days: [Day]
     
     
     static let exampleWeek = Week(
         id: 0,
         startDate: Date(),
-        days: [segunda, terca, quarta, quinta, sexta, sabado, domingo]
-        //tasks: [task1, task2, task3],
-        //events: ["Aniversário de Cont", "Prova de Física", "Checkpoint Design"]
+        tasks: []
+        //days: [segunda, terca, quarta, quinta, sexta, sabado, domingo]
     )
     
-    init(id:Int, startDate: Date, days:[Day]) {
+    init(id:Int, startDate: Date, tasks:[Task]) {
         self.id = id
         self.startDate = startDate
-        self.days = days
+        self.tasks = tasks
     }
 
 }

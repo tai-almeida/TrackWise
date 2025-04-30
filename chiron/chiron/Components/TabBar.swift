@@ -9,16 +9,17 @@ import SwiftUI
 
 struct TabBar: View {
     
-    @ObservedObject
-        var week = Week(id: Week.exampleWeek.id,
-                        startDate: Week.exampleWeek.startDate,
-                        days: Week.exampleWeek.days)
+    @StateObject
+//        var week = Week(id: Week.exampleWeek.id,
+//                        startDate: Week.exampleWeek.startDate,
+//                        days: Week.exampleWeek.days)
+    var schedule = Schedule()
     
     /* TabBar com 3 elementos - planner, calendario e pendentes */
     var body: some View {
        
         TabView {
-            PlannerView(week: week)
+            PlannerView()
                 .tabItem{
                     Label("Planner", systemImage: "book")}
 
@@ -26,13 +27,15 @@ struct TabBar: View {
 //                .tabItem{
 //                    Label("Calendário", systemImage: "calendar")}
             
-
-            Text("Tela 3")
+            
+            
+            Text("Tela 2")
                 .tabItem{
                     Label("Pendentes", systemImage: "clock.badge.exclamationmark")}
         }
         // altera cor do item selecionado na TabBar
         .accentColor(Color("AccentColor"))
+        .environmentObject(schedule)
     }
 }
 
