@@ -11,38 +11,60 @@ struct CurrentTaskView: View {
     
     @Binding var task: Task
     
-    @ObservedObject var week: Week
+    @EnvironmentObject var week: Week
     
-    let startTime = Date()
+    @State private var editableTask: Task
     
+    init(task: Binding<Task>) {
+        self._task = task
+        self._editableTask = State(initialValue: task.wrappedValue)
+    }
+    
+
     @Environment(\.dismiss) var dismiss
 
     @State private var alertFim = false
     @State private var otimizarRotina = false
     @State private var proxima: Task? = nil
     
+    @State private var tempoRestante: TimeInterval = 0
+    let startTime = Date()
+    
     
     func iniciarTimer() {
-       // fazer se der tempo
-    }
-    
-    func pararTimer() {
-       // fazer se der tempo
-    }
-    
-    func observarHora() {
-        // codigo real
-        if (startTime >= task.endTime) {
-            proxima = proximaTarefa()
-            alertFim = true
-        }
-        //codigo de teste:
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            proxima = proximaTarefa()
-            alertFim = true
-            
+        tempoRestante = task.endTime.timeIntervalSince(startTime)
+
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            let restante = task.endTime.timeIntervalSince(Date())
+            if restante <= 0 {
+                timer.invalidate()
+                proxima = proximaTarefa()
+                alertFim = true
+            } else {
+                tempoRestante = restante
+            }
         }
     }
+    
+    func novoTimer() {
+        var extraTime = 0
+        if !
+       // inicia se tempo restante acabar
+    }
+    
+//    func observarHora() {
+//        // codigo real
+//        if (startTime >= task.endTime) {
+//            proxima = proximaTarefa()
+//            alertFim = true
+//        }
+//        //codigo de teste:
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//            proxima = proximaTarefa()
+//            alertFim = true
+//
+//        }
+//    }
     
     func proximaTarefa() -> Task? {
         let futuras = week.tasks.filter { $0.startTime > task.endTime }
@@ -50,6 +72,9 @@ struct CurrentTaskView: View {
     }
     
     var body: some View {
+        
+        var tempoRestante = task.endTime.timeIntervalSince(startTime)
+        
         NavigationView {
             VStack (alignment: .leading) {
                 
@@ -65,7 +90,7 @@ struct CurrentTaskView: View {
                     Text(task.formattedRangeTime)
                         .padding(.bottom, 5)
                     
-                    Text("Tempo restante: \(task.averageTime) min")
+                    Text("Tempo restante: \(Int(tempoRestante / 60)) min")
                         .font(.subheadline)
                         .padding(.bottom, 10)
                 }
@@ -73,14 +98,14 @@ struct CurrentTaskView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Form {
                     Section(header: Text("Checklist")) {
-                        ForEach(Array(task.checklist), id: \.key) { item, isDone in
+                        ForEach(Array(editableTask.checklist), id: \.key) { item, isDone in
                             HStack {
                                 Text(item)
                                     .strikethrough(isDone)
                                     .foregroundColor(isDone ? .gray : .primary)
                                 Spacer()
                                 Button {
-                                    task.checklist[item]?.toggle()
+                                    editableTask.checklist[item]?.toggle()
                                 } label:{
                                     Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
                                         .foregroundColor(isDone ? .green : .gray)
@@ -97,6 +122,7 @@ struct CurrentTaskView: View {
                 VStack {
                     Button {
                         otimizarRotina = true
+                        task = editableTask
                     } label: {
                         Text("Finalizar Tarefa")
                             .padding(.horizontal, 100)
@@ -135,18 +161,25 @@ struct CurrentTaskView: View {
             .onAppear {
                 UITableView.appearance().backgroundColor = .clear
                 iniciarTimer()
-                observarHora()
+                //observarHora()
             }
             .alert("Está na hora de finalizar!", isPresented: $alertFim, actions: {
                 
                 if proxima != nil {
-                    Button("Continuar") { }
+                    Button("Continuar") {
+                        tempoRestante = 0
+                        novoTimer()
+                    }
                     Button("Próxima", role: .cancel) {
                         dismiss()
                         //procurar como colocar para abrir a proxima tarefa
                     }
                 } else {
                     Button("Finalizar") { dismiss() }
+                    Button("Continuar") {
+                        tempoRestante = 0
+                        novoTimer()
+                    }
                 }
                 
             }, message: {
@@ -164,10 +197,9 @@ struct CurrentTaskView: View {
 
 
 
-/*
-struct CurrentTaskView_Previews: PreviewProvider {
-    static var previews: some View {
-        CurrentTaskView(task: .constant(Task.exampleTask))
-    }
-}
-*/
+//struct CurrentTaskView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CurrentTaskView(task: .constant(Task.exampleTask), week: <#T##Week#>)
+//    }
+//}
+

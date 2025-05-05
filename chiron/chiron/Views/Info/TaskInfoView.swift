@@ -175,7 +175,7 @@ struct TaskInfoView: View {
         }
        // .environmentObject(week)  // add e arrumar!!
         .sheet(isPresented: $modal, content: {
-            CurrentTaskView(task: $originalTask, week: week)
+            CurrentTaskView(task: $originalTask)
         })
         
         NavigationLink.init("",
