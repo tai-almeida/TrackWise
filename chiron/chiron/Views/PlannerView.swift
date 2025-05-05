@@ -31,9 +31,9 @@ struct PlannerView: View {
                                 .multilineTextAlignment(.leading)
                                 .padding(.leading, 10)
                             
+                            // começa no dia de hoje e percorre os próximos 7 dias
                             ForEach((0..<7), id: \.self) { i in
                                 let day = Calendar.current.date(byAdding: .day, value: i, to: Date())!
-                                // começa no dia de hoje e percorre os próximos 7 dias
                                 Text(schedule.getWeekDay(date: day))
                                     .padding(.top, 5)
                                     .font(.body.bold())
@@ -41,7 +41,7 @@ struct PlannerView: View {
                                 
                                 VStack (alignment: .leading){
                                 // cada evento separado por um divisor
-                                    ForEach($schedule.events, id: \.self) { $events in
+                                    ForEach(schedule.dateEvents(data: day), id: \.self) { events in
                                         Divider()
                                         .padding(.horizontal, 20)
                                         
@@ -50,72 +50,80 @@ struct PlannerView: View {
                                             Text(events.title)
                                                 .padding(.horizontal, 20)
                                                 .padding(.bottom, 20)
+                                            
                                         }
                                     }
                                 }
                                 
+                                // percorre as tarefas do dia e as apresenta na tela
                                 VStack(alignment: .leading) {
+                                    // verifica se ha tarefas nessa data
                                     if !schedule.dateTasks(data: day).isEmpty {
                                     Text("Atividades")
                                         .padding(.top, 20)
                                         .font(.body.bold())
                                         .multilineTextAlignment(.leading)
+                                        
                                     Section {
-                                        ForEach($schedule.tasks, id: \.id) { $task in
-                                            HStack {
-                                                // cada tarefa separada por um divisor abaixo do horario setado (formatado)
-                                                Spacer()
-                                                Text(task.formattedTime)
-                                                    .padding(.trailing, 10)
-                                            }
-                                            Divider()
-                                                NavigationLink(destination: TaskInfoView(originalTask: $task,
-                                                                                         task: task)) {
-                                                    HStack {
-                                                        Rectangle()
-                                                            .foregroundColor(task.category.color)
-                                                            .frame(width:10)
-                                                        VStack(alignment: .leading) {
-                                                            // nome da tarefa
-                                                            Text(task.title)
-                                                                .padding(.top, 10)
-                                                                .foregroundStyle(.black)
-                                                                .padding(.leading, 5)
-                                                            // tag de dificuldade
-                                                            Text(task.difficulty.rawValue)
-                                                                .font(.system(size:12))
-                                                                .padding(.horizontal, 10)
-                                                                .padding(.vertical, 4)
-                                                                .background(task.difficulty.color)
-                                                                .foregroundStyle(.white)
-                                                                .clipShape(Capsule())
-                                                        }
-                                                        .padding(.bottom, 5)
-                                                        Spacer()
-                                                        VStack(alignment: .trailing) {
-                                                            // simbolo de inicio da tarefa
-                                                            Image(systemName: "play.fill")
-                                                                .padding(.horizontal, 10)
-                                                                .padding(.vertical, 4)
-                                                                .background(Color("AccentColor"))
-                                                                .foregroundStyle(.white)
-                                                                .clipShape(Capsule())
-                                                            // tag com o tempo convertido para HhMIN
-                                                            Text(convertsTime(duration: task.averageTime))
-                                                                .font(.system(size:12))
-                                                                .padding(.horizontal, 10)
-                                                                .padding(.vertical, 4)
-                                                                .background(Color(hex: 0xEFE8D8))
-                                                                .foregroundStyle(.black)
-                                                                .clipShape(Capsule())
-                                                        }
-                                                        .padding(.trailing, 5)
-                                                    }
+                                        //percorre as tarefas do dia
+                                        ForEach(schedule.dateTasks(data: day), id: \.self) { index in
+                                            let task = schedule.tasks[index]
+                                                HStack {
+                                                    // cada tarefa separada por um divisor abaixo do horario setado (formatado)
+                                                    Spacer()
+                                                    Text(schedule.tasks[index].formattedTime)
+                                                        .padding(.trailing, 10)
                                                 }
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                .background(Color(hex: 0xF8F6ED))
-                                                .cornerRadius(8)
-                                                .padding(.horizontal, 5)
+                                                Divider()
+                                            NavigationLink(destination: TaskInfoView(originalTask: $schedule.tasks[index],
+                                                                                     task: task)) {
+                                                        HStack {
+                                                            Rectangle()
+                                                                .foregroundColor(task.category.color)
+                                                                .frame(width:10)
+                                                            VStack(alignment: .leading) {
+                                                                // nome da tarefa
+                                                                Text(task.title)
+                                                                    .padding(.top, 10)
+                                                                    .foregroundStyle(.black)
+                                                                    .padding(.leading, 5)
+                                                                // tag de dificuldade
+                                                                Text(task.difficulty.rawValue)
+                                                                    .font(.system(size:12))
+                                                                    .padding(.horizontal, 10)
+                                                                    .padding(.vertical, 4)
+                                                                    .background(task.difficulty.color)
+                                                                    .foregroundStyle(.white)
+                                                                    .clipShape(Capsule())
+                                                            }
+                                                            .padding(.bottom, 5)
+                                                            Spacer()
+                                                            VStack(alignment: .trailing) {
+                                                                // simbolo de inicio da tarefa
+                                                                Image(systemName: "play.fill")
+                                                                    .padding(.horizontal, 10)
+                                                                    .padding(.vertical, 4)
+                                                                    .background(Color("AccentColor"))
+                                                                    .foregroundStyle(.white)
+                                                                    .clipShape(Capsule())
+                                                                // tag com o tempo convertido para HhMIN
+                                                                Text(convertsTime(duration: task.averageTime))
+                                                                    .font(.system(size:12))
+                                                                    .padding(.horizontal, 10)
+                                                                    .padding(.vertical, 4)
+                                                                    .background(Color(hex: 0xEFE8D8))
+                                                                    .foregroundStyle(.black)
+                                                                    .clipShape(Capsule())
+                                                            }
+                                                            .padding(.trailing, 5)
+                                                        }
+                                                    }
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .background(Color(hex: 0xF8F6ED))
+                                                    .cornerRadius(8)
+                                                    .padding(.horizontal, 5)
+                                            
+                                            
                                             }
                                         }
                                     }

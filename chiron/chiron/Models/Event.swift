@@ -32,4 +32,11 @@ struct Event: Identifiable, Hashable {
         location: "Morro do Bombom",
         date: Date()
     )
+    
+    static let example2 = Event(
+        id: 1,
+        title: "Prova Biologia",
+        location: "Escola",
+        date: Calendar.current.date(byAdding: .day, value: 3, to: Date())!
+    )
 }

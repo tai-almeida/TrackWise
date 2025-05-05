@@ -14,15 +14,15 @@ class Schedule: ObservableObject {
     var events: [Event]
     
     init() {
-        self.tasks = [Task.exampleTask]
-        self.events = [Event.exampleEvent]
+        self.tasks = [Task.exampleTask, Task.task2]
+        self.events = [Event.exampleEvent, Event.example2]
     }
     
-    func dateTasks(data: Date) -> [Task] {
+    func dateTasks(data: Date) -> [Int] {
     // retorna todas as tarefas de "data"
         let calendar = Calendar.current
-        return tasks.filter {
-            calendar.isDate($0.date, inSameDayAs: data)
+        return tasks.indices.filter {
+            calendar.isDate(tasks[$0].date, inSameDayAs: data)
         }
     }
     
