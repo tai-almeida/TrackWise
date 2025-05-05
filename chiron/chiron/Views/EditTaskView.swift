@@ -16,45 +16,41 @@ struct EditTaskView: View {
     
     @State
     var editableTask:Task
+    
+    @State private var newSubitemTitle: String = ""
+    
+    @Environment(\.dismiss) var dismiss
+
 
     init(task: Binding<Task>, taskData: Task){
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
-        //_task = State(initialValue: task)
+
         self._task = task
         self._editableTask = State(initialValue: taskData)
-        //self.editableTask.title = week.tasks[index].title
     }
-        
-    @State
-    var completeAndReturn: Bool = false
 
     var body: some View {
-            
+        
+        // background
         ZStack {
-            // background
             Color("BackgroundScreenColor").ignoresSafeArea()
-            
+                            
             Form {
+                
                 Section {
                     TextField("Titulo", text: $editableTask.title)
                     TextField("Localização", text: $editableTask.location)
                 }
-                .listRowBackground(Color(hex: 0xF8F6ED))
+                    .listRowBackground(Color(hex: 0xF8F6ED))
 
     
                 Section {
-                    DatePicker(
-                        selection: $editableTask.date, in: ...Date(), displayedComponents: .date, label: {
-                        Text("Data")})
-                    DatePicker(
-                        selection: $editableTask.startTime, in: ...Date(), displayedComponents: .hourAndMinute, label: {
-                        Text("Inicio")})
-                    DatePicker(
-                        selection: $editableTask.endTime, in: ...Date(), displayedComponents: .hourAndMinute, label: {
-                        Text("Fim")})
-                    }
-                .listRowBackground(Color(hex: 0xF8F6ED))
+                    DatePicker("Data", selection: $editableTask.date, in: ...Date(), displayedComponents: .date)
+                    DatePicker("Início", selection: $editableTask.startTime, in: ...Date(), displayedComponents: .hourAndMinute)
+                    DatePicker("Fim", selection: $editableTask.endTime, in: ...Date(), displayedComponents: .hourAndMinute)
+                }
+                    .listRowBackground(Color(hex: 0xF8F6ED))
 
         
                 Section {
@@ -69,13 +65,14 @@ struct EditTaskView: View {
                             ForEach(Category.allCases.filter { $0 != editableTask.category }, id: \.self) { category in
                                 Button(category.rawValue.capitalized) {
                                     editableTask.category = category
+                                    }
                                 }
-                            }
-                        } label: {
-                            Text(editableTask.category.rawValue.capitalized)
-                            Image(systemName: "chevron.up.chevron.down")
-                            }
-                            .modifier(ColorfulShapeStyle(backgroundColor: editableTask.category.color))
+                            } label: {
+                                Text(editableTask.category.rawValue.capitalized)
+                                Image(systemName: "chevron.up.chevron.down")
+                                }
+                                .modifier(ColorfulShapeStyle(backgroundColor:
+                                                             editableTask.category.color))
                         }
                     
                         HStack {
@@ -88,36 +85,66 @@ struct EditTaskView: View {
                                 ForEach(Difficulty.allCases.filter { $0 != editableTask.difficulty }, id: \.self) { difficulty in
                                     Button(difficulty.rawValue) {
                                         editableTask.difficulty = difficulty
+                                        }
                                     }
-                                }
-                            } label: {
-                                Text(editableTask.difficulty.rawValue.capitalized)
-                                Image(systemName: "chevron.up.chevron.down")
-                            }
-                            .modifier(ColorfulShapeStyle(backgroundColor: editableTask.difficulty.color))
+                                } label: {
+                                    Text(editableTask.difficulty.rawValue.capitalized)
+                                    Image(systemName: "chevron.up.chevron.down")
+                                    }
+                                    .modifier(ColorfulShapeStyle(backgroundColor:
+                                                                 editableTask.difficulty.color))
                         }
                 }
                 .listRowBackground(Color(hex: 0xF8F6ED))
                 
+                
                 Section(header: Text("Checklist")) {
-                    List {
-                        ForEach(Array(editableTask.checklist.keys), id: \.self) { item in
-                            
-                            //TextField("Item", text: $item)
+
+                    ForEach($editableTask.checklist) { $item in
+                        HStack {
+                            Button(action: {
+                                item.isDone.toggle()
+                            }) {
+                                Image(systemName: item.isDone ? "checkmark.circle" : "circle")
+                                    .foregroundColor(item.isDone ? .green : .gray)
+                            }
+                            .buttonStyle(.plain)
+
+                            TextField("Subtarefa", text: $item.title)
+
+                            Button(action: {
+                                if let index = editableTask.checklist.firstIndex(where: { $0.id == item.id }) {
+                                    editableTask.checklist.remove(at: index)
+                                }
+                            }) {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.secondary)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
+                    
+                    // implementar logica para criar um campo vazio que adiciona um chacklistitem no array checklist
+                    // se adicionar um novo, aparece outro campo em branco
+                    
+                    HStack {
+                        TextField("Nova subtarefa", text: $newSubitemTitle, onCommit: {
+                            addNewSubitem()
+                        })
+                        .submitLabel(.done)
+                    }
+                    
                 }
                 .listRowBackground(Color(hex: 0xF8F6ED))
-
+                
+                
             }
-        }
+
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    completeAndReturn = true
                     task = editableTask
-//                    task[
-//                    editInfos(task: editableTask, title: "aa")]
+                    dismiss()
                 }) {
                     Text("Ok")
                         .foregroundColor(Color("AccentColor"))
@@ -125,16 +152,22 @@ struct EditTaskView: View {
             }
         }
         
-        NavigationLink.init("",
-                            destination: TaskInfoView(originalTask: $task,
-                                                      task: editableTask),
-                            isActive: $completeAndReturn)
+        
+//        NavigationLink.init("",
+//                            destination: TaskInfoView(originalTask: $task,
+//                                                      task: editableTask),
+//                            isActive: $completeAndReturn)
         }
     }
-
-func editInfos(task: Task, title: String) -> Task {
-    return task
+    
+    func addNewSubitem() {
+        let newItem: ChecklistItem = ChecklistItem(title: newSubitemTitle, isDone: false)
+        editableTask.checklist.append(newItem)
+        newSubitemTitle = ""
+    }
+    
 }
+
 
 
 //struct EditTaskView_Previews: PreviewProvider {

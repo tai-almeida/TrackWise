@@ -21,7 +21,8 @@ struct TaskInfoView: View {
     @State
     var navigateToEditTaskView: Bool = false
     
-
+    @EnvironmentObject
+    var week: Week
     
     var body: some View {
         
@@ -107,12 +108,12 @@ struct TaskInfoView: View {
                                 .padding(.vertical, 10)
                                 .foregroundColor(.secondary)
                         } else {
-                            ForEach(Array(task.checklist.keys), id: \.self) { item in
+                            ForEach(task.checklist, id: \.id) { item in
                                 Divider()
-                                Text(item)
-                                    .strikethrough(task.checklist[item] == true , color: .gray)
+                                Text(item.title)
+                                    .strikethrough(item.isDone == true , color: .gray)
                                     .padding(.vertical, 10)
-                                    .foregroundColor(task.checklist[item] == true ? .gray : .primary)
+                                    .foregroundColor(item.isDone == true ? .gray : .primary)
                             }
                         }
                     }

@@ -17,7 +17,11 @@ var task1 = Task(
             endTime: Date().addingTimeInterval(3600),
             category: .estudos,
             difficulty: .dificil,
-            checklist: ["Assistir aula":false, "Fazer exercícios":false, "Revisar":false],
+            checklist: [
+                ChecklistItem(title: "Assistir aula", isDone: true),
+                ChecklistItem(title: "Fazer exercícios", isDone: false),
+                ChecklistItem(title: "Revisar", isDone: false)
+            ],
             isCompleted: false,
             averageTime: 47)
 
@@ -30,7 +34,10 @@ var task2 = Task(
             endTime: Date().addingTimeInterval(3600),
             category: .faxina,
             difficulty: .facil,
-            checklist: ["Lavar Roupas" : false, "Estender Roupas": false],
+            checklist: [
+                ChecklistItem(title: "Lavar Roupas", isDone: false),
+                ChecklistItem(title: "Estender Roupas", isDone: false)
+            ],
             isCompleted: false,
             averageTime: 58)
 
@@ -43,7 +50,10 @@ var task3 = Task(
             endTime: Date().addingTimeInterval(3600),
             category: .atv_fisica,
             difficulty: .medio,
-            checklist: ["Treinar" : false, "Tomar banho": false],
+            checklist: [
+                ChecklistItem(title: "Treinar", isDone: false),
+                ChecklistItem(title: "Tomar banho", isDone: false)
+            ],
             isCompleted: false,
             averageTime: 80)
 

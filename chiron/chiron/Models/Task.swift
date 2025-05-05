@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-
+import SwiftUI
 
 // CaseIterable permite acessar os valores como lista,
 // necessario para criar a seleçao na criaçao de Task
@@ -20,7 +19,11 @@ enum Difficulty: String, CaseIterable, Identifiable {
 }
 
 enum Category: String, CaseIterable, Identifiable {
-    case estudos, lazer, faxina, social, atv_fisica
+    case estudos = "Estudos"
+    case lazer = "Lazer"
+    case faxina = "Faxina"
+    case social = "Social"
+    case atv_fisica = "Saúde"
     
     var id: String { self.rawValue }
 }
@@ -34,12 +37,12 @@ struct Task: Identifiable {
     var endTime: Date
     var category: Category
     var difficulty: Difficulty
-    var checklist: [String:Bool]
+    var checklist: [ChecklistItem]
     var isCompleted: Bool
     var averageTime: Int //?
     
     init(id:Int, title:String, location:String, date:Date, startTime:Date,
-         endTime:Date, category:Category, difficulty:Difficulty, checklist:[String:Bool], isCompleted:Bool, averageTime:Int) {
+         endTime:Date, category:Category, difficulty:Difficulty, checklist:[ChecklistItem], isCompleted:Bool, averageTime:Int) {
         self.id = id
         self.title = title
         self.location = location
@@ -84,7 +87,11 @@ struct Task: Identifiable {
         endTime: Date().addingTimeInterval(3600),
         category: .estudos,
         difficulty: .dificil,
-        checklist: ["Assistir aula":false, "Fazer exercícios":false, "Revisar":false],
+        checklist: [
+            ChecklistItem(title: "Assistir aula", isDone: false),
+            ChecklistItem(title: "Fazer exercícios", isDone: false),
+            ChecklistItem(title: "Revisar", isDone: false)
+        ],
         isCompleted: false,
         averageTime: 47
     )

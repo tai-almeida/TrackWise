@@ -82,6 +82,7 @@ struct PlannerView: View {
                                                                                  task: task)) {
                                                 LinkView(task: $task)
                                                 .padding(.trailing, 5)
+                                                .environmentObject(week)
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .background(Color(hex: 0xF8F6ED))
@@ -141,12 +142,13 @@ struct LinkView:View {
                     .padding(.leading, 5)
                 
                 Text(task.difficulty.rawValue)
-                    .font(.system(size:12))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(task.difficulty.color)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
+//                    .font(.system(size:12))
+//                    .padding(.horizontal, 10)
+//                    .padding(.vertical, 4)
+//                    .background(task.difficulty.color)
+//                    .foregroundStyle(.white)
+//                    .clipShape(Capsule())
+                    .modifier(ColorfulShapeStyle(backgroundColor: task.difficulty.color))
             }
             .padding(.bottom, 5)
             Spacer()
