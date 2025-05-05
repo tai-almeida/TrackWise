@@ -98,3 +98,5 @@ func convertsTime(duration: Int) -> String {
         return "\(minutes)min"
     }
 }
+
+

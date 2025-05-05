@@ -25,6 +25,5 @@ class Day: Identifiable, ObservableObject {
         self.name = name
         self.tasks = tasks
         self.events = events
-        //self.isToday = true
     }
 }

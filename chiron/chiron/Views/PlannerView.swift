@@ -7,10 +7,13 @@
 import SwiftUI
 struct PlannerView: View {
     @State
-      var navigateToAddItem:Bool = false
+    var navigateToAddItem:Bool = false
     // by default, the first tab selected is the planner (main frame)
-    @ObservedObject
-    var week: Week
+    @EnvironmentObject
+    //var week: Week
+    var schedule: Schedule
+    
+    
     
     var body: some View {
         ZStack {
@@ -28,32 +31,37 @@ struct PlannerView: View {
                                 .multilineTextAlignment(.leading)
                                 .padding(.leading, 10)
                             
-                            ForEach($week.days) { $day in
-                                // imprime o dia da semana e a data abaixo
-                                Text(day.name)
+                            ForEach((0..<7), id: \.self) { i in
+                                let day = Calendar.current.date(byAdding: .day, value: i, to: Date())!
+                                // começa no dia de hoje e percorre os próximos 7 dias
+                                Text(schedule.getWeekDay(date: day))
                                     .padding(.top, 5)
                                     .font(.body.bold())
                                     .multilineTextAlignment(.leading)
-                                // impressao de cada evento do dia
+                                
                                 VStack (alignment: .leading){
-                                    // cada evento separado por um divisor
-                                    ForEach(day.events, id: \.self) { events in
+                                // cada evento separado por um divisor
+                                    ForEach($schedule.events, id: \.self) { $events in
                                         Divider()
-                                            .padding(.horizontal, 20)
-                                        Text(events)
-                                            .padding(.horizontal, 20)
-                                            .padding(.bottom, 20)
+                                        .padding(.horizontal, 20)
+                                        
+                                        // verifica se ha eventos na data analisada
+                                        if !schedule.dateEvents(data: day).isEmpty {
+                                            Text(events.title)
+                                                .padding(.horizontal, 20)
+                                                .padding(.bottom, 20)
+                                        }
                                     }
                                 }
-                                // impressao das tarefas do dia
-                                VStack (alignment: .leading) {
-                                    if !day.tasks.isEmpty {
+                                
+                                VStack(alignment: .leading) {
+                                    if !schedule.dateTasks(data: day).isEmpty {
                                     Text("Atividades")
                                         .padding(.top, 20)
                                         .font(.body.bold())
                                         .multilineTextAlignment(.leading)
                                     Section {
-                                        ForEach($day.tasks, id: \.id) { $task in
+                                        ForEach($schedule.tasks, id: \.id) { $task in
                                             HStack {
                                                 // cada tarefa separada por um divisor abaixo do horario setado (formatado)
                                                 Spacer()
@@ -112,9 +120,9 @@ struct PlannerView: View {
                                         }
                                     }
                                 }
+                                
                             }
-                            
-                            // insere + na toolbar para ir para tela de AddTask
+                             //insere + na toolbar para ir para tela de AddTask
                             .padding(.horizontal, 10)
                             NavigationLink.init("",
                                                 destination: AddItemView(),
@@ -132,16 +140,23 @@ struct PlannerView: View {
                                           }
                                         }
                                       }
+                        }
                     }
+                .onAppear {
+                    UITableView.appearance().backgroundColor = .clear
                 }
-            }
+                .background(Color("BackgroundScreenColor"))
+
+                }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("BackgroundScreenColor"))
+            }
         }
     }
-    struct PlannerView_Previews: PreviewProvider {
-        static var previews: some View {
-            PlannerView(week: Week.exampleWeek)
-        }
-    }
-}
+//}
+                            
+//    struct PlannerView_Previews: PreviewProvider {
+//        static var previews: some View {
+//            PlannerView(week: Week.exampleWeek)
+//        }
+//    }
+//}
