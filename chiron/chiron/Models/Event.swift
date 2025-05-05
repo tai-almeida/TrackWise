@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event: Identifiable {
+struct Event: Identifiable, Hashable {
     let id: Int
     var title: String
     var location: String

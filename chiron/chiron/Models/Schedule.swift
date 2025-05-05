@@ -10,9 +10,12 @@ import SwiftUI
 class Schedule: ObservableObject {
     @Published
     var tasks: [Task]
+    @Published
+    var events: [Event]
     
     init() {
-        self.tasks = []
+        self.tasks = [Task.exampleTask]
+        self.events = [Event.exampleEvent]
     }
     
     func dateTasks(data: Date) -> [Task] {
@@ -23,9 +26,16 @@ class Schedule: ObservableObject {
         }
     }
     
+    func dateEvents(data: Date) -> [Event] {
+    // retorna todas as tarefas de "data"
+        let calendar = Calendar.current
+        return events.filter {
+            calendar.isDate($0.date, inSameDayAs: data)
+        }
+    }
+    
     func getWeekDay(date: Date) -> String {
         let f = DateFormatter()
-
         return f.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
     }
     
