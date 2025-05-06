@@ -10,9 +10,6 @@ import SwiftUI
 struct TabBar: View {
     
     @StateObject
-//        var week = Week(id: Week.exampleWeek.id,
-//                        startDate: Week.exampleWeek.startDate,
-//                        days: Week.exampleWeek.days)
     var schedule = Schedule()
     
     /* TabBar com 3 elementos - planner, calendario e pendentes */

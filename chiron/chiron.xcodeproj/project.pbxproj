@@ -14,7 +14,6 @@
 		2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C952DB7D72600B10322 /* InfoView.swift */; };
 		2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C972DB7DAF600B10322 /* Event.swift */; };
 		2A5E7C9A2DB7DD9500B10322 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C992DB7DD9500B10322 /* Travel.swift */; };
-		2A5E7C9D2DB7E08F00B10322 /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C9C2DB7E08F00B10322 /* Week.swift */; };
 		2A5E7C9F2DB7E11700B10322 /* RoutineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */; };
 		2A5E7CA12DB7E72200B10322 /* TravelinfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7CA02DB7E72200B10322 /* TravelinfoView.swift */; };
 		2A9930792DB016EF00C393AF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9930782DB016EF00C393AF /* ColorExtension.swift */; };
@@ -31,7 +30,6 @@
 		ED7F62D12DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */; };
 		ED7F62D32DC0FB8500E2BDAE /* ShapeColorfulStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */; };
 		ED7F62D52DC0FC7200E2BDAE /* CurrentTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F62D42DC0FC7200E2BDAE /* CurrentTaskView.swift */; };
-		ED8F03372DBA79CF009135DA /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8F03362DBA79CF009135DA /* Day.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +40,6 @@
 		2A5E7C952DB7D72600B10322 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		2A5E7C972DB7DAF600B10322 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2A5E7C992DB7DD9500B10322 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
-		2A5E7C9C2DB7E08F00B10322 /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineItem.swift; sourceTree = "<group>"; };
 		2A5E7CA02DB7E72200B10322 /* TravelinfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelinfoView.swift; sourceTree = "<group>"; };
 		2A9930782DB016EF00C393AF /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -60,7 +57,6 @@
 		ED7F62D02DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulShapeStyle.swift; sourceTree = "<group>"; };
 		ED7F62D22DC0FB8500E2BDAE /* ShapeColorfulStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeColorfulStyle.swift; sourceTree = "<group>"; };
 		ED7F62D42DC0FC7200E2BDAE /* CurrentTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTaskView.swift; sourceTree = "<group>"; };
-		ED8F03362DBA79CF009135DA /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,9 +128,7 @@
 				2AC416682DAE9262008E4538 /* Task.swift */,
 				2A5E7C972DB7DAF600B10322 /* Event.swift */,
 				2A5E7C992DB7DD9500B10322 /* Travel.swift */,
-				2A5E7C9C2DB7E08F00B10322 /* Week.swift */,
 				2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */,
-				ED8F03362DBA79CF009135DA /* Day.swift */,
 				ED66D9B52DC261B5009E96E1 /* Schedule.swift */,
 			);
 			path = Models;
@@ -263,7 +257,6 @@
 				ED7F62D12DC0FB6D00E2BDAE /* ColorfulShapeStyle.swift in Sources */,
 				ED7F62D52DC0FC7200E2BDAE /* CurrentTaskView.swift in Sources */,
 				2A4C32312DB9318C00F400AE /* PlannerView.swift in Sources */,
-				2A5E7C9D2DB7E08F00B10322 /* Week.swift in Sources */,
 				ED49657C2DC108ED00A52B09 /* IniciarTaskView.swift in Sources */,
 				2AC357192DAFF22800429D10 /* TaskStyle.swift in Sources */,
 				2A5E7C942DB7D61500B10322 /* EventInfoView.swift in Sources */,
@@ -273,7 +266,6 @@
 				ED7F62D32DC0FB8500E2BDAE /* ShapeColorfulStyle.swift in Sources */,
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
-				ED8F03372DBA79CF009135DA /* Day.swift in Sources */,
 				2AC416692DAE9262008E4538 /* Task.swift in Sources */,
 				2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */,
 				4E51FCA82DBA774E007A7304 /* GreenButtonStyle.swift in Sources */,
