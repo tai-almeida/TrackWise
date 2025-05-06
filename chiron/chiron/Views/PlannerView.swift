@@ -44,21 +44,26 @@ struct PlannerView: View {
                                 // cada evento separado por um divisor
                                     ForEach(schedule.dateEvents(data: day), id: \.self) { index in
                                         let event = schedule.events[index]
+                                        Divider()
                                         NavigationLink(destination: EventInfoView(originalEvent: $schedule.events[index],
                                                                                  event: event)){
-                                            Divider()
-                                            .padding(.horizontal, 20)
+                                            
+                                            //.padding(.horizontal, 20)
                                             
                                             // verifica se ha eventos na data analisada
                                             if !schedule.dateEvents(data: day).isEmpty {
                                                 Text(event.title)
-                                                    .padding(.horizontal, 20)
-                                                    .padding(.bottom, 20)
+                                                    //.padding(.leading,10)
+                                                    .padding(.bottom, 10)
+                                                    .foregroundColor(.black)
+                                                
                                                 
                                             }
 
                                         }
+                                        Divider()
                                     }
+                                    
                                 }
                                 
                                 // percorre as tarefas do dia e as apresenta na tela
