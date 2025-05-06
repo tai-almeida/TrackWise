@@ -106,7 +106,7 @@ struct CurrentTaskView: View {
                                         .foregroundColor(item.isDone ? .green : .gray)
                                 }
                             }
-                            .listRowBackground(Color(hex:0xF8F6ED))
+                            .listRowBackground(Color(.secondarySystemBackground))
                         }
                     }
                 }
@@ -127,7 +127,7 @@ struct CurrentTaskView: View {
                         Text("Finalizar Tarefa")
                             .padding(.horizontal, 100)
                             .padding(.vertical, 15)
-                            .background(Color(hex: 0x91A394))
+                            .background(Color("AccentColor"))
                             .foregroundStyle(.white)
                             .cornerRadius(8)
                     }
@@ -153,7 +153,7 @@ struct CurrentTaskView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .background(Color(hex: 0xEFE8D8))
+            .background(Color("BackgroundScreenColor"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     // botao de cancelar
@@ -161,7 +161,7 @@ struct CurrentTaskView: View {
                         dismiss()
                     } label: {
                         Text("Cancelar")
-                            .foregroundColor(Color(hex: 0x91A394))
+                            .foregroundColor(Color("AccentColor"))
                     }
                 }
                 ToolbarItem(placement: .principal) {

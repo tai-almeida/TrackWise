@@ -14,10 +14,8 @@
 		2A5E7C942DB7D61500B10322 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C932DB7D61500B10322 /* EventInfoView.swift */; };
 		2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C952DB7D72600B10322 /* InfoView.swift */; };
 		2A5E7C982DB7DAF600B10322 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C972DB7DAF600B10322 /* Event.swift */; };
-		2A5E7C9A2DB7DD9500B10322 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C992DB7DD9500B10322 /* Travel.swift */; };
 		2A5E7C9D2DB7E08F00B10322 /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C9C2DB7E08F00B10322 /* Week.swift */; };
 		2A5E7C9F2DB7E11700B10322 /* RoutineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */; };
-		2A5E7CA12DB7E72200B10322 /* TravelinfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E7CA02DB7E72200B10322 /* TravelinfoView.swift */; };
 		2A9930792DB016EF00C393AF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9930782DB016EF00C393AF /* ColorExtension.swift */; };
 		2AC357192DAFF22800429D10 /* TaskStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC357182DAFF22800429D10 /* TaskStyle.swift */; };
 		2AC416662DAE8FE9008E4538 /* TaskInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */; };
@@ -41,10 +39,8 @@
 		2A5E7C932DB7D61500B10322 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		2A5E7C952DB7D72600B10322 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		2A5E7C972DB7DAF600B10322 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		2A5E7C992DB7DD9500B10322 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		2A5E7C9C2DB7E08F00B10322 /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineItem.swift; sourceTree = "<group>"; };
-		2A5E7CA02DB7E72200B10322 /* TravelinfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelinfoView.swift; sourceTree = "<group>"; };
 		2A9930782DB016EF00C393AF /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		2AC357182DAFF22800429D10 /* TaskStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStyle.swift; sourceTree = "<group>"; };
 		2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoView.swift; sourceTree = "<group>"; };
@@ -92,7 +88,6 @@
 				2A5E7C952DB7D72600B10322 /* InfoView.swift */,
 				2AC416652DAE8FE9008E4538 /* TaskInfoView.swift */,
 				2A5E7C932DB7D61500B10322 /* EventInfoView.swift */,
-				2A5E7CA02DB7E72200B10322 /* TravelinfoView.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -128,7 +123,6 @@
 			children = (
 				2AC416682DAE9262008E4538 /* Task.swift */,
 				2A5E7C972DB7DAF600B10322 /* Event.swift */,
-				2A5E7C992DB7DD9500B10322 /* Travel.swift */,
 				2A5E7C9C2DB7E08F00B10322 /* Week.swift */,
 				2A5E7C9E2DB7E11700B10322 /* RoutineItem.swift */,
 				4E76A8682DC0F1B300E4580B /* Day.swift */,
@@ -246,8 +240,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A5E7C9A2DB7DD9500B10322 /* Travel.swift in Sources */,
-				2A5E7CA12DB7E72200B10322 /* TravelinfoView.swift in Sources */,
 				2A4C32312DB9318C00F400AE /* PlannerView.swift in Sources */,
 				4E76A86F2DCA2FC800E4580B /* EditEventView.swift in Sources */,
 				2A5E7C9D2DB7E08F00B10322 /* Week.swift in Sources */,
