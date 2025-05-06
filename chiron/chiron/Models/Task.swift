@@ -80,7 +80,7 @@ struct Task: Identifiable {
     )
     
     static let task2 = Task(
-        id: 1,
+        //id: 1,
         title: "Lavar Roupa",
         location: "Casa",
         date:  Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
