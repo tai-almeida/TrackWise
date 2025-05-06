@@ -29,6 +29,8 @@ struct TaskInfoView: View {
     
     var body: some View {
         
+        ScrollView {
+
         VStack (alignment: .leading){
             
             VStack(alignment: .leading) {
@@ -81,12 +83,11 @@ struct TaskInfoView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(hex: 0xF8F6ED))
+                        .fill(Color(.secondarySystemBackground))
                 )
             }
 
-            ScrollView {
-                    // bloco checklist
+                // bloco checklist
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Checklist")
                             .font(.caption)
@@ -113,24 +114,14 @@ struct TaskInfoView: View {
                     .padding(.horizontal)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF8F6ED))
+                            .fill(Color(.secondarySystemBackground))
                     )
             }
             .padding(.top, 10)
 
             Spacer()
-                    
-        // conferir se o horario bate com o da tarefa
-        Button(action: {
-            navigateToCurrentTaskView = true
-            modalCurrentTaskView.toggle()
-        }) {
-          Text("Começar Tarefa")
         }
-        .buttonStyle(GreenButtonStyle())
-
-        }
-        .padding(.top, 15)
+        .padding()
         .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")
@@ -147,6 +138,15 @@ struct TaskInfoView: View {
         .sheet(isPresented: $modalCurrentTaskView, content: {
             CurrentTaskView(task: $originalTask)
         })
+        
+        // conferir se o horario bate com o da tarefa
+        Button(action: {
+            navigateToCurrentTaskView = true
+            modalCurrentTaskView.toggle()
+        }) {
+          Text("Começar Tarefa")
+        }
+        .buttonStyle(GreenButtonStyle())
         
         NavigationLink.init("",
                             destination: EditTaskView(task: $originalTask,

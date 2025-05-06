@@ -52,7 +52,7 @@ struct EventInfoView: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: 0xF1ECDB))
+                            .fill(Color(.secondarySystemBackground))
                     )
                     .padding(.bottom)
                 }
@@ -67,7 +67,7 @@ struct EventInfoView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {}) {
                     Text("Editar")
-                        .foregroundColor(Color(hex: 0x91A394))
+                        .foregroundColor(Color("AccentColor"))
                 }
             }
         }
