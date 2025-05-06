@@ -72,18 +72,20 @@ struct AddItemView: View {
                 }  else if SelectedPicker == 2 {
                     VStack(spacing: 0) {
                         VStack(spacing: 0) {
-                            Group {
+                            GroupBox {
                                 TextField("Nome do evento", text: $event.title)
-                                    .padding()
+                                 
+                                Divider()
+                                
+                            
+                                TextField("Localizacao", text: $event.location)
+                                 
+                                
                                 Divider()
                                 
                                 DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
                                     Text("Data")})
                                 
-                                Divider()
-                                
-                                TextField("Localizacao", text: $event.location)
-                                    .padding()
                             }
                         }.background(Color(hex: 0xF8F6ED))
                             .cornerRadius(10)
@@ -172,14 +174,7 @@ struct Form1: View {
             Section {
                 
                 HStack {
-                    
-                    Text("Categoria")
-                    Spacer()
-                    Text("\(task.category.rawValue)")
-                                            .foregroundStyle(.secondary)
-                    
-                    
-                    
+                   
                     Menu {
                         
                         Section{
@@ -213,21 +208,25 @@ struct Form1: View {
                             
                         }
                         
-                    } label: {
+                    }
+                    
+                label: {
+                    
+                    Text("Categoria")
+                        .foregroundStyle(.black)
+                    Spacer()
+                   
+                    
+                    Text("\(task.category.rawValue)")
+                        .foregroundStyle(.secondary)
                         Image(systemName: "chevron.up.chevron.down")
+                        .foregroundStyle(.secondary)
                         
                     }
-                }
+                } .contentShape(Rectangle())
                 
                 HStack {
-                    
-                    Text("Dificuldade")
-                    
-                    Spacer()
-                    Text("\(task.difficulty.rawValue)")
-                                            .foregroundStyle(.secondary)
-                    
-                    
+    
                     Menu {
                         
                         Button("Fácil") {
@@ -245,8 +244,14 @@ struct Form1: View {
                             
                         }
                     } label: {
-                        Image(systemName: "chevron.up.chevron.down")
+                        Text("Dificuldade")
+                            .foregroundStyle(.black)
+                        Spacer()
                         
+                        Text("\(task.difficulty.rawValue)")
+                            .foregroundStyle(.secondary)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
