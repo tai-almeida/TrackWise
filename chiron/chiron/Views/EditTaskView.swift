@@ -46,11 +46,20 @@ struct EditTaskView: View {
 
     
                 Section {
-                    DatePicker("Data", selection: $editableTask.date, in: ...Date(), displayedComponents: .date)
-                    DatePicker("Início", selection: $editableTask.startTime, in: ...Date(), displayedComponents: .hourAndMinute)
-                    DatePicker("Fim", selection: $editableTask.endTime, in: ...Date(), displayedComponents: .hourAndMinute)
-                }
-                    .listRowBackground(Color(.secondarySystemBackground))
+                    DatePicker(
+                        selection: $editableTask.date,
+                        displayedComponents: .date, label: {
+                        Text("Data")})
+                    DatePicker(
+                        selection: $editableTask.startTime,
+                        displayedComponents: .hourAndMinute, label: {
+                        Text("Inicio")})
+                    DatePicker(
+                        selection: $editableTask.endTime,
+                        displayedComponents: .hourAndMinute, label: {
+                        Text("Fim")})
+                    }
+                .listRowBackground(Color(.secondarySystemBackground))
 
         
                 Section {

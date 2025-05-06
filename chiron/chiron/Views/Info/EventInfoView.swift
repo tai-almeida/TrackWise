@@ -17,8 +17,8 @@ struct EventInfoView: View {
     @State
     var navigateToEditEventView: Bool = false
     
-    @EnvironmentObject
-    var week: Week
+//    @EnvironmentObject
+//    var week: Week
     
     var body: some View {
         

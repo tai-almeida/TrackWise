@@ -24,8 +24,8 @@ struct TaskInfoView: View {
     @State
     var modalCurrentTaskView: Bool = false
     
-    @EnvironmentObject
-    var week: Week
+//    @EnvironmentObject
+//    var week: Week
     
     var body: some View {
         
@@ -121,7 +121,7 @@ struct TaskInfoView: View {
 
             Spacer()
         }
-        .padding(.top, 15)
+        .padding()
         .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")

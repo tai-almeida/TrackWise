@@ -4,7 +4,6 @@
 //
 //  Created by Laris on 15/04/25.
 //
-
 import Foundation
 import SwiftUI
 
@@ -14,22 +13,18 @@ enum Difficulty: String, CaseIterable, Identifiable {
     case facil = "Fácil"
     case medio = "Média"
     case dificil = "Difícil"
-    
     var id: String { self.rawValue } // rawValue pega o valor (a string)
 }
-
 enum Category: String, CaseIterable, Identifiable {
     case estudos = "Estudos"
     case lazer = "Lazer"
     case faxina = "Faxina"
     case social = "Social"
-    case atv_fisica = "Saúde"
-    
+    case atv_fisica = "Atividade Física"
     var id: String { self.rawValue }
 }
-
 struct Task: Identifiable {
-    let id: Int
+    let id = UUID()
     var title: String
     var location: String
     var date: Date
@@ -41,9 +36,9 @@ struct Task: Identifiable {
     var isCompleted: Bool
     var averageTime: Int //?
     
-    init(id:Int, title:String, location:String, date:Date, startTime:Date,
+    init(title:String, location:String, date:Date, startTime:Date,
          endTime:Date, category:Category, difficulty:Difficulty, checklist:[ChecklistItem], isCompleted:Bool, averageTime:Int) {
-        self.id = id
+        //self.id = UUID()
         self.title = title
         self.location = location
         self.date = date
@@ -55,13 +50,11 @@ struct Task: Identifiable {
         self.isCompleted = isCompleted
         self.averageTime = averageTime
     }
-    
     var formattedData: String {
         let formatter = DateFormatter()
         formatter.dateFormat="dd/MM/YYYY"
         return formatter.string(from: startTime)
     }
-    
     var formattedRangeTime: String {
         let formatter = DateFormatter()
         formatter.dateFormat="HH:mm"
@@ -69,17 +62,13 @@ struct Task: Identifiable {
         let end = formatter.string(from: endTime)
         return "\(start) - \(end)"
     }
-    
     var formattedTime: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
-        
         return formatter.string(from: startTime)
     }
-    
-    
     static let exampleTask = Task(
-        id: 0,
+        //id: 0,
         title: "Estudar Cálculo 1",
         location: "Biblioteca Central",
         date: Date(),
@@ -95,17 +84,30 @@ struct Task: Identifiable {
         isCompleted: false,
         averageTime: 47
     )
+    
+    static let task2 = Task(
+        //id: 1,
+        title: "Lavar Roupa",
+        location: "Casa",
+        date:  Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
+        startTime: setTime(hour: 9, minute: 0),
+        endTime: Date().addingTimeInterval(3600),
+        category: .faxina,
+        difficulty: .facil,
+        checklist: [
+            ChecklistItem(title:"Lavar Roupas", isDone: false),
+            ChecklistItem(title:"Estender Roupas", isDone: false)
+            ],
+        isCompleted: false,
+        averageTime: 58)
 }
-
 func setTime(hour: Int, minute: Int) -> Date {
     var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
     components.hour = hour
     components.minute = minute
     components.second = 0
-    
     return Calendar.current.date(from:components)!
 }
-
 func convertsTime(duration: Int) -> String {
     /* Converte o tempo da tarefa de minutos para uma string no formato HhMIN*/
     let totalMinutes = duration
@@ -123,3 +125,5 @@ func convertsTime(duration: Int) -> String {
         return "\(minutes)min"
     }
 }
+
+

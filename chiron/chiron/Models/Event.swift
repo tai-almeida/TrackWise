@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event: Identifiable {
+struct Event: Identifiable, Hashable {
     let id: Int
     var title: String
     var location: String
@@ -31,5 +31,12 @@ struct Event: Identifiable {
         title: "Aniversário do Cont",
         location: "Morro do Bombom",
         date: Date()
+    )
+    
+    static let example2 = Event(
+        id: 1,
+        title: "Prova Biologia",
+        location: "Escola",
+        date: Calendar.current.date(byAdding: .day, value: 3, to: Date())!
     )
 }

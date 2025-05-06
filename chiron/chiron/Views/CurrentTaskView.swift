@@ -11,7 +11,7 @@ struct CurrentTaskView: View {
     
     @Binding var task: Task
     
-    @EnvironmentObject var week: Week
+    @EnvironmentObject var schedule: Schedule
     
     @State private var editableTask: Task
     
@@ -27,6 +27,7 @@ struct CurrentTaskView: View {
     @State private var alertFim = false
     @State private var otimizarRotina = false
     @State private var finalizarTarefa = false
+    @State private var continuar = false
     @State private var proxima: Task? = nil
     
     @State private var tempoRestante: TimeInterval = 0
@@ -38,6 +39,7 @@ struct CurrentTaskView: View {
         // inicia ao abrir a tela
         let startTime = Date()
         tempoRestante = task.endTime.timeIntervalSince(startTime)
+        tempoRestante = (tempoRestante>=0 ? tempoRestante : 0)
 
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             let restante = task.endTime.timeIntervalSince(Date())
@@ -62,7 +64,7 @@ struct CurrentTaskView: View {
     
     func proximaTarefa() -> Task? {
         // encontra qual a proxima tarefa em week
-        let futuras = week.tasks.filter { $0.startTime > task.endTime }
+        let futuras = schedule.tasks.filter { $0.startTime > task.endTime }
         return futuras.sorted { $0.startTime < $1.startTime }.first
     }
     
@@ -84,7 +86,7 @@ struct CurrentTaskView: View {
                     Text(task.formattedRangeTime)
                         .padding(.bottom, 5)
                     
-                    Text("Tempo restante: \(Int(tempoRestante / 60)) min")
+                    Text("Tempo \(continuar ? String("extra: \(Int(tempoExtra)/60)") : String("restante: \(Int(tempoRestante)/60)")) min")
                         .font(.subheadline)
                         .padding(.bottom, 10)
                 }
@@ -117,7 +119,7 @@ struct CurrentTaskView: View {
                 VStack {
                     // botao finalizar tarefa
                     Button {
-                        if (tempoRestante <= 0) {
+                        if (tempoRestante <= 0 && continuar) {
                             otimizarRotina = true
                             task = editableTask
                         } else {
@@ -125,21 +127,18 @@ struct CurrentTaskView: View {
                         }
                     } label: {
                         Text("Finalizar Tarefa")
-                            .padding(.horizontal, 100)
-                            .padding(.vertical, 15)
-                            .background(Color("AccentColor"))
-                            .foregroundStyle(.white)
-                            .cornerRadius(8)
                     }
+                    .buttonStyle(GreenButtonStyle())
+
                     .alert("Otimizar Rotina?", isPresented: $otimizarRotina, actions: {
                         // alerta para otimizar rotina (add tempo extra ao tempo medio)
                         Button("Sim", role: .cancel) {
-                            task.averageTime += Int(tempoExtra)
+                            task.averageTime = ((2*task.averageTime) + (Int(tempoExtra)/60))/2
                             dismiss()
                         }
-                        Button("NÃ£o") { dismiss() }
+                        Button("Não") { dismiss() }
                     }, message: {
-                        Text("Passaram-se \(tempoExtra) do tempo programado\nDeseja atualizar a tarefa?")
+                        Text("Passaram-se \(Int(tempoExtra)/60) min do tempo programado\nAtualizar o tempo médio da tarefa?")
                     })
                         .frame(maxWidth: .infinity, alignment: .center)
                     .alert("Finalizar Tarefa?", isPresented: $finalizarTarefa, actions: {
@@ -148,7 +147,7 @@ struct CurrentTaskView: View {
                             task = editableTask
                             dismiss()
                         }
-                        Button("NÃ£o") { }
+                        Button("Não") { }
                     })
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
@@ -161,7 +160,7 @@ struct CurrentTaskView: View {
                         dismiss()
                     } label: {
                         Text("Cancelar")
-                            .foregroundColor(Color("AccentColor"))
+                            .foregroundColor(Color(hex: 0x91A394))
                     }
                 }
                 ToolbarItem(placement: .principal) {
@@ -176,29 +175,29 @@ struct CurrentTaskView: View {
                 UITableView.appearance().backgroundColor = .clear
                 iniciarTimer()
             }
-            .alert("EstÃ¡ na hora de finalizar!", isPresented: $alertFim, actions: {
+            .alert("Está na hora de finalizar!", isPresented: $alertFim, actions: {
                 // alerta para finalizar quando o tempoRestante acabar
                 if proxima != nil {
                     Button("Continuar") {
-                        tempoRestante = 0
+                        continuar = true
                         novoTimer()
                     }
-                    Button("PrÃ³xima", role: .cancel) {
+                    Button("Próxima", role: .cancel) {
                         dismiss()
                         //procurar como colocar para abrir a proxima tarefa
                     }
                 } else {
                     Button("Finalizar") { dismiss() }
                     Button("Continuar") {
-                        tempoRestante = 0
+                        continuar = true
                         novoTimer()
                     }
                 }
             }, message: {
                 if let p = proxima {
-                    Text("Continuar essa tarefa?\nA prÃ³xima tarefa Ã©\n\(p.title) Ã s \(p.formattedTime)")
+                    Text("Continuar essa tarefa?\nA próxima tarefa é\n\(p.title) às \(p.formattedTime)")
                 } else {
-                    Text("NÃ£o hÃ¡ prÃ³xima tarefa")
+                    Text("Não há próxima tarefa")
                 }
             })
             

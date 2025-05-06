@@ -4,173 +4,183 @@
 //
 //  Created by Aluno 41 on 15/04/25.
 //
-
-import Foundation
 import SwiftUI
-
-
 struct PlannerView: View {
-    
+    @State
+    var navigateToAddItem:Bool = false
     // by default, the first tab selected is the planner (main frame)
-    //@State var selectedTab: Tabs = .planner
-    @ObservedObject
-    var week: Week
+    @EnvironmentObject
+    //var week: Week
+    var schedule: Schedule
+    
+    
     
     var body: some View {
         ZStack {
             Color("BackgroundScreenColor").ignoresSafeArea()
-            
             NavigationView {
-                
                 VStack(alignment: .leading) {
-                    
                     // tela scrolavel com os dias da semana
                     ScrollView {
                         VStack(alignment: .leading) {
+                            // "Hoje" com destaque na tela
                             Text("Hoje")
                                 .font(.title.bold())
-                                .padding(.bottom, 2)
-                                .padding(.trailing, 277)
+                                .padding(.vertical, 2)
+                                .padding(.top, 5)
                                 .multilineTextAlignment(.leading)
-                                
+                                .padding(.leading, 10)
                             
-                            Text("Segunda-Feira, 10 de abril")
-                                .font(.body.bold())
-                                //.padding(.top, 1)
-                                //.padding(.leading, 5)
-                                .multilineTextAlignment(.leading)
-                            
-                            // impressao de cada evento do dia
-                            VStack (alignment: .leading){
-                                
-                                ForEach(week.events, id: \.self) { item in
-                                    Divider()
-                                        .padding(.horizontal, 20)
-                                    //Rectangle()
-                                        //.foregroundColor(Color(hex: 0xFCFFEF))
-                                        //.cornerRadius(10)
-                                        //.padding(.leading, 20)
-                                    //.padding(.trailing, 20)
-                                    Text(item)
-                                        .padding(.horizontal, 20)
-                                    
-                                        
-                                }
-                            }
-                            
-                            // impressao das tarefas do dia
-                            VStack (alignment: .leading) {
-                                Text("Atividades")
-                                    .padding(.top, 20)
+                            // começa no dia de hoje e percorre os próximos 7 dias
+                            ForEach((0..<7), id: \.self) { i in
+                                let day = Calendar.current.date(byAdding: .day, value: i, to: Date())!
+                                Text(schedule.getWeekDay(date: day))
+                                    .padding(.top, 5)
                                     .font(.body.bold())
+                                    //.font(.body.bold())
                                     .multilineTextAlignment(.leading)
                                 
-                                Section {
-                                    ForEach($week.tasks) { $task in
-                                        HStack {
-                                            Spacer()
-                                            Text(task.formattedTime)
-                                                .padding(.trailing, 10)
+                                VStack (alignment: .leading){
+                                // cada evento separado por um divisor
+                                    ForEach(schedule.dateEvents(data: day), id: \.self) { index in
+                                        let event = schedule.events[index]
+                                        NavigationLink(destination: EventInfoView(originalEvent: $schedule.events[index],
+                                                                                 event: event)){
+                                            Divider()
+                                            .padding(.horizontal, 20)
                                             
+                                            // verifica se ha eventos na data analisada
+                                            if !schedule.dateEvents(data: day).isEmpty {
+                                                Text(event.title)
+                                                    .padding(.horizontal, 20)
+                                                    .padding(.bottom, 20)
+                                                
+                                            }
+
                                         }
+                                    }
+                                }
+                                
+                                // percorre as tarefas do dia e as apresenta na tela
+                                VStack(alignment: .leading) {
+                                    // verifica se ha tarefas nessa data
+                                    if !schedule.dateTasks(data: day).isEmpty {
+                                    Text("Atividades")
+                                        .padding(.top, 20)
+                                        .font(.body.bold())
+                                        .multilineTextAlignment(.leading)
+                                        
+                                    Section {
+                                        //percorre as tarefas do dia
+                                        ForEach(schedule.dateTasks(data: day), id: \.self) { index in
+                                            let task = schedule.tasks[index]
+                                                HStack {
+                                                    // cada tarefa separada por um divisor abaixo do horario setado (formatado)
+                                                    Spacer()
+                                                    Text(schedule.tasks[index].formattedTime)
+                                                        .padding(.trailing, 10)
+                                                }
+                                                Divider()
+                                            NavigationLink(destination: TaskInfoView(originalTask: $schedule.tasks[index],
+                                                                                     task: task)) {
+                                                        HStack {
+                                                            Rectangle()
+                                                                .foregroundColor(task.category.color)
+                                                                .frame(width:10)
+                                                            VStack(alignment: .leading) {
+                                                                // nome da tarefa
+                                                                Text(task.title)
+                                                                    .padding(.top, 10)
+                                                                    .foregroundStyle(.black)
+                                                                    .padding(.leading, 5)
+                                                                // tag de dificuldade
+                                                                Text(task.difficulty.rawValue)
+                                                                    .font(.system(size:12))
+                                                                    .padding(.horizontal, 10)
+                                                                    .padding(.vertical, 4)
+                                                                    .background(task.difficulty.color)
+                                                                    .foregroundStyle(.white)
+                                                                    .clipShape(Capsule())
+                                                            }
+                                                            .padding(.bottom, 5)
+                                                            Spacer()
+                                                            VStack(alignment: .trailing) {
+                                                                // simbolo de inicio da tarefa
+                                                                Image(systemName: "play.fill")
+                                                                    .padding(.horizontal, 10)
+                                                                    .padding(.vertical, 4)
+                                                                    .background(Color("AccentColor"))
+                                                                    .foregroundStyle(.white)
+                                                                    .clipShape(Capsule())
+                                                                // tag com o tempo convertido para HhMIN
+                                                                Text(convertsTime(duration: task.averageTime))
+                                                                    .font(.system(size:12))
+                                                                    .padding(.horizontal, 10)
+                                                                    .padding(.vertical, 4)
+                                                                    .background(Color(hex: 0xEFE8D8))
+                                                                    .foregroundStyle(.black)
+                                                                    .clipShape(Capsule())
+                                                            }
+                                                            .padding(.trailing, 5)
+                                                        }
+                                                    }
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .background(Color(hex: 0xF8F6ED))
+                                                    .cornerRadius(8)
+                                                    .padding(.horizontal, 5)
+                                            
+                                            
+                                            }
+                                        }
+                                    } else {
                                         
                                         Divider()
-                                            //.padding(.horizontal, 10)
-                                        
-                                        
-                                        NavigationLink(destination: TaskInfoView(originalTask: $task,
-                                                                                 task: task)) {
-                                                LinkView(task: $task)
-                                                .padding(.trailing, 5)
-                                                .environmentObject(week)
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color(hex: 0xF8F6ED))
-                                        .cornerRadius(8)
-                                        .padding(.horizontal, 5)
+                                            .padding(.top, 20)
+                                        Text("Não há tarefas!")
+                                            
+                                            .foregroundColor(.secondary)
+                                        Divider()
+                                            .padding(.bottom, 20)
                                     }
-                                    //.padding(.horizontal, 10)
+
                                 }
-                            }
                                 
-                        }
-                    }.onAppear {
-                        for task in week.tasks {
-                            print(task.title)
+                            }
+                             //insere + na toolbar para ir para tela de AddTask
+                            .padding(.horizontal, 10)
+                            NavigationLink.init("",
+                                                destination: AddItemView(),
+                                                isActive: $navigateToAddItem)
+                                    }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
+                                      .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                      .background(Color("BackgroundScreenColor"))
+                                      .toolbar {
+                                        ToolbarItem(placement: .navigationBarTrailing) {
+                                          Button(action: {
+                                            navigateToAddItem = true
+                                          }) {
+                                            Text("+")
+                                              .foregroundColor(Color("AccentColor"))
+                                          }
+                                        }
+                                      }
                         }
                     }
-                    
-                    
-                }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color("BackgroundScreenColor"))
-                    
-            }
-            
-            
+                .onAppear {
+                    UITableView.appearance().backgroundColor = .clear
+                }
+                .background(Color("BackgroundScreenColor"))
+
+                }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("BackgroundScreenColor"))
-            .padding()
-            
-        }
-    }
-    
-    struct PlannerView_Previews: PreviewProvider {
-        static var previews: some View {
-            PlannerView(week: Week.exampleWeek)
-        }
-    }
-}
-
-
-struct LinkView:View {
-    
-    @Binding
-    var task:Task
-    
-    var body:some View {
-        HStack {
-            Rectangle()
-                .foregroundColor(task.category.color)
-                .frame(width:10)
-            
-            VStack(alignment: .leading) {
-                Text(task.title)
-                    //.padding(.horizontal, 100)
-                    .padding(.top, 10)
-                    .foregroundStyle(.black)
-                    .padding(.leading, 5)
-                
-                Text(task.difficulty.rawValue)
-//                    .font(.system(size:12))
-//                    .padding(.horizontal, 10)
-//                    .padding(.vertical, 4)
-//                    .background(task.difficulty.color)
-//                    .foregroundStyle(.white)
-//                    .clipShape(Capsule())
-                    .modifier(ColorfulShapeStyle(backgroundColor: task.difficulty.color))
-            }
-            .padding(.bottom, 5)
-            Spacer()
-            VStack(alignment: .trailing) {
-                Image(systemName: "play.fill")
-                    //.font(.system(size:12))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(Color("AccentColor"))
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
-                
-                //let duration: Int = task.averageTime
-                Text(convertsTime(duration: task.averageTime))
-                    .font(.system(size:12))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(Color(hex: 0xEFE8D8))
-                    .foregroundStyle(.black)
-                    .clipShape(Capsule())
             }
         }
     }
-    
-}
+//}
+                            
+//    struct PlannerView_Previews: PreviewProvider {
+//        static var previews: some View {
+//            PlannerView(week: Week.exampleWeek)
+//        }
+//    }
+//}
