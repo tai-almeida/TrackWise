@@ -21,6 +21,9 @@ struct TaskInfoView: View {
     @State
     var navigateToEditTaskView: Bool = false
     
+    @State
+    var modalCurrentTaskView: Bool = false
+    
     @EnvironmentObject
     var week: Week
     
@@ -116,14 +119,11 @@ struct TaskInfoView: View {
             .padding(.top, 10)
 
             Spacer()
-            
-        NavigationLink.init("",
-                            destination: CurrentTaskView(task: $task),
-                      isActive: $navigateToCurrentTaskView)
-        
+                    
         // conferir se o horario bate com o da tarefa
         Button(action: {
             navigateToCurrentTaskView = true
+            modalCurrentTaskView.toggle()
         }) {
           Text("Começar Tarefa")
         }
@@ -144,6 +144,9 @@ struct TaskInfoView: View {
                 }
             }
         }
+        .sheet(isPresented: $modalCurrentTaskView, content: {
+            CurrentTaskView(task: $originalTask)
+        })
         
         NavigationLink.init("",
                             destination: EditTaskView(task: $originalTask,
