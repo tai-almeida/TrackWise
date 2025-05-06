@@ -20,6 +20,10 @@ struct AddItemView: View {
     var event:Event = Event(id: 0, title: "", location: "", date: Date())
     
     @State var SelectedPicker = 1
+    
+    @State
+    var isTask: Bool = false
+    
 
     
     @State
@@ -42,6 +46,9 @@ struct AddItemView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .background(Color(hex: 0xF8F6ED))
                 .padding()
+                .onChange(of: SelectedPicker) { newValue in
+                    isTask = (newValue == 1)
+                }
                 
                 
                 if SelectedPicker == 1 {
@@ -91,9 +98,12 @@ struct AddItemView: View {
                         //var task = Task()
                         let components = Calendar.current.dateComponents([.minute], from: task.startTime, to: task.endTime)
                         task.averageTime = components.minute ?? 0
-
-                        schedule.tasks.append(task)
-                        schedule.events.append(event)
+                        
+                        if isTask {
+                            schedule.tasks.append(task)
+                        } else {
+                            schedule.events.append(event)
+                        }
                         dismiss()
                     }) {
                         Text("OK")
@@ -121,12 +131,15 @@ struct Form1: View {
     @Binding
     var task:Task
     
+    
     var body: some View {
         
         Form {
+            
             Section {
                 TextField("Nome da Tarefa", text: $task.title)
                 TextField("Localizacao", text: $task.location)
+                
             }
             .listRowBackground(Color(hex: 0xF8F6ED))
             
