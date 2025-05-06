@@ -78,6 +78,19 @@ struct Task: Identifiable {
         isCompleted: false,
         averageTime: 47
     )
+    
+    static let task2 = Task(
+        id: 1,
+        title: "Lavar Roupa",
+        location: "Casa",
+        date:  Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
+        startTime: setTime(hour: 9, minute: 0),
+        endTime: Date().addingTimeInterval(3600),
+        category: .faxina,
+        difficulty: .facil,
+        checklist: ["Lavar Roupas" : false, "Estender Roupas": false],
+        isCompleted: false,
+        averageTime: 58)
 }
 func setTime(hour: Int, minute: Int) -> Date {
     var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
