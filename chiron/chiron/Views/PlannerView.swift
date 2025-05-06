@@ -147,7 +147,7 @@ struct PlannerView: View {
                                 
                             }
                              //insere + na toolbar para ir para tela de AddTask
-                            .padding(.horizontal, 10)
+                            //.padding(.horizontal, 10)
                             NavigationLink.init("",
                                                 destination: AddItemView(),
                                                 isActive: $navigateToAddItem)
@@ -161,6 +161,7 @@ struct PlannerView: View {
                                           }) {
                                             Text("+")
                                               .foregroundColor(Color("AccentColor"))
+                                              .font(.system(size: 24))
                                           }
                                         }
                                       }
@@ -173,6 +174,7 @@ struct PlannerView: View {
 
                 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, 10)
             }
         }
     }
