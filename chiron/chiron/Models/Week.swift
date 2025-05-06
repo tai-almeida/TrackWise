@@ -4,12 +4,10 @@
 //
 //  Created by Aluno 45 on 17/04/25.
 //
-
 import Foundation
-
 // tasks de exemplo (estaticas)
 var task1 = Task(
-            id: 0,
+            //id: 0,
             title: "Estudar Calculo",
             location: "Biblioteca Central",
             date: Date(),
@@ -20,9 +18,8 @@ var task1 = Task(
             checklist: ["Assistir aula":false, "Fazer exercícios":false, "Revisar":false],
             isCompleted: false,
             averageTime: 47)
-
 var task2 = Task(
-            id: 1,
+            //id: 1,
             title: "Lavar Roupa",
             location: "Casa",
             date: Date(),
@@ -33,9 +30,8 @@ var task2 = Task(
             checklist: ["Lavar Roupas" : false, "Estender Roupas": false],
             isCompleted: false,
             averageTime: 58)
-
 var task3 = Task(
-            id: 2,
+            //id: 2,
             title: "Academia",
             location: "Academia",
             date: Date(),
@@ -78,3 +74,14 @@ class Week: Identifiable, ObservableObject {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+

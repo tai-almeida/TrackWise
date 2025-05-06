@@ -267,6 +267,7 @@
 				2A4C32342DB931A400F400AE /* TabBar.swift in Sources */,
 				2A5E7C962DB7D72600B10322 /* InfoView.swift in Sources */,
 				2AC416692DAE9262008E4538 /* Task.swift in Sources */,
+				AD00DF322DBFA6E500FD58DF /* Day.swift in Sources */,
 				2A4C32322DB9318C00F400AE /* chironApp.swift in Sources */,
 				4E51FCA82DBA774E007A7304 /* GreenButtonStyle.swift in Sources */,
 				2A5E7C9F2DB7E11700B10322 /* RoutineItem.swift in Sources */,

@@ -4,29 +4,25 @@
 //
 //  Created by Laris on 15/04/25.
 //
-
 import Foundation
-
-
-
 // CaseIterable permite acessar os valores como lista,
 // necessario para criar a seleçao na criaçao de Task
 enum Difficulty: String, CaseIterable, Identifiable {
     case facil = "Fácil"
     case medio = "Média"
     case dificil = "Difícil"
-    
     var id: String { self.rawValue } // rawValue pega o valor (a string)
 }
-
 enum Category: String, CaseIterable, Identifiable {
-    case estudos, lazer, faxina, social, atv_fisica
-    
+    case estudos = "Estudos"
+    case lazer = "Lazer"
+    case faxina = "Faxina"
+    case social = "Social"
+    case atv_fisica = "Atividade Física"
     var id: String { self.rawValue }
 }
-
 struct Task: Identifiable {
-    let id: Int
+    let id = UUID()
     var title: String
     var location: String
     var date: Date
@@ -38,9 +34,9 @@ struct Task: Identifiable {
     var isCompleted: Bool
     var averageTime: Int //?
     
-    init(id:Int, title:String, location:String, date:Date, startTime:Date,
+    init(title:String, location:String, date:Date, startTime:Date,
          endTime:Date, category:Category, difficulty:Difficulty, checklist:[String:Bool], isCompleted:Bool, averageTime:Int) {
-        self.id = id
+        //self.id = id
         self.title = title
         self.location = location
         self.date = date
@@ -52,13 +48,11 @@ struct Task: Identifiable {
         self.isCompleted = isCompleted
         self.averageTime = averageTime
     }
-    
     var formattedData: String {
         let formatter = DateFormatter()
         formatter.dateFormat="dd/MM/YYYY"
         return formatter.string(from: startTime)
     }
-    
     var formattedRangeTime: String {
         let formatter = DateFormatter()
         formatter.dateFormat="HH:mm"
@@ -66,17 +60,13 @@ struct Task: Identifiable {
         let end = formatter.string(from: endTime)
         return "\(start) - \(end)"
     }
-    
     var formattedTime: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
-        
         return formatter.string(from: startTime)
     }
-    
-    
     static let exampleTask = Task(
-        id: 0,
+        //id: 0,
         title: "Estudar Cálculo 1",
         location: "Biblioteca Central",
         date: Date(),
@@ -102,16 +92,13 @@ struct Task: Identifiable {
         isCompleted: false,
         averageTime: 58)
 }
-
 func setTime(hour: Int, minute: Int) -> Date {
     var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
     components.hour = hour
     components.minute = minute
     components.second = 0
-    
     return Calendar.current.date(from:components)!
 }
-
 func convertsTime(duration: Int) -> String {
     /* Converte o tempo da tarefa de minutos para uma string no formato HhMIN*/
     let totalMinutes = duration

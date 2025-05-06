@@ -9,184 +9,257 @@ import SwiftUI
 
 
 struct AddItemView: View {
+    @EnvironmentObject var schedule: Schedule
+    @Environment(\.dismiss) var dismiss
+    //init(){
+    // Muda cor do picker slecionado
     
-    init(){
-        // Muda cor do picker slecionado
-        
-        // UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.red)
-        
-        // Muda cor do texto do picker
-//            UISegmentedControl.appearance().setTitleTextAttributes(
-//                [NSAttributedString.Key.foregroundColor: UIColor.white],
-//                for: .selected
-//            )
-//        //
-//            UISegmentedControl.appearance().setTitleTextAttributes(
-//                [NSAttributedString.Key.foregroundColor: UIColor.black],
-//                for: .normal
-//            )
-        UITableView.appearance().backgroundColor = .clear
-        UITableViewCell.appearance().backgroundColor = .clear
-    }
+    // UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.red)
+    
+    // Muda cor do texto do picker
+    //            UISegmentedControl.appearance().setTitleTextAttributes(
+    //                [NSAttributedString.Key.foregroundColor: UIColor.white],
+    //                for: .selected
+    //            )
+    //        //
+    //            UISegmentedControl.appearance().setTitleTextAttributes(
+    //                [NSAttributedString.Key.foregroundColor: UIColor.black],
+    //                for: .normal
+    //            )
+    // UITableView.appearance().backgroundColor = .clear
+    // UITableViewCell.appearance().backgroundColor = .clear
+    //}
     
     
-    // Instancias que representam o estado de variaveis que mudar com o input
+    // Instancias que representam o estado de variaveis que mudam com o input
+    
+    @State
+    var task: Task = Task(title: "", location: "", date: Date(), startTime: Date(), endTime: Date(), category: .atv_fisica, difficulty: .facil, checklist: [:], isCompleted: false, averageTime: 0)
+    @State
+    var event:Event = Event(id: 0, title: "", location: "", date: Date())
+    
     @State var SelectedPicker = 1
+
     
-    @State var TaskName = ""
-    @State var TaskLocation = ""
-    @State var EventName = ""
-    @State var EventLocation = ""
-    @State var EventDate = ""
-    @State var StartDate = Date()
-    @State var EndDate = Date()
-   
+    @State
+    var completeAndReturn: Bool = false
     
     var body: some View {
         
-        VStack {
-            Picker(selection: $SelectedPicker, label: Text("Picker"), content: {
-            Text("Tarefa").tag(1)
-            Text("Evento").tag(2)
+        ZStack {
             
-                
-            })
+            Color("BackgroundScreenColor")
+                .ignoresSafeArea()
+            
+            VStack {
+                Picker(selection: $SelectedPicker, label: Text("Picker")) {
+                    Text("Tarefa").tag(1)
+                    Text("Evento").tag(2)
+                    
+                    
+                }
                 .pickerStyle(SegmentedPickerStyle())
-                .background(Color(hex: 0xF8F6ED)) // Your custom unselected background
-                    
-        
-            if SelectedPicker == 1 {
+                .background(Color(hex: 0xF8F6ED))
+                .padding()
                 
-                // Tudo que representa a secao tarefa
                 
-                ZStack {
+                if SelectedPicker == 1 {
                     
-                    Color("BackgroundScreenColor")
+                    // Tudo que representa a secao tarefa
                     
-                    .ignoresSafeArea()
+                    Form1(task:$task)
                     
-                    VStack(alignment: .leading){
-                        
-                        Form {
-                            Section {
-                        TextField("Nome da Tarefa", text: $TaskName)
-                        TextField("Localizacao", text: $TaskName)
-                            }
-                            .listRowBackground(Color(hex: 0xF8F6ED))
-                        }
-
-                        
-                        Form {
-                            Section{
-                            DatePicker(selection: $StartDate, in: ...Date(), label: {
-                                Text("Inicio")})
-                            
-                            DatePicker(selection: $EndDate, in: ...Date(), label: {
-                                Text("Fim")})
-                            }
-                            .listRowBackground(Color(hex: 0xF8F6ED))
-                        }
-                        
-                        Section {
-                            
-                        HStack {
-                            
-                            Text("Categoria")
-                            
-                         Spacer()
-                            
-                            Menu {
-                                        Button("Adicionar", action: TagAdicionar)
-                                        Button("Lazer", action: TagLazer)
-                                        Button("Estudos", action: TagEstudo)
-                                        Button("Domestico", action: TagDomestico)
-                                        
-                                    } label: {
-                                        Image(systemName: "chevron.up.chevron.down")
-                                            
-                                    }
-                        }
-                        HStack {
-                            
-                            Text("Dificuldade")
-                            
-                            Spacer()
-                            
-                            Menu {
-                           
-                                        Button("Fácil", action: CatFacil)
-                                        Button("Médio", action: CatMedio)
-                                        Button("Difícil", action: CatDificil)
-                            } label: {
-                                Image(systemName: "chevron.up.chevron.down")
-                                  
-                            }
-                        
-                        
+                }  else if SelectedPicker == 2 {
+                    VStack(spacing: 0) {
+                        VStack(spacing: 0) {
+                            Group {
+                                TextField("Nome do evento", text: $event.title)
+                                    .padding()
+                                Divider()
                                 
-                        
-                            
+                                DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
+                                    Text("Data")})
+                                
+                                Divider()
+                                
+                                TextField("Localizacao", text: $event.location)
+                                    .padding()
                             }
-                        }   .padding([.vertical], 0)
-                            .padding([.horizontal],30)
+                        }.background(Color(hex: 0xF8F6ED))
+                            .cornerRadius(10)
+                            .padding()
                         
-                        Form {
-                            Section(header: Text("Checklist")){
-                            Text("Subtarefa 1")
-                            Text("Subtarefa 2")
-                            Text("Subtarefa 3")
-                            }
-                            .listRowBackground(Color(hex: 0xF8F6ED))
-                        }
+                        Spacer()
                         
                         
+                       
+                    }
+
+                    
+                    
+                }
+
+            }
+
+        }.navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Adicionar Tarefa")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        completeAndReturn = true
+                        //var task = Task()
+                        let components = Calendar.current.dateComponents([.minute], from: task.startTime, to: task.endTime)
+                        task.averageTime = components.minute ?? 0
+
+                        schedule.tasks.append(task)
+                        schedule.events.append(event)
+                        dismiss()
+                        
+                        
+                    }) {
+                        Text("OK")
+                            .foregroundColor(Color("AccentColor"))
+                       
+                    }
+                    
                 }
             }
+        
+
+       
+    }
+}
+
+// Atribuir as funcoes a tarefas e init
+func TagLazer() { }
+func TagEstudo() { }
+func TagDomestico() { }
+func TagAdicionar() { }
+func CatFacil() { }
+func CatMedio() { }
+func CatDificil() { }
+
+
+struct Form1: View {
+    
+    @Binding
+    var task:Task
+    
+    var body: some View {
+        
+        Form {
+            Section {
+                TextField("Nome da Tarefa", text: $task.title)
+                TextField("Localizacao", text: $task.location)
             }
-            if SelectedPicker == 2 {
-                // Tudo que reperesenta eventos
-                ZStack {
+            .listRowBackground(Color(hex: 0xF8F6ED))
+            
+            
+            
+            
+            Section{
+                DatePicker(selection: $task.date, in: Date()..., displayedComponents: [.date], label: {
+                    Text("Data")})
+                
+                DatePicker(selection: $task.startTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
+                    Text("Início")})
+                DatePicker(selection: $task.endTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
+                    Text("Fim")})
+            }
+            .listRowBackground(Color(hex: 0xF8F6ED))
+            
+            
+            Section {
+                
+                HStack {
                     
-                    Color.green
+                    Text("Categoria")
+                    Spacer()
+                    Text("\(task.category.rawValue)")
+                                            .foregroundStyle(.secondary)
                     
-                    .ignoresSafeArea()
                     
-                VStack(alignment: .leading){
-                    Form {
-                        Section {
-                    TextField("Nome do evento", text: $EventName)
-                    TextField("Data", text: $EventDate)
-                    TextField("Localizacao", text: $EventLocation)
+                    
+                    Menu {
+                        
+                        Section{
+                            Button {
+                               
+                            } label: {
+                                Label("Adicionar", systemImage: "plus.circle")
+                            }
                         }
-                        .listRowBackground(Color(hex:0xF8F6ED))
+                        Button("Lazer") {
+                            task.category = .lazer
+                        }
+                        Button("Estudos") {
+                            task.category = .estudos
+                            
+                            
+                        }
+                        Button("Faxina") {
+                            task.category = .faxina
+                           
+                            
+                        }
+                        Button("Social") {
+                            task.category = .social
+                         
+                            
+                        }
+                        Button("Atividade Física") {
+                            task.category = .atv_fisica
+                            //Text("Atividade Física")
+                            
+                        }
+                        
+                    } label: {
+                        Image(systemName: "chevron.up.chevron.down")
+                        
                     }
                 }
+                
+                HStack {
+                    
+                    Text("Dificuldade")
+                    
+                    Spacer()
+                    Text("\(task.difficulty.rawValue)")
+                                            .foregroundStyle(.secondary)
+                    
+                    
+                    Menu {
+                        
+                        Button("Fácil") {
+                            task.difficulty = .facil
+                        
+                        }
+                        Button("Médio") {
+                            task.difficulty = .medio
+                       
+                            
+                        }
+                        Button("Difícil") {
+                            task.difficulty = .dificil
+                           
+                            
+                        }
+                    } label: {
+                        Image(systemName: "chevron.up.chevron.down")
+                        
+                    }
                 }
             }
-    }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Adicionar Tarefa")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}) {
-                    Text("OK")
-                        .foregroundColor(Color("AccentColor"))
-                }
+            .listRowBackground(Color(hex: 0xF8F6ED))
+            
+            Section(header: Text("Checklist")){
+                Text("Subtarefa 1")
+                Text("Subtarefa 2")
+                Text("Subtarefa 3")
             }
+            .listRowBackground(Color(hex: 0xF8F6ED))
+            
         }
-}
-}
-// Atribuir as funcoes a tarefas e init
-    func TagLazer() { }
-    func TagEstudo() { }
-    func TagDomestico() { }
-    func TagAdicionar() { }
-    func CatFacil() { }
-    func CatMedio() { }
-    func CatDificil() { }
-    
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View  {
-        AddItemView()
     }
+    
 }
