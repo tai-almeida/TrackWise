@@ -14,11 +14,15 @@ enum Difficulty: String, CaseIterable, Identifiable {
     var id: String { self.rawValue } // rawValue pega o valor (a string)
 }
 enum Category: String, CaseIterable, Identifiable {
-    case estudos, lazer, faxina, social, atv_fisica
+    case estudos = "Estudos"
+    case lazer = "Lazer"
+    case faxina = "Faxina"
+    case social = "Social"
+    case atv_fisica = "Atividade Física"
     var id: String { self.rawValue }
 }
 struct Task: Identifiable {
-    let id: Int
+    let id = UUID()
     var title: String
     var location: String
     var date: Date
@@ -29,9 +33,10 @@ struct Task: Identifiable {
     var checklist: [String:Bool]
     var isCompleted: Bool
     var averageTime: Int //?
-    init(id:Int, title:String, location:String, date:Date, startTime:Date,
+    
+    init(title:String, location:String, date:Date, startTime:Date,
          endTime:Date, category:Category, difficulty:Difficulty, checklist:[String:Bool], isCompleted:Bool, averageTime:Int) {
-        self.id = id
+        //self.id = id
         self.title = title
         self.location = location
         self.date = date
@@ -61,7 +66,7 @@ struct Task: Identifiable {
         return formatter.string(from: startTime)
     }
     static let exampleTask = Task(
-        id: 0,
+        //id: 0,
         title: "Estudar Cálculo 1",
         location: "Biblioteca Central",
         date: Date(),

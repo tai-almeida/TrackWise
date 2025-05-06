@@ -7,7 +7,7 @@
 import Foundation
 // tasks de exemplo (estaticas)
 var task1 = Task(
-            id: 0,
+            //id: 0,
             title: "Estudar Calculo",
             location: "Biblioteca Central",
             date: Date(),
@@ -19,7 +19,7 @@ var task1 = Task(
             isCompleted: false,
             averageTime: 47)
 var task2 = Task(
-            id: 1,
+            //id: 1,
             title: "Lavar Roupa",
             location: "Casa",
             date: Date(),
@@ -31,7 +31,7 @@ var task2 = Task(
             isCompleted: false,
             averageTime: 58)
 var task3 = Task(
-            id: 2,
+            //id: 2,
             title: "Academia",
             location: "Academia",
             date: Date(),
