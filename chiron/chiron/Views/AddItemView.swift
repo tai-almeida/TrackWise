@@ -52,7 +52,7 @@ struct AddItemView: View {
                 
             })
                 .pickerStyle(SegmentedPickerStyle())
-                .background(Color.brown) // Your custom unselected background
+                .background(Color(hex: 0xF8F6ED)) // Your custom unselected background
                     
         
             if SelectedPicker == 1 {
@@ -61,7 +61,7 @@ struct AddItemView: View {
                 
                 ZStack {
                     
-                    Color.green
+                    Color("BackgroundScreenColor")
                     
                     .ignoresSafeArea()
                     
@@ -72,7 +72,7 @@ struct AddItemView: View {
                         TextField("Nome da Tarefa", text: $TaskName)
                         TextField("Localizacao", text: $TaskName)
                             }
-                            .listRowBackground(Color.brown)
+                            .listRowBackground(Color(hex: 0xF8F6ED))
                         }
 
                         
@@ -84,7 +84,7 @@ struct AddItemView: View {
                             DatePicker(selection: $EndDate, in: ...Date(), label: {
                                 Text("Fim")})
                             }
-                            .listRowBackground(Color.brown)
+                            .listRowBackground(Color(hex: 0xF8F6ED))
                         }
                         
                         Section {
@@ -136,7 +136,7 @@ struct AddItemView: View {
                             Text("Subtarefa 2")
                             Text("Subtarefa 3")
                             }
-                            .listRowBackground(Color.brown)
+                            .listRowBackground(Color(hex: 0xF8F6ED))
                         }
                         
                         
@@ -158,13 +158,22 @@ struct AddItemView: View {
                     TextField("Data", text: $EventDate)
                     TextField("Localizacao", text: $EventLocation)
                         }
-                        .listRowBackground(Color.brown)
+                        .listRowBackground(Color(hex:0xF8F6ED))
                     }
                 }
                 }
             }
     }
-   
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Adicionar Tarefa")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}) {
+                    Text("OK")
+                        .foregroundColor(Color("AccentColor"))
+                }
+            }
+        }
 }
 }
 // Atribuir as funcoes a tarefas e init

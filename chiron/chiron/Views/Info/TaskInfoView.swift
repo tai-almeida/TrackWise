@@ -11,7 +11,7 @@ import SwiftUI
 struct TaskInfoView: View {
     
     @Binding
-    var originalTask:Task
+    var originalTask: Task
     
     var task: Task
     
@@ -81,19 +81,7 @@ struct TaskInfoView: View {
                         .fill(Color(hex: 0xF8F6ED))
                 )
             }
-//                // bloco checklist
-//                List {
-//                    Text("Checklist")
-//                        .font(.caption)
-//                        .fontWeight(.light)
-//
-//                    ForEach(Array(task.checklist.keys), id: \.self) { item in
-//                        Text(item)
-//
-//                    }
-//                }
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//
+
             ScrollView {
                     // bloco checklist
                     VStack(alignment: .leading, spacing: 0) {
@@ -130,7 +118,7 @@ struct TaskInfoView: View {
             Spacer()
             
         NavigationLink.init("",
-                      destination: CurrentTaskView(),
+                            destination: CurrentTaskView(task: $task),
                       isActive: $navigateToCurrentTaskView)
         
         // conferir se o horario bate com o da tarefa
@@ -141,17 +129,6 @@ struct TaskInfoView: View {
         }
         .buttonStyle(GreenButtonStyle())
 
-            
-//        NavigationLink(destination: IniciarTaskView()) {
-//            Text("Começar Tarefa")
-//                .padding(.horizontal, 100)
-//                .padding(.vertical, 15)
-//                .background(Color("AccentColor"))
-//                .foregroundStyle(.white)
-//                .cornerRadius(8)
-//        }
-//        .frame(maxWidth: .infinity, alignment: .center)
-            
         }
         .padding(.top, 15)
         .background(Color("BackgroundScreenColor"))

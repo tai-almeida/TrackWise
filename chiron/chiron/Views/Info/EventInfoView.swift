@@ -8,7 +8,17 @@
 import SwiftUI
 
 struct EventInfoView: View {
+    
+    @Binding
+    var originalEvent: Event
+    
     var event: Event
+    
+    @State
+    var navigateToEditEventView: Bool = false
+    
+    @EnvironmentObject
+    var week: Week
     
     var body: some View {
         
@@ -16,7 +26,6 @@ struct EventInfoView: View {
             
             ScrollView {
                 VStack(alignment: .leading) {
-                    
                     
                     // bloco infos principais
                     VStack (alignment: .leading){
@@ -36,6 +45,7 @@ struct EventInfoView: View {
                             Text("Data")
                             Spacer()
                             Text(event.formattedData)
+                                .foregroundStyle(.secondary)
                         }
                                             
                     }
@@ -64,8 +74,9 @@ struct EventInfoView: View {
     }
 }
 
-struct EventInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventInfoView(event: Event.exampleEvent)
-    }
-}
+//struct EventInfoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventInfoView(originalEvent: Event.exampleEvent,
+//                      event: Event.exampleEvent)
+//    }
+//}
