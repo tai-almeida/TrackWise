@@ -26,11 +26,11 @@ class Schedule: ObservableObject {
         }
     }
     
-    func dateEvents(data: Date) -> [Event] {
+    func dateEvents(data: Date) -> [Int] {
     // retorna todas as tarefas de "data"
         let calendar = Calendar.current
-        return events.filter {
-            calendar.isDate($0.date, inSameDayAs: data)
+        return events.indices.filter {
+            calendar.isDate(events[$0].date, inSameDayAs: data)
         }
     }
     

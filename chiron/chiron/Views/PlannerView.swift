@@ -37,20 +37,26 @@ struct PlannerView: View {
                                 Text(schedule.getWeekDay(date: day))
                                     .padding(.top, 5)
                                     .font(.body.bold())
+                                    //.font(.body.bold())
                                     .multilineTextAlignment(.leading)
                                 
                                 VStack (alignment: .leading){
                                 // cada evento separado por um divisor
-                                    ForEach(schedule.dateEvents(data: day), id: \.self) { events in
-                                        Divider()
-                                        .padding(.horizontal, 20)
-                                        
-                                        // verifica se ha eventos na data analisada
-                                        if !schedule.dateEvents(data: day).isEmpty {
-                                            Text(events.title)
-                                                .padding(.horizontal, 20)
-                                                .padding(.bottom, 20)
+                                    ForEach(schedule.dateEvents(data: day), id: \.self) { index in
+                                        let event = schedule.events[index]
+                                        NavigationLink(destination: EventInfoView(originalEvent: $schedule.events[index],
+                                                                                 event: event)){
+                                            Divider()
+                                            .padding(.horizontal, 20)
                                             
+                                            // verifica se ha eventos na data analisada
+                                            if !schedule.dateEvents(data: day).isEmpty {
+                                                Text(event.title)
+                                                    .padding(.horizontal, 20)
+                                                    .padding(.bottom, 20)
+                                                
+                                            }
+
                                         }
                                     }
                                 }
@@ -126,7 +132,17 @@ struct PlannerView: View {
                                             
                                             }
                                         }
+                                    } else {
+                                        
+                                        Divider()
+                                            .padding(.top, 20)
+                                        Text("Não há tarefas!")
+                                            
+                                            .foregroundColor(.secondary)
+                                        Divider()
+                                            .padding(.bottom, 20)
                                     }
+
                                 }
                                 
                             }

@@ -11,7 +11,7 @@ import SwiftUI
 struct TaskInfoView: View {
     
     @Binding
-    var originalTask:Task
+    var originalTask: Task
     
     var task: Task
     
@@ -21,7 +21,11 @@ struct TaskInfoView: View {
     @State
     var navigateToEditTaskView: Bool = false
     
-
+    @State
+    var modalCurrentTaskView: Bool = false
+    
+//    @EnvironmentObject
+//    var week: Week
     
     var body: some View {
         
@@ -80,19 +84,7 @@ struct TaskInfoView: View {
                         .fill(Color(hex: 0xF8F6ED))
                 )
             }
-//                // bloco checklist
-//                List {
-//                    Text("Checklist")
-//                        .font(.caption)
-//                        .fontWeight(.light)
-//
-//                    ForEach(Array(task.checklist.keys), id: \.self) { item in
-//                        Text(item)
-//
-//                    }
-//                }
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//
+
             ScrollView {
                     // bloco checklist
                     VStack(alignment: .leading, spacing: 0) {
@@ -107,12 +99,12 @@ struct TaskInfoView: View {
                                 .padding(.vertical, 10)
                                 .foregroundColor(.secondary)
                         } else {
-                            ForEach(Array(task.checklist.keys), id: \.self) { item in
+                            ForEach(task.checklist, id: \.id) { item in
                                 Divider()
-                                Text(item)
-                                    .strikethrough(task.checklist[item] == true , color: .gray)
+                                Text(item.title)
+                                    .strikethrough(item.isDone == true , color: .gray)
                                     .padding(.vertical, 10)
-                                    .foregroundColor(task.checklist[item] == true ? .gray : .primary)
+                                    .foregroundColor(item.isDone == true ? .gray : .primary)
                             }
                         }
                     }
@@ -127,30 +119,16 @@ struct TaskInfoView: View {
             .padding(.top, 10)
 
             Spacer()
-            
-        NavigationLink.init("",
-                      destination: CurrentTaskView(),
-                      isActive: $navigateToCurrentTaskView)
-        
+                    
         // conferir se o horario bate com o da tarefa
         Button(action: {
             navigateToCurrentTaskView = true
+            modalCurrentTaskView.toggle()
         }) {
           Text("Começar Tarefa")
         }
         .buttonStyle(GreenButtonStyle())
 
-            
-//        NavigationLink(destination: IniciarTaskView()) {
-//            Text("Começar Tarefa")
-//                .padding(.horizontal, 100)
-//                .padding(.vertical, 15)
-//                .background(Color("AccentColor"))
-//                .foregroundStyle(.white)
-//                .cornerRadius(8)
-//        }
-//        .frame(maxWidth: .infinity, alignment: .center)
-            
         }
         .padding(.top, 15)
         .background(Color("BackgroundScreenColor"))
@@ -166,6 +144,9 @@ struct TaskInfoView: View {
                 }
             }
         }
+        .sheet(isPresented: $modalCurrentTaskView, content: {
+            CurrentTaskView(task: $originalTask)
+        })
         
         NavigationLink.init("",
                             destination: EditTaskView(task: $originalTask,

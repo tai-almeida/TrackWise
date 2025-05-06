@@ -11,30 +11,11 @@ import SwiftUI
 struct AddItemView: View {
     @EnvironmentObject var schedule: Schedule
     @Environment(\.dismiss) var dismiss
-    //init(){
-    // Muda cor do picker slecionado
-    
-    // UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.red)
-    
-    // Muda cor do texto do picker
-    //            UISegmentedControl.appearance().setTitleTextAttributes(
-    //                [NSAttributedString.Key.foregroundColor: UIColor.white],
-    //                for: .selected
-    //            )
-    //        //
-    //            UISegmentedControl.appearance().setTitleTextAttributes(
-    //                [NSAttributedString.Key.foregroundColor: UIColor.black],
-    //                for: .normal
-    //            )
-    // UITableView.appearance().backgroundColor = .clear
-    // UITableViewCell.appearance().backgroundColor = .clear
-    //}
-    
     
     // Instancias que representam o estado de variaveis que mudam com o input
     
     @State
-    var task: Task = Task(title: "", location: "", date: Date(), startTime: Date(), endTime: Date(), category: .atv_fisica, difficulty: .facil, checklist: [:], isCompleted: false, averageTime: 0)
+    var task: Task = Task(title: "", location: "", date: Date(), startTime: Date(), endTime: Date(), category: .atv_fisica, difficulty: .facil, checklist: [], isCompleted: false, averageTime: 0)
     @State
     var event:Event = Event(id: 0, title: "", location: "", date: Date())
     
@@ -114,8 +95,6 @@ struct AddItemView: View {
                         schedule.tasks.append(task)
                         schedule.events.append(event)
                         dismiss()
-                        
-                        
                     }) {
                         Text("OK")
                             .foregroundColor(Color("AccentColor"))
@@ -124,9 +103,6 @@ struct AddItemView: View {
                     
                 }
             }
-        
-
-       
     }
 }
 
@@ -154,9 +130,6 @@ struct Form1: View {
             }
             .listRowBackground(Color(hex: 0xF8F6ED))
             
-            
-            
-            
             Section{
                 DatePicker(selection: $task.date, in: Date()..., displayedComponents: [.date], label: {
                     Text("Data")})
@@ -170,7 +143,6 @@ struct Form1: View {
             
             
             Section {
-                
                 HStack {
                     
                     Text("Categoria")
@@ -178,13 +150,9 @@ struct Form1: View {
                     Text("\(task.category.rawValue)")
                                             .foregroundStyle(.secondary)
                     
-                    
-                    
                     Menu {
-                        
                         Section{
                             Button {
-                               
                             } label: {
                                 Label("Adicionar", systemImage: "plus.circle")
                             }
@@ -194,59 +162,39 @@ struct Form1: View {
                         }
                         Button("Estudos") {
                             task.category = .estudos
-                            
-                            
                         }
                         Button("Faxina") {
                             task.category = .faxina
-                           
-                            
                         }
                         Button("Social") {
                             task.category = .social
-                         
-                            
                         }
                         Button("Atividade Física") {
                             task.category = .atv_fisica
-                            //Text("Atividade Física")
-                            
                         }
                         
                     } label: {
                         Image(systemName: "chevron.up.chevron.down")
-                        
                     }
                 }
-                
                 HStack {
-                    
                     Text("Dificuldade")
                     
                     Spacer()
                     Text("\(task.difficulty.rawValue)")
                                             .foregroundStyle(.secondary)
-                    
-                    
                     Menu {
-                        
                         Button("Fácil") {
                             task.difficulty = .facil
-                        
                         }
                         Button("Médio") {
                             task.difficulty = .medio
-                       
-                            
                         }
                         Button("Difícil") {
                             task.difficulty = .dificil
-                           
-                            
                         }
                     } label: {
                         Image(systemName: "chevron.up.chevron.down")
-                        
                     }
                 }
             }
