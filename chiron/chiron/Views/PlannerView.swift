@@ -13,13 +13,27 @@ struct PlannerView: View {
     //var week: Week
     var schedule: Schedule
     
+    init() {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().compactAppearance = appearance
+            UINavigationBar.appearance().tintColor = .white
+        }
+    
     
     
     var body: some View {
         ZStack {
+
             Color("BackgroundScreenColor").ignoresSafeArea()
             NavigationView {
                 VStack(alignment: .leading) {
+
                     // tela scrolavel com os dias da semana
                     ScrollView {
                         VStack(alignment: .leading) {
@@ -29,14 +43,15 @@ struct PlannerView: View {
                                 .padding(.vertical, 2)
                                 .padding(.top, 5)
                                 .multilineTextAlignment(.leading)
-                                .padding(.leading, 10)
+                                //.padding(.leading, 10)
                             
                             // começa no dia de hoje e percorre os próximos 7 dias
                             ForEach((0..<7), id: \.self) { i in
                                 let day = Calendar.current.date(byAdding: .day, value: i, to: Date())!
                                 Text(schedule.getWeekDay(date: day))
                                     .padding(.top, 5)
-                                    .font(.body.bold())
+                                    .font(.system(size: 20, weight: .bold))
+                                    //.font(.bold)
                                     //.font(.body.bold())
                                     .multilineTextAlignment(.leading)
                                 
@@ -56,6 +71,7 @@ struct PlannerView: View {
                                                     //.padding(.leading,10)
                                                     .padding(.bottom, 10)
                                                     .foregroundColor(.black)
+                                                    
                                                 
                                                 
                                             }
@@ -72,7 +88,7 @@ struct PlannerView: View {
                                     if !schedule.dateTasks(data: day).isEmpty {
                                     Text("Atividades")
                                         .padding(.top, 20)
-                                        .font(.body.bold())
+                                        .font(.headline)
                                         .multilineTextAlignment(.leading)
                                         
                                     Section {
@@ -130,25 +146,34 @@ struct PlannerView: View {
                                                         }
                                                     }
                                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .background(Color(hex: 0xF8F6ED))
+                                                    .background(.white)
                                                     .cornerRadius(8)
                                                     .padding(.horizontal, 5)
-                                            
+                                                    .shadow(radius: 2)
                                             
                                             }
                                         }
                                     } else {
+                                        if !schedule.dateEvents(data: day).isEmpty {
+                                            Text("Atividades")
+                                                .padding(.top, 10)
+                                                //.font(.system(size: 16))
+                                                //.font(.body.bold())
+                                                
+                                                .multilineTextAlignment(.leading)
+                                        }
                                         
                                         Divider()
-                                            .padding(.top, 20)
+                                            .padding(.top, 10)
                                         Text("Não há tarefas!")
                                             
                                             .foregroundColor(.secondary)
-                                        Divider()
-                                            .padding(.bottom, 20)
+//                                        Divider()
+//                                            .padding(.bottom, 20)
                                     }
 
                                 }
+                                Divider()
                                 
                             }
                              //insere + na toolbar para ir para tela de AddTask
@@ -165,7 +190,7 @@ struct PlannerView: View {
                                             navigateToAddItem = true
                                           }) {
                                             Text("+")
-                                              .foregroundColor(Color("AccentColor"))
+                                                  .foregroundColor(.white)
                                               .font(.system(size: 24))
                                           }
                                         }
@@ -176,11 +201,12 @@ struct PlannerView: View {
                     UITableView.appearance().backgroundColor = .clear
                 }
                 .background(Color("BackgroundScreenColor"))
-
+                .padding(.horizontal, 10)
                 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, 10)
+            //
             }
+        
         }
     }
 //}

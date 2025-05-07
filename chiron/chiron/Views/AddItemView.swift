@@ -70,7 +70,7 @@ struct AddItemView: View {
                                     TextField("Localizacao", text: $event.location)
                                         .padding()
                                 }
-                            }.background(Color(hex: 0xF8F6ED))
+                            }.background(Color("AccentColor"))
                                 .cornerRadius(10)
                                 .padding()
                             
@@ -83,9 +83,6 @@ struct AddItemView: View {
                     }
                     
                 }
-                
-                
-
             }
 
         }.navigationBarTitleDisplayMode(.inline)
