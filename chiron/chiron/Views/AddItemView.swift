@@ -46,46 +46,45 @@ struct AddItemView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .background(Color(hex: 0xF8F6ED))
                 .padding()
-                .onChange(of: SelectedPicker) { newValue in
-                    isTask = (newValue == 1)
-                }
                 
-                
-                if SelectedPicker == 1 {
-                    
-                    // Tudo que representa a secao tarefa
-                    
-                    Form1(task:$task)
-                    
-                }  else if SelectedPicker == 2 {
-                    VStack(spacing: 0) {
+                Group {
+                    if SelectedPicker == 1 {
+                        
+                        // Tudo que representa a secao tarefa
+                        
+                        Form1(task:$task)
+                        
+                    } else if SelectedPicker == 2 {
                         VStack(spacing: 0) {
-                            Group {
-                                TextField("Nome do evento", text: $event.title)
-                                    .padding()
-                                Divider()
-                                
-                                DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
-                                    Text("Data")})
-                                
-                                Divider()
-                                
-                                TextField("Localizacao", text: $event.location)
-                                    .padding()
-                            }
-                        }.background(Color(hex: 0xF8F6ED))
-                            .cornerRadius(10)
-                            .padding()
-                        
-                        Spacer()
-                        
-                        
-                       
+                            VStack(spacing: 0) {
+                                Group {
+                                    TextField("Nome do evento", text: $event.title)
+                                        .padding()
+                                    Divider()
+                                    
+                                    DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
+                                        Text("Data")})
+                                    
+                                    Divider()
+                                    
+                                    TextField("Localizacao", text: $event.location)
+                                        .padding()
+                                }
+                            }.background(Color(hex: 0xF8F6ED))
+                                .cornerRadius(10)
+                                .padding()
+                            
+                            Spacer()
+                        }
                     }
-
-                    
+                }.onAppear {
+                    if SelectedPicker == 1 {
+                        isTask = true
+                    }
                     
                 }
+                
+                
 
             }
 
