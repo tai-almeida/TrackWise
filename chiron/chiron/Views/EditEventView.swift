@@ -40,13 +40,17 @@ struct EditEventView: View {
                     TextField("Titulo", text: $editableEvent.title)
                     TextField("Localização", text: $editableEvent.location)
                 }
-                    .listRowBackground(Color(hex: 0xF8F6ED))
+                .listRowBackground(Color(.secondarySystemBackground))
 
     
                 Section {
-                    DatePicker("Data", selection: $editableEvent.date, in: ...Date(), displayedComponents: .date)
+                    DatePicker("Data",
+                               selection: $editableEvent.date,
+                               in: Date()...,
+                               displayedComponents: .date
+                    )
                 }
-                    .listRowBackground(Color(hex: 0xF8F6ED))
+                .listRowBackground(Color(.secondarySystemBackground))
             }
 
         .toolbar {

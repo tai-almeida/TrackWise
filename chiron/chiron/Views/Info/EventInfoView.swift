@@ -22,9 +22,10 @@ struct EventInfoView: View {
     
     var body: some View {
         
-        VStack (alignment: .leading){
+        ScrollView {
+
+            VStack (alignment: .leading){
             
-            ScrollView {
                 VStack(alignment: .leading) {
                     
                     // bloco infos principais
@@ -37,7 +38,6 @@ struct EventInfoView: View {
                             .font(.headline)
                             .padding(.bottom, 5)
                     }
-                    .padding()
                     
                     // bloco infos secundarias
                     VStack {
@@ -54,23 +54,30 @@ struct EventInfoView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(.secondarySystemBackground))
                     )
-                    .padding(.bottom)
                 }
                 
             }
             Spacer()
         }
+        .padding()
         .background(Color("BackgroundScreenColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes do Evento")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}) {
+                Button(action: {
+                    navigateToEditEventView = true
+                }) {
                     Text("Editar")
                         .foregroundColor(Color("AccentColor"))
                 }
             }
         }
+        
+        NavigationLink.init("",
+                            destination: EditEventView(event: $originalEvent,
+                                                      eventData: event),
+                            isActive: $navigateToEditEventView)
     }
 }
 
