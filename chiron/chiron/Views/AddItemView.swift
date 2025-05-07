@@ -11,24 +11,24 @@ import SwiftUI
 struct AddItemView: View {
     @EnvironmentObject var schedule: Schedule
     @Environment(\.dismiss) var dismiss
-    //init(){
-    // Muda cor do picker slecionado
+    init(){
+  //   Muda cor do picker slecionado
     
-    // UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.red)
+     UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.red)
     
-    // Muda cor do texto do picker
-    //            UISegmentedControl.appearance().setTitleTextAttributes(
-    //                [NSAttributedString.Key.foregroundColor: UIColor.white],
-    //                for: .selected
-    //            )
-    //        //
-    //            UISegmentedControl.appearance().setTitleTextAttributes(
-    //                [NSAttributedString.Key.foregroundColor: UIColor.black],
-    //                for: .normal
-    //            )
-    // UITableView.appearance().backgroundColor = .clear
-    // UITableViewCell.appearance().backgroundColor = .clear
-    //}
+   //  Muda cor do texto do picker
+                UISegmentedControl.appearance().setTitleTextAttributes(
+                    [NSAttributedString.Key.foregroundColor: UIColor.blue],
+                    for: .selected
+                )
+            //
+                UISegmentedControl.appearance().setTitleTextAttributes(
+                    [NSAttributedString.Key.foregroundColor: UIColor.black],
+                    for: .normal
+                )
+     UITableView.appearance().backgroundColor = .blue
+     UITableViewCell.appearance().backgroundColor = .green
+    }
     
     
     // Instancias que representam o estado de variaveis que mudam com o input
