@@ -165,7 +165,7 @@ struct Form1: View {
                 
                 DatePicker(selection: $task.startTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
                     Text("Início")})
-                DatePicker(selection: $task.endTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
+                DatePicker(selection: $task.endTime, in: task.startTime..., displayedComponents: [.hourAndMinute], label: {
                     Text("Fim")})
             }
             .listRowBackground(Color(hex: 0xF8F6ED))
@@ -243,6 +243,8 @@ struct Form1: View {
                            
                             
                         }
+                        
+                        
                     } label: {
                         Text("Dificuldade")
                             .foregroundStyle(.black)
