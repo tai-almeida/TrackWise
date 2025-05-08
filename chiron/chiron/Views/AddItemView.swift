@@ -14,11 +14,11 @@ struct AddItemView: View {
     
     
         init() {
-            UISegmentedControl.appearance().selectedSegmentTintColor = .white //UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor((Color("AccentColor"))).toUIColor(color: Color("AccentColor"))], for: .normal)
-            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-            UISegmentedControl.appearance().backgroundColor = UIColor(Color("AccentColor")).toUIColor(color:Color("AccentColor"))
+            UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("AccentColor")).toUIColor(color:Color("AccentColor"))
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
+
 
         }
       
@@ -45,8 +45,8 @@ struct AddItemView: View {
         
         ZStack {
             
-            Color("BackgroundScreenColor")
-                .ignoresSafeArea()
+//            Color("BackgroundScreenColor")
+//                .ignoresSafeArea()
             
             VStack {
                 Picker(selection: $SelectedPicker, label: Text("Picker")) {
@@ -62,37 +62,33 @@ struct AddItemView: View {
                 
                 Group {
                     if SelectedPicker == 1 {
-                        
-                        // Tudo que representa a secao tarefa
-                        
-                        Form1(task:$task)
-                        
+                        Form1(task: $task)
                     } else if SelectedPicker == 2 {
                         VStack(spacing: 0) {
-                            VStack(spacing: 0) {
-                                GroupBox {
+                            GroupBox {
+                                VStack {
                                     TextField("Nome do evento", text: $event.title)
-                                        //.padding()
                                     Divider()
-                                    TextField("Localizacao", text: $event.location)
-                                        //.padding()
+                                    TextField("Localização", text: $event.location)
                                     Divider()
-                                    DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
-                                        Text("Data")})
-                                    
-                                    
-                                    
-                                    
+                                    DatePicker(selection: $event.date,
+                                             in: Date()...,
+                                             displayedComponents: [.date]) {
+                                        Text("Data")
+                                    }
                                 }
+                            
                             }
-                                .cornerRadius(10)
-                                //.background(Color("AccentColor"))
-                                .padding()
+                            .groupBoxStyle(WhiteGroupBoxStyle())
+                            .cornerRadius(10)
+                            .padding()
                             
                             Spacer()
                         }
                     }
-                }.onAppear {
+                }
+
+                .onAppear {
                     if SelectedPicker == 1 {
                         isTask = true
                     }
@@ -119,7 +115,7 @@ struct AddItemView: View {
                         dismiss()
                     }) {
                         Text("OK")
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("AccentColor"))
                        
                     }
                     

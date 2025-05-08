@@ -13,24 +13,24 @@ struct PlannerView: View {
     //var week: Week
     var schedule: Schedule
     
-    init() {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            UINavigationBar.appearance().compactAppearance = appearance
-            UINavigationBar.appearance().tintColor = .white
-        }
+//    init() {
+//            let appearance = UINavigationBarAppearance()
+//            appearance.configureWithOpaqueBackground()
+//            appearance.backgroundColor = UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
+//            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//            UINavigationBar.appearance().standardAppearance = appearance
+//            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//            UINavigationBar.appearance().compactAppearance = appearance
+//            UINavigationBar.appearance().tintColor = .white
+//        }
     
     
     
     var body: some View {
         ZStack {
 
-            Color("BackgroundScreenColor").ignoresSafeArea()
+            Color(.secondarySystemBackground).ignoresSafeArea()
             NavigationView {
                 VStack(alignment: .leading) {
 
@@ -157,9 +157,7 @@ struct PlannerView: View {
                                         if !schedule.dateEvents(data: day).isEmpty {
                                             Text("Atividades")
                                                 .padding(.top, 10)
-                                                //.font(.system(size: 16))
-                                                //.font(.body.bold())
-                                                
+                                                .font(.headline)
                                                 .multilineTextAlignment(.leading)
                                         }
                                         
@@ -183,15 +181,15 @@ struct PlannerView: View {
                                                 isActive: $navigateToAddItem)
                                     }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
                                       .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                      .background(Color("BackgroundScreenColor"))
+                                      .background(Color(.secondarySystemBackground))
                                       .toolbar {
                                         ToolbarItem(placement: .navigationBarTrailing) {
                                           Button(action: {
                                             navigateToAddItem = true
                                           }) {
                                             Text("+")
-                                                  .foregroundColor(.white)
-                                              .font(.system(size: 24))
+                                                  .foregroundColor(Color("AccentColor"))
+                                              .font(.system(size: 30))
                                           }
                                         }
                                       }
@@ -200,13 +198,16 @@ struct PlannerView: View {
                 .onAppear {
                     UITableView.appearance().backgroundColor = .clear
                 }
-                .background(Color("BackgroundScreenColor"))
                 .padding(.horizontal, 10)
+                .background(Color(.secondarySystemBackground))
+                
+                
                 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
             //
             }
-        
+        //.background(Color(.secondarySystemBackground))
         }
     }
 //}

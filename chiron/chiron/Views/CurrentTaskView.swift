@@ -104,7 +104,7 @@ struct CurrentTaskView: View {
                                             .foregroundColor(item.isDone ? .green : .gray)
                                     }
                                 }
-                                .listRowBackground(Color(.secondarySystemBackground))
+                                //.listRowBackground(Color(.secondarySystemBackground))
                             }
                         }
                     }
@@ -156,7 +156,7 @@ struct CurrentTaskView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .background(Color("BackgroundScreenColor"))
+            .background(Color(.secondarySystemBackground))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     // botao de cancelar

@@ -83,7 +83,7 @@ struct TaskInfoView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(.secondarySystemBackground))
+                        .fill(.white)
                 )
             }
 
@@ -114,7 +114,7 @@ struct TaskInfoView: View {
                     .padding(.horizontal)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.secondarySystemBackground))
+                            .fill(.white)
                     )
             }
             .padding(.top, 10)
@@ -122,7 +122,7 @@ struct TaskInfoView: View {
             Spacer()
         }
         .padding()
-        .background(Color("BackgroundScreenColor"))
+        .background(Color(.secondarySystemBackground))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")
         .toolbar {

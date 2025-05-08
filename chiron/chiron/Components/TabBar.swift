@@ -15,23 +15,8 @@ struct TabBar: View {
     /* TabBar com 3 elementos - planner, calendario e pendentes */
     var body: some View {
        
-        TabView {
+        //TabView {
             PlannerView()
-                .tabItem{
-                    Label("Planner", systemImage: "book")}
-
-//            Text("Tela 2")
-//                .tabItem{
-//                    Label("Calendário", systemImage: "calendar")}
-            
-            
-            
-            Text("Tela 2")
-                .tabItem{
-                    Label("Pendentes", systemImage: "clock.badge.exclamationmark")}
-        }
-        // altera cor do item selecionado na TabBar
-        .accentColor(Color("AccentColor"))
         .environmentObject(schedule)
     }
 }

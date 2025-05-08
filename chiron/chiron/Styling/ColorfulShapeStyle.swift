@@ -21,3 +21,15 @@ struct ColorfulShapeStyle: ViewModifier {
             .clipShape(Capsule())
     }
 }
+
+// Define a cor do GroupBox ao adicionar eventos
+struct WhiteGroupBoxStyle: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            configuration.content
+                .padding()
+                .background(Color.white)
+                .cornerRadius(8)
+        }
+    }
+}

@@ -34,7 +34,7 @@ struct EditTaskView: View {
         
         // background
         ZStack {
-            Color("BackgroundScreenColor").ignoresSafeArea()
+            Color(.secondarySystemBackground).ignoresSafeArea()
                             
             Form {
                 
@@ -42,7 +42,7 @@ struct EditTaskView: View {
                     TextField("Titulo", text: $editableTask.title)
                     TextField("Localização", text: $editableTask.location)
                 }
-                    .listRowBackground(Color(.secondarySystemBackground))
+                    //.listRowBackground(Color(.secondarySystemBackground))
 
     
                 Section {
@@ -59,7 +59,7 @@ struct EditTaskView: View {
                         displayedComponents: .hourAndMinute, label: {
                         Text("Fim")})
                     }
-                .listRowBackground(Color(.secondarySystemBackground))
+                //.listRowBackground(Color(.secondarySystemBackground))
 
         
                 Section {
@@ -104,7 +104,7 @@ struct EditTaskView: View {
                                                                  editableTask.difficulty.color))
                         }
                 }
-                .listRowBackground(Color(.secondarySystemBackground))
+                //.listRowBackground(Color(.secondarySystemBackground))
                 
                 
                 Section(header: Text("Checklist")) {
@@ -144,7 +144,7 @@ struct EditTaskView: View {
                     }
                     
                 }
-                .listRowBackground(Color(.secondarySystemBackground))
+                //.listRowBackground(Color(.secondarySystemBackground))
                 
                 
             }
