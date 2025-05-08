@@ -152,8 +152,10 @@ struct PlannerView: View {
                                                         }
                                                     }
                                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .background(.white)
+                                                    .background(task.isCompleted ? Color(.systemGray6) : .white)
                                                     .cornerRadius(8)
+                                                    .grayscale(task.isCompleted ? 0.8 : 0.0)
+                                                    .opacity(task.isCompleted ? 0.5 : 1.0)
                                                     .padding(.horizontal, 5)
                                                     .shadow(radius: 2)
                                             
