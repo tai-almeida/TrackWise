@@ -84,7 +84,7 @@ struct TaskInfoView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(.white))
+                        .fill(.white)
                 )
             }
 
@@ -115,7 +115,7 @@ struct TaskInfoView: View {
                     .padding(.horizontal)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.white))
+                            .fill(.white)
                     )
             }
             .padding(.top, 10)

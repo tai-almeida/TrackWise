@@ -46,7 +46,7 @@ struct EditTaskView: View {
                     TextField("Titulo", text: $editableTask.title)
                     TextField("Localização", text: $editableTask.location)
                 }
-                    .listRowBackground(Color(.white))
+                    //.listRowBackground(Color(.secondarySystemBackground))
 
     
                 Section {
@@ -71,7 +71,7 @@ struct EditTaskView: View {
                             Text("Fim")
                         })
                     }
-                .listRowBackground(Color(.white))
+                //.listRowBackground(Color(.secondarySystemBackground))
 
         
                 Section {
@@ -116,7 +116,7 @@ struct EditTaskView: View {
                                                                  editableTask.difficulty.color))
                         }
                 }
-                .listRowBackground(Color(.white))
+                //.listRowBackground(Color(.secondarySystemBackground))
                 
                 
                 Section(header: Text("Checklist")) {
@@ -158,7 +158,8 @@ struct EditTaskView: View {
                     }
                     
                 }
-                .listRowBackground(Color(.white))
+                //.listRowBackground(Color(.secondarySystemBackground))
+                
                 
                 Section {
                     Button(action: {

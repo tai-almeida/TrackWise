@@ -3,12 +3,11 @@
 //  chiron
 //
 //  Created by Aluno 02 on 22/04/25.
-//
-
 import SwiftUI
-
 struct CurrentTaskView: View {
     
+
+
     @Binding var task: Task
     
     @EnvironmentObject var schedule: Schedule
@@ -20,10 +19,7 @@ struct CurrentTaskView: View {
         self._task = task
         self._editableTask = State(initialValue: task.wrappedValue)
     }
-    
-
-    @Environment(\.dismiss) var dismiss // necessario para modal
-
+        @Environment(\.dismiss) var dismiss // necessario para modal
     @State private var alertFim = false
     @State private var otimizarRotina = false
     @State private var finalizarTarefa = false
@@ -40,7 +36,6 @@ struct CurrentTaskView: View {
         let startTime = Date()
         tempoRestante = task.endTime.timeIntervalSince(startTime)
         tempoRestante = (tempoRestante>=0 ? tempoRestante : 0)
-
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             let restante = task.endTime.timeIntervalSince(Date())
             if restante <= 0 {
@@ -92,28 +87,31 @@ struct CurrentTaskView: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Form {
-                    // checklist
-                    Section(header: Text("Checklist")) {
-                        ForEach($editableTask.checklist) { $item in
-                            HStack {
-                                Text(item.title)
-                                    .strikethrough(item.isDone)
-                                    .foregroundColor(item.isDone ? .gray : .primary)
-                                Spacer()
-                                Button {
-                                    item.isDone.toggle()
-                                    editableTask.updateCompletionStatus()
-                                } label:{
-                                    Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
-                                        .foregroundColor(item.isDone ? .green : .gray)
+                if !task.checklist.isEmpty {
+                    Form {
+                        // checklist
+                        Section(header: Text("Checklist")) {
+                            ForEach($editableTask.checklist) { $item in
+                                HStack {
+                                    Text(item.title)
+                                        .strikethrough(item.isDone)
+                                        .foregroundColor(item.isDone ? .gray : .primary)
+                                    Spacer()
+                                    Button {
+                                        item.isDone.toggle()
+                                        editableTask.updateCompletionStatus()
+
+                                    } label:{
+                                        Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+                                            .foregroundColor(item.isDone ? .green : .gray)
+                                    }
                                 }
+                                //.listRowBackground(Color(.secondarySystemBackground))
                             }
-                            .listRowBackground(Color(.secondarySystemBackground))
                         }
                     }
+                    .frame(alignment: .topLeading)
                 }
-                .frame(alignment: .topLeading)
                 
                 Spacer()
                 
@@ -130,30 +128,37 @@ struct CurrentTaskView: View {
                         Text("Finalizar Tarefa")
                     }
                     .buttonStyle(GreenButtonStyle())
-
                     .alert("Otimizar Rotina?", isPresented: $otimizarRotina, actions: {
-                        // alerta para otimizar rotina (add tempo extra ao tempo medio)
+                        // alerta para otimizar rotina (add tempo extra ou diminui tempo restante do tempo medio)
                         Button("Sim", role: .cancel) {
-                            task.averageTime = ((2*task.averageTime) + (Int(tempoExtra)/60))/2
+                            if tempoRestante <= 0 {
+                                task.averageTime = ((2*task.averageTime) + (Int(tempoExtra)/60))/2
+                            } else {
+                                task.averageTime = ((2*task.averageTime) - (Int(tempoRestante)/60))/2
+                            }
                             dismiss()
                         }
                         Button("Não") { dismiss() }
                     }, message: {
-                        Text("Passaram-se \(Int(tempoExtra)/60) min do tempo programado\nAtualizar o tempo médio da tarefa?")
+                        if tempoRestante <= 0 {
+                            Text("Passaram-se \(Int(tempoExtra)/60) min do tempo programado\nAtualizar o tempo médio da tarefa?")
+                        } else {
+                            Text("Você terminou com \(Int(tempoRestante)/60) min de sobra!\nAtualizar o tempo médio da tarefa?")
+                        }
                     })
                         .frame(maxWidth: .infinity, alignment: .center)
                     .alert("Finalizar Tarefa?", isPresented: $finalizarTarefa, actions: {
                         // alerta para finalizar tarefa mesmo
                         Button("Sim", role: .cancel) {
                             task = editableTask
-                            dismiss()
+                            otimizarRotina = true
                         }
                         Button("Não") { }
                     })
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .background(Color("BackgroundScreenColor"))
+            .background(Color(.secondarySystemBackground))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     // botao de cancelar
