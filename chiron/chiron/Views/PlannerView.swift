@@ -129,7 +129,8 @@ struct PlannerView: View {
                                                             Spacer()
                                                             VStack(alignment: .trailing) {
                                                                 // simbolo de inicio da tarefa
-                                                                if let adjustedStart = Calendar.current.date(byAdding: .minute, value: -5, to: task.startTime),
+                                                                if Calendar.current.isDate(currentDate, inSameDayAs: task.date),
+                                                                   let adjustedStart = Calendar.current.date(byAdding: .minute, value: -5, to: task.startTime),
                                                                    currentDate >= adjustedStart && currentDate <= task.endTime {
                                                                     Image(systemName: "play.fill")
                                                                         .padding(.horizontal, 10)
@@ -137,7 +138,13 @@ struct PlannerView: View {
                                                                         .background(Color("AccentColor"))
                                                                         .foregroundStyle(.white)
                                                                         .clipShape(Capsule())
+                                                                } else {
+                                                                    Image(systemName: "play.fill")
+                                                                        .padding(.horizontal, 10)
+                                                                        .padding(.vertical, 4)
+                                                                        .hidden()
                                                                 }
+
 
                                                                 // tag com o tempo convertido para HhMIN
                                                                 Text(convertsTime(duration: task.averageTime))
