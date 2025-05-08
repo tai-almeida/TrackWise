@@ -5,6 +5,8 @@
 //  Created by Laris on 15/04/25.
 //
 import Foundation
+import SwiftUI
+
 // CaseIterable permite acessar os valores como lista,
 // necessario para criar a seleçao na criaçao de Task
 enum Difficulty: String, CaseIterable, Identifiable {
@@ -30,13 +32,13 @@ struct Task: Identifiable {
     var endTime: Date
     var category: Category
     var difficulty: Difficulty
-    var checklist: [String:Bool]
+    var checklist: [ChecklistItem]
     var isCompleted: Bool
     var averageTime: Int //?
     
     init(title:String, location:String, date:Date, startTime:Date,
-         endTime:Date, category:Category, difficulty:Difficulty, checklist:[String:Bool], isCompleted:Bool, averageTime:Int) {
-        //self.id = id
+         endTime:Date, category:Category, difficulty:Difficulty, checklist:[ChecklistItem], isCompleted:Bool, averageTime:Int) {
+        //self.id = UUID()
         self.title = title
         self.location = location
         self.date = date
@@ -74,13 +76,17 @@ struct Task: Identifiable {
         endTime: Date().addingTimeInterval(3600),
         category: .estudos,
         difficulty: .dificil,
-        checklist: ["Assistir aula":false, "Fazer exercícios":false, "Revisar":false],
+        checklist: [
+            ChecklistItem(title: "Assistir aula", isDone: false),
+            ChecklistItem(title: "Fazer exercícios", isDone: false),
+            ChecklistItem(title: "Revisar", isDone: false)
+        ],
         isCompleted: false,
         averageTime: 47
     )
     
     static let task2 = Task(
-       // id: 1,
+        //id: 1,
         title: "Lavar Roupa",
         location: "Casa",
         date:  Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
@@ -88,7 +94,10 @@ struct Task: Identifiable {
         endTime: Date().addingTimeInterval(3600),
         category: .faxina,
         difficulty: .facil,
-        checklist: ["Lavar Roupas" : false, "Estender Roupas": false],
+        checklist: [
+            ChecklistItem(title:"Lavar Roupas", isDone: false),
+            ChecklistItem(title:"Estender Roupas", isDone: false)
+            ],
         isCompleted: false,
         averageTime: 58)
 }

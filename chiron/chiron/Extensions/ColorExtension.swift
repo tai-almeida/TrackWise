@@ -21,6 +21,12 @@ extension Color {
     }
 }
 
+extension UIColor {
+    func toUIColor(color:Color) -> UIColor {
+        return UIColor(color)
+    }
+}
+
 let backgroundGradient = LinearGradient(
     colors: [Color(hex: 0xEFE8D8), Color(hex: 0xEFE8D8, opacity: 0.5)],
     startPoint: .top, endPoint: .bottom)

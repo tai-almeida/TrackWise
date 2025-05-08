@@ -26,17 +26,37 @@ class Schedule: ObservableObject {
         }
     }
     
-    func dateEvents(data: Date) -> [Event] {
+    func dateEvents(data: Date) -> [Int] {
     // retorna todas as tarefas de "data"
         let calendar = Calendar.current
-        return events.filter {
-            calendar.isDate($0.date, inSameDayAs: data)
+        return events.indices.filter {
+            calendar.isDate(events[$0].date, inSameDayAs: data)
         }
     }
     
     func getWeekDay(date: Date) -> String {
         let f = DateFormatter()
-        return f.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
+        let day = Calendar.current.component(.weekday, from: date)
+        
+        switch day {
+            case 1:
+                return "Domingo"
+            case 2:
+                return "Segunda-Feira"
+            case 3:
+                return "Terça-Feira"
+            case 4:
+                return "Quarta-Feira"
+            case 5:
+                return "Quinta-Feira"
+            case 6:
+                return "Sexta-Feira"
+            case 7:
+                return "Sábado"
+            
+        default:
+            return ""
+        }
     }
     
     

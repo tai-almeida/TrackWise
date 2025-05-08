@@ -11,34 +11,31 @@ import SwiftUI
 struct AddItemView: View {
     @EnvironmentObject var schedule: Schedule
     @Environment(\.dismiss) var dismiss
-    init(){
-  //   Muda cor do picker slecionado
     
-     UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.red)
     
-   //  Muda cor do texto do picker
-                UISegmentedControl.appearance().setTitleTextAttributes(
-                    [NSAttributedString.Key.foregroundColor: UIColor.blue],
-                    for: .selected
-                )
-            //
-                UISegmentedControl.appearance().setTitleTextAttributes(
-                    [NSAttributedString.Key.foregroundColor: UIColor.black],
-                    for: .normal
-                )
-     UITableView.appearance().backgroundColor = .blue
-     UITableViewCell.appearance().backgroundColor = .green
-    }
-    
+        init() {
+            UISegmentedControl.appearance().selectedSegmentTintColor = .white //UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor((Color("AccentColor"))).toUIColor(color: Color("AccentColor"))], for: .normal)
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+            UISegmentedControl.appearance().backgroundColor = UIColor(Color("AccentColor")).toUIColor(color:Color("AccentColor"))
+
+        }
+      
+
     
     // Instancias que representam o estado de variaveis que mudam com o input
     
     @State
-    var task: Task = Task(title: "", location: "", date: Date(), startTime: Date(), endTime: Date(), category: .atv_fisica, difficulty: .facil, checklist: [:], isCompleted: false, averageTime: 0)
+    var task: Task = Task(title: "", location: "", date: Date(), startTime: Date(), endTime: Date(), category: .atv_fisica, difficulty: .facil, checklist: [], isCompleted: false, averageTime: 0)
     @State
     var event:Event = Event(id: 0, title: "", location: "", date: Date())
     
     @State var SelectedPicker = 1
+    
+    @State
+    var isTask: Bool = false
+    
 
     
     @State
@@ -59,49 +56,50 @@ struct AddItemView: View {
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .background(Color(hex: 0xF8F6ED))
+                
+                .background(.clear)
                 .padding()
                 
-                
-                if SelectedPicker == 1 {
-                    
-                    // Tudo que representa a secao tarefa
-                    
-                    Form1(task:$task)
-                    
-                }  else if SelectedPicker == 2 {
-                    VStack(spacing: 0) {
+                Group {
+                    if SelectedPicker == 1 {
+                        
+                        // Tudo que representa a secao tarefa
+                        
+                        Form1(task:$task)
+                        
+                    } else if SelectedPicker == 2 {
                         VStack(spacing: 0) {
-                            GroupBox {
-                                TextField("Nome do evento", text: $event.title)
-                                 
-                                Divider()
-                                
-                            
-                                TextField("Localizacao", text: $event.location)
-                                 
-                                
-                                Divider()
-                                
-                                DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
-                                    Text("Data")})
-                                
+                            VStack(spacing: 0) {
+                                GroupBox {
+                                    TextField("Nome do evento", text: $event.title)
+                                        //.padding()
+                                    Divider()
+                                    TextField("Localizacao", text: $event.location)
+                                        //.padding()
+                                    Divider()
+                                    DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
+                                        Text("Data")})
+                                    
+                                    
+                                    
+                                    
+                                }
                             }
-                        }.background(Color(hex: 0xF8F6ED))
-                            .cornerRadius(10)
-                            .padding()
-                        
-                        Spacer()
-                        
-                        
-                       
+                                .cornerRadius(10)
+                                //.background(Color("AccentColor"))
+                                .padding()
+                            
+                            Spacer()
+                        }
                     }
-
-                    
+                }.onAppear {
+                    if SelectedPicker == 1 {
+                        isTask = true
+                    }
                     
                 }
-
             }
+            .background(Color(.secondarySystemBackground))
 
         }.navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Adicionar Tarefa")
@@ -112,23 +110,21 @@ struct AddItemView: View {
                         //var task = Task()
                         let components = Calendar.current.dateComponents([.minute], from: task.startTime, to: task.endTime)
                         task.averageTime = components.minute ?? 0
-
-                        schedule.tasks.append(task)
-                        schedule.events.append(event)
+                        
+                        if isTask {
+                            schedule.tasks.append(task)
+                        } else {
+                            schedule.events.append(event)
+                        }
                         dismiss()
-                        
-                        
                     }) {
                         Text("OK")
-                            .foregroundColor(Color("AccentColor"))
+                            .foregroundColor(.white)
                        
                     }
                     
                 }
             }
-        
-
-       
     }
 }
 
@@ -147,17 +143,17 @@ struct Form1: View {
     @Binding
     var task:Task
     
+    
     var body: some View {
         
         Form {
+            
             Section {
                 TextField("Nome da Tarefa", text: $task.title)
                 TextField("Localizacao", text: $task.location)
+                
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
-            
-            
-            
+            //.listRowBackground(Color(.secondarySystemBackground))
             
             Section{
                 DatePicker(selection: $task.date, in: Date()..., displayedComponents: [.date], label: {
@@ -168,18 +164,15 @@ struct Form1: View {
                 DatePicker(selection: $task.endTime, in: task.startTime..., displayedComponents: [.hourAndMinute], label: {
                     Text("Fim")})
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(.secondarySystemBackground))
             
             
             Section {
-                
                 HStack {
                    
                     Menu {
-                        
                         Section{
                             Button {
-                               
                             } label: {
                                 Label("Adicionar", systemImage: "plus.circle")
                             }
@@ -189,23 +182,15 @@ struct Form1: View {
                         }
                         Button("Estudos") {
                             task.category = .estudos
-                            
-                            
                         }
                         Button("Faxina") {
                             task.category = .faxina
-                           
-                            
                         }
                         Button("Social") {
                             task.category = .social
-                         
-                            
                         }
                         Button("Atividade Física") {
                             task.category = .atv_fisica
-                            //Text("Atividade Física")
-                            
                         }
                         
                     }
@@ -228,20 +213,14 @@ struct Form1: View {
                 HStack {
     
                     Menu {
-                        
                         Button("Fácil") {
                             task.difficulty = .facil
-                        
                         }
                         Button("Médio") {
                             task.difficulty = .medio
-                       
-                            
                         }
                         Button("Difícil") {
                             task.difficulty = .dificil
-                           
-                            
                         }
                         
                         
@@ -257,14 +236,14 @@ struct Form1: View {
                     }
                 }
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(hex: 0xF8F6ED))
             
             Section(header: Text("Checklist")){
                 Text("Subtarefa 1")
                 Text("Subtarefa 2")
                 Text("Subtarefa 3")
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(hex: 0xF8F6ED))
             
         }
     }
