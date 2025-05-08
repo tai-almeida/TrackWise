@@ -203,14 +203,14 @@ struct Form1: View {
                 HStack {
     
                     Menu {
-                        Button("Fácil") {
-                            task.difficulty = .facil
+                        Button("Difícil") {
+                            task.difficulty = .dificil
                         }
                         Button("Médio") {
                             task.difficulty = .medio
                         }
-                        Button("Difícil") {
-                            task.difficulty = .dificil
+                        Button("Fácil") {
+                            task.difficulty = .facil
                         }
                         
                         
