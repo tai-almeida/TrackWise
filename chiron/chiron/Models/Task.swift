@@ -50,6 +50,11 @@ struct Task: Identifiable {
         self.isCompleted = isCompleted
         self.averageTime = averageTime
     }
+    
+    mutating func updateCompletionStatus() {
+        isCompleted = checklist.allSatisfy { $0.isDone }
+    }
+
     var formattedData: String {
         let formatter = DateFormatter()
         formatter.dateFormat="dd/MM/YYYY"

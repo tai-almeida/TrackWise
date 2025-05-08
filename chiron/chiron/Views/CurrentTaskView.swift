@@ -103,6 +103,7 @@ struct CurrentTaskView: View {
                                 Spacer()
                                 Button {
                                     item.isDone.toggle()
+                                    editableTask.updateCompletionStatus()
                                 } label:{
                                     Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
                                         .foregroundColor(item.isDone ? .green : .gray)

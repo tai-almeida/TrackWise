@@ -19,6 +19,7 @@ struct EditEventView: View {
         
     @Environment(\.dismiss) var dismiss
 
+    @EnvironmentObject var schedule: Schedule
 
     init(event: Binding<Event>, eventData: Event){
         UITableView.appearance().backgroundColor = .clear
@@ -32,7 +33,7 @@ struct EditEventView: View {
         
         // background
         ZStack {
-            Color("BackgroundScreenColor").ignoresSafeArea()
+            Color(.secondarySystemBackground).ignoresSafeArea()
                             
             Form {
                 
@@ -40,7 +41,7 @@ struct EditEventView: View {
                     TextField("Titulo", text: $editableEvent.title)
                     TextField("Localização", text: $editableEvent.location)
                 }
-                .listRowBackground(Color(.secondarySystemBackground))
+                .listRowBackground(Color(.white))
 
     
                 Section {
@@ -50,9 +51,26 @@ struct EditEventView: View {
                                displayedComponents: .date
                     )
                 }
+                .listRowBackground(Color(.white))
+                
+                Section {
+                    Button(action: {
+                        if let index = schedule.events.firstIndex(where: { $0.id == event.id }) {
+                            schedule.events.remove(at: index)
+                            dismiss()
+                        } else {
+                            print("Não achei!")
+                        }
+                    }) {
+                        Text("Excluir Evento")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(.red)
+                    }
+                }
                 .listRowBackground(Color(.secondarySystemBackground))
-            }
 
+            }
+            .background(Color(.secondarySystemBackground))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

@@ -12,6 +12,18 @@ struct AddItemView: View {
     @EnvironmentObject var schedule: Schedule
     @Environment(\.dismiss) var dismiss
     
+    
+        init() {
+            UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("AccentColor")).toUIColor(color:Color("AccentColor"))
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
+
+
+        }
+      
+
+    
     // Instancias que representam o estado de variaveis que mudam com o input
     
     @State
@@ -20,6 +32,10 @@ struct AddItemView: View {
     var event:Event = Event(id: 0, title: "", location: "", date: Date())
     
     @State var SelectedPicker = 1
+    
+    @State
+    var isTask: Bool = false
+    
 
     
     @State
@@ -29,8 +45,8 @@ struct AddItemView: View {
         
         ZStack {
             
-            Color("BackgroundScreenColor")
-                .ignoresSafeArea()
+//            Color("BackgroundScreenColor")
+//                .ignoresSafeArea()
             
             VStack {
                 Picker(selection: $SelectedPicker, label: Text("Picker")) {
@@ -40,47 +56,46 @@ struct AddItemView: View {
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .background(Color(hex: 0xF8F6ED))
+                
+                .background(.clear)
                 .padding()
                 
-                
-                if SelectedPicker == 1 {
-                    
-                    // Tudo que representa a secao tarefa
-                    
-                    Form1(task:$task)
-                    
-                }  else if SelectedPicker == 2 {
-                    VStack(spacing: 0) {
+                Group {
+                    if SelectedPicker == 1 {
+                        Form1(task: $task)
+                    } else if SelectedPicker == 2 {
                         VStack(spacing: 0) {
-                            Group {
-                                TextField("Nome do evento", text: $event.title)
-                                    .padding()
-                                Divider()
-                                
-                                DatePicker(selection: $event.date, in: Date()..., displayedComponents: [.date], label: {
-                                    Text("Data")})
-                                
-                                Divider()
-                                
-                                TextField("Localizacao", text: $event.location)
-                                    .padding()
+                            GroupBox {
+                                VStack {
+                                    TextField("Nome do evento", text: $event.title)
+                                    Divider()
+                                    TextField("Localização", text: $event.location)
+                                    Divider()
+                                    DatePicker(selection: $event.date,
+                                             in: Date()...,
+                                             displayedComponents: [.date]) {
+                                        Text("Data")
+                                    }
+                                }
+                            
                             }
-                        }.background(Color(hex: 0xF8F6ED))
+                            .groupBoxStyle(WhiteGroupBoxStyle())
                             .cornerRadius(10)
                             .padding()
-                        
-                        Spacer()
-                        
-                        
-                       
+                            
+                            Spacer()
+                        }
                     }
-
-                    
-                    
                 }
 
+                .onAppear {
+                    if SelectedPicker == 1 {
+                        isTask = true
+                    }
+                    
+                }
             }
+            .background(Color(.secondarySystemBackground))
 
         }.navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Adicionar Tarefa")
@@ -91,9 +106,12 @@ struct AddItemView: View {
                         //var task = Task()
                         let components = Calendar.current.dateComponents([.minute], from: task.startTime, to: task.endTime)
                         task.averageTime = components.minute ?? 0
-
-                        schedule.tasks.append(task)
-                        schedule.events.append(event)
+                        
+                        if isTask {
+                            schedule.tasks.append(task)
+                        } else {
+                            schedule.events.append(event)
+                        }
                         dismiss()
                     }) {
                         Text("OK")
@@ -121,14 +139,17 @@ struct Form1: View {
     @Binding
     var task:Task
     
+    
     var body: some View {
         
         Form {
+            
             Section {
                 TextField("Nome da Tarefa", text: $task.title)
                 TextField("Localizacao", text: $task.location)
+                
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(.secondarySystemBackground))
             
             Section{
                 DatePicker(selection: $task.date, in: Date()..., displayedComponents: [.date], label: {
@@ -136,20 +157,15 @@ struct Form1: View {
                 
                 DatePicker(selection: $task.startTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
                     Text("Início")})
-                DatePicker(selection: $task.endTime, in: Date()..., displayedComponents: [.hourAndMinute], label: {
+                DatePicker(selection: $task.endTime, in: task.startTime..., displayedComponents: [.hourAndMinute], label: {
                     Text("Fim")})
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(.secondarySystemBackground))
             
             
             Section {
                 HStack {
-                    
-                    Text("Categoria")
-                    Spacer()
-                    Text("\(task.category.rawValue)")
-                                            .foregroundStyle(.secondary)
-                    
+                   
                     Menu {
                         Section{
                             Button {
@@ -173,16 +189,25 @@ struct Form1: View {
                             task.category = .atv_fisica
                         }
                         
-                    } label: {
-                        Image(systemName: "chevron.up.chevron.down")
                     }
-                }
-                HStack {
-                    Text("Dificuldade")
                     
+                label: {
+                    
+                    Text("Categoria")
+                        .foregroundStyle(.black)
                     Spacer()
-                    Text("\(task.difficulty.rawValue)")
-                                            .foregroundStyle(.secondary)
+                   
+                    
+                    Text("\(task.category.rawValue)")
+                        .foregroundStyle(.secondary)
+                        Image(systemName: "chevron.up.chevron.down")
+                        .foregroundStyle(.secondary)
+                        
+                    }
+                } .contentShape(Rectangle())
+                
+                HStack {
+    
                     Menu {
                         Button("Fácil") {
                             task.difficulty = .facil
@@ -193,19 +218,28 @@ struct Form1: View {
                         Button("Difícil") {
                             task.difficulty = .dificil
                         }
+                        
+                        
                     } label: {
+                        Text("Dificuldade")
+                            .foregroundStyle(.black)
+                        Spacer()
+                        
+                        Text("\(task.difficulty.rawValue)")
+                            .foregroundStyle(.secondary)
                         Image(systemName: "chevron.up.chevron.down")
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(hex: 0xF8F6ED))
             
             Section(header: Text("Checklist")){
                 Text("Subtarefa 1")
                 Text("Subtarefa 2")
                 Text("Subtarefa 3")
             }
-            .listRowBackground(Color(hex: 0xF8F6ED))
+            //.listRowBackground(Color(hex: 0xF8F6ED))
             
         }
     }

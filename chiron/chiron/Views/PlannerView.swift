@@ -13,13 +13,29 @@ struct PlannerView: View {
     //var week: Week
     var schedule: Schedule
     
+    @State private var currentDate = Date()
+
+//    init() {
+//            let appearance = UINavigationBarAppearance()
+//            appearance.configureWithOpaqueBackground()
+//            appearance.backgroundColor = UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
+//            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//            UINavigationBar.appearance().standardAppearance = appearance
+//            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//            UINavigationBar.appearance().compactAppearance = appearance
+//            UINavigationBar.appearance().tintColor = .white
+//        }
+    
     
     
     var body: some View {
         ZStack {
-            Color("BackgroundScreenColor").ignoresSafeArea()
+
+            Color(.secondarySystemBackground).ignoresSafeArea()
             NavigationView {
                 VStack(alignment: .leading) {
+
                     // tela scrolavel com os dias da semana
                     ScrollView {
                         VStack(alignment: .leading) {
@@ -29,14 +45,15 @@ struct PlannerView: View {
                                 .padding(.vertical, 2)
                                 .padding(.top, 5)
                                 .multilineTextAlignment(.leading)
-                                .padding(.leading, 10)
+                                //.padding(.leading, 10)
                             
                             // começa no dia de hoje e percorre os próximos 7 dias
                             ForEach((0..<7), id: \.self) { i in
                                 let day = Calendar.current.date(byAdding: .day, value: i, to: Date())!
                                 Text(schedule.getWeekDay(date: day))
                                     .padding(.top, 5)
-                                    .font(.body.bold())
+                                    .font(.system(size: 20, weight: .bold))
+                                    //.font(.bold)
                                     //.font(.body.bold())
                                     .multilineTextAlignment(.leading)
                                 
@@ -44,21 +61,27 @@ struct PlannerView: View {
                                 // cada evento separado por um divisor
                                     ForEach(schedule.dateEvents(data: day), id: \.self) { index in
                                         let event = schedule.events[index]
+                                        Divider()
                                         NavigationLink(destination: EventInfoView(originalEvent: $schedule.events[index],
                                                                                  event: event)){
-                                            Divider()
-                                            .padding(.horizontal, 20)
+                                            
+                                            //.padding(.horizontal, 20)
                                             
                                             // verifica se ha eventos na data analisada
                                             if !schedule.dateEvents(data: day).isEmpty {
                                                 Text(event.title)
-                                                    .padding(.horizontal, 20)
-                                                    .padding(.bottom, 20)
+                                                    //.padding(.leading,10)
+                                                    .padding(.bottom, 10)
+                                                    .foregroundColor(.black)
+                                                    
+                                                
                                                 
                                             }
 
                                         }
+                                        Divider()
                                     }
+                                    
                                 }
                                 
                                 // percorre as tarefas do dia e as apresenta na tela
@@ -67,7 +90,7 @@ struct PlannerView: View {
                                     if !schedule.dateTasks(data: day).isEmpty {
                                     Text("Atividades")
                                         .padding(.top, 20)
-                                        .font(.body.bold())
+                                        .font(.headline)
                                         .multilineTextAlignment(.leading)
                                         
                                     Section {
@@ -106,12 +129,16 @@ struct PlannerView: View {
                                                             Spacer()
                                                             VStack(alignment: .trailing) {
                                                                 // simbolo de inicio da tarefa
-                                                                Image(systemName: "play.fill")
-                                                                    .padding(.horizontal, 10)
-                                                                    .padding(.vertical, 4)
-                                                                    .background(Color("AccentColor"))
-                                                                    .foregroundStyle(.white)
-                                                                    .clipShape(Capsule())
+                                                                if let adjustedStart = Calendar.current.date(byAdding: .minute, value: -5, to: task.startTime),
+                                                                   currentDate >= adjustedStart && currentDate <= task.endTime {
+                                                                    Image(systemName: "play.fill")
+                                                                        .padding(.horizontal, 10)
+                                                                        .padding(.vertical, 4)
+                                                                        .background(Color("AccentColor"))
+                                                                        .foregroundStyle(.white)
+                                                                        .clipShape(Capsule())
+                                                                }
+
                                                                 // tag com o tempo convertido para HhMIN
                                                                 Text(convertsTime(duration: task.averageTime))
                                                                     .font(.system(size:12))
@@ -125,42 +152,50 @@ struct PlannerView: View {
                                                         }
                                                     }
                                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .background(Color(hex: 0xF8F6ED))
+                                                    .background(.white)
                                                     .cornerRadius(8)
                                                     .padding(.horizontal, 5)
-                                            
+                                                    .shadow(radius: 2)
                                             
                                             }
                                         }
                                     } else {
+                                        if !schedule.dateEvents(data: day).isEmpty {
+                                            Text("Atividades")
+                                                .padding(.top, 10)
+                                                .font(.headline)
+                                                .multilineTextAlignment(.leading)
+                                        }
                                         
                                         Divider()
-                                            .padding(.top, 20)
+                                            .padding(.top, 10)
                                         Text("Não há tarefas!")
                                             
                                             .foregroundColor(.secondary)
-                                        Divider()
-                                            .padding(.bottom, 20)
+//                                        Divider()
+//                                            .padding(.bottom, 20)
                                     }
 
                                 }
+                                Divider()
                                 
                             }
                              //insere + na toolbar para ir para tela de AddTask
-                            .padding(.horizontal, 10)
+                            //.padding(.horizontal, 10)
                             NavigationLink.init("",
                                                 destination: AddItemView(),
                                                 isActive: $navigateToAddItem)
                                     }.navigationTitle("Minha Rotina").navigationBarTitleDisplayMode(.inline)
                                       .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                      .background(Color("BackgroundScreenColor"))
+                                      .background(Color(.secondarySystemBackground))
                                       .toolbar {
                                         ToolbarItem(placement: .navigationBarTrailing) {
                                           Button(action: {
                                             navigateToAddItem = true
                                           }) {
                                             Text("+")
-                                              .foregroundColor(Color("AccentColor"))
+                                                  .foregroundColor(Color("AccentColor"))
+                                              .font(.system(size: 30))
                                           }
                                         }
                                       }
@@ -168,12 +203,19 @@ struct PlannerView: View {
                     }
                 .onAppear {
                     UITableView.appearance().backgroundColor = .clear
+                    Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
+                        currentDate = Date()
                 }
-                .background(Color("BackgroundScreenColor"))
-
+                .padding(.horizontal, 10)
+                .background(Color(.secondarySystemBackground))
+                
+                
                 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            //
             }
+        //.background(Color(.secondarySystemBackground))
         }
     }
 //}

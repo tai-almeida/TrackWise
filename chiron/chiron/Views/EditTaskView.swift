@@ -17,24 +17,28 @@ struct EditTaskView: View {
     @State
     var editableTask:Task
     
+   // @Binding var isActive: Bool
+    
     @State private var newSubitemTitle: String = ""
     
     @Environment(\.dismiss) var dismiss
-
-
-    init(task: Binding<Task>, taskData: Task){
+    
+    @EnvironmentObject var schedule: Schedule
+    
+    init(task: Binding<Task>, taskData: Task) {
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
 
         self._task = task
         self._editableTask = State(initialValue: taskData)
+       // self._isActive = isActive
     }
 
     var body: some View {
         
         // background
         ZStack {
-            Color("BackgroundScreenColor").ignoresSafeArea()
+            Color(.secondarySystemBackground).ignoresSafeArea()
                             
             Form {
                 
@@ -42,7 +46,7 @@ struct EditTaskView: View {
                     TextField("Titulo", text: $editableTask.title)
                     TextField("Localização", text: $editableTask.location)
                 }
-                    .listRowBackground(Color(.secondarySystemBackground))
+                    .listRowBackground(Color(.white))
 
     
                 Section {
@@ -67,7 +71,7 @@ struct EditTaskView: View {
                             Text("Fim")
                         })
                     }
-                .listRowBackground(Color(.secondarySystemBackground))
+                .listRowBackground(Color(.white))
 
         
                 Section {
@@ -112,7 +116,7 @@ struct EditTaskView: View {
                                                                  editableTask.difficulty.color))
                         }
                 }
-                .listRowBackground(Color(.secondarySystemBackground))
+                .listRowBackground(Color(.white))
                 
                 
                 Section(header: Text("Checklist")) {
@@ -121,6 +125,7 @@ struct EditTaskView: View {
                         HStack {
                             Button(action: {
                                 item.isDone.toggle()
+                                editableTask.updateCompletionStatus()
                             }) {
                                 Image(systemName: item.isDone ? "checkmark.circle" : "circle")
                                     .foregroundColor(item.isDone ? .green : .gray)
@@ -132,6 +137,7 @@ struct EditTaskView: View {
                             Button(action: {
                                 if let index = editableTask.checklist.firstIndex(where: { $0.id == item.id }) {
                                     editableTask.checklist.remove(at: index)
+                                    editableTask.updateCompletionStatus()
                                 }
                             }) {
                                 Image(systemName: "xmark")
@@ -152,28 +158,42 @@ struct EditTaskView: View {
                     }
                     
                 }
+                .listRowBackground(Color(.white))
+                
+                Section {
+                    Button(action: {
+                        if let index = schedule.tasks.firstIndex(where: { $0.id == task.id }) {
+                            schedule.tasks.remove(at: index)
+                            dismiss()
+                        } else {
+                            print("Não achei!")
+                        }
+                    }) {
+                        Text("Excluir Tarefa")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(.red)
+                    }
+                }
                 .listRowBackground(Color(.secondarySystemBackground))
-                
-                
-            }
 
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    task = editableTask
-                    dismiss()
-                }) {
-                    Text("Ok")
-                        .foregroundColor(Color("AccentColor"))
+
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .background(Color(.secondarySystemBackground))
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancelar") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Salvar") {
+                        task = editableTask
+                        dismiss()
+                    }
                 }
             }
-        }
-        
-        
-//        NavigationLink.init("",
-//                            destination: TaskInfoView(originalTask: $task,
-//                                                      task: editableTask),
-//                            isActive: $completeAndReturn)
         }
     }
     

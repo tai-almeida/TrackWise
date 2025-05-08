@@ -52,7 +52,7 @@ struct EventInfoView: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.secondarySystemBackground))
+                            .fill(Color(.white))
                     )
                 }
                 
@@ -60,7 +60,7 @@ struct EventInfoView: View {
             Spacer()
         }
         .padding()
-        .background(Color("BackgroundScreenColor"))
+        .background(Color(.secondarySystemBackground))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes do Evento")
         .toolbar {

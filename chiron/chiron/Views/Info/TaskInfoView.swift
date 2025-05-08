@@ -21,15 +21,16 @@ struct TaskInfoView: View {
     @State
     var navigateToEditTaskView: Bool = false
     
+   // @Binding var isActive: Bool
+    
     @State
     var modalCurrentTaskView: Bool = false
     
-//    @EnvironmentObject
-//    var week: Week
+    @StateObject var schedule = Schedule()
     
     var body: some View {
         
-        ScrollView {
+        VStack { ScrollView {
 
         VStack (alignment: .leading){
             
@@ -83,7 +84,7 @@ struct TaskInfoView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(.secondarySystemBackground))
+                        .fill(Color(.white))
                 )
             }
 
@@ -114,15 +115,31 @@ struct TaskInfoView: View {
                     .padding(.horizontal)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.secondarySystemBackground))
+                            .fill(Color(.white))
                     )
             }
             .padding(.top, 10)
 
             Spacer()
         }
+        
+        // conferir se o horario bate com o da tarefa
+        if let adjustedStart = Calendar.current.date(byAdding: .minute, value: -5, to: task.startTime),
+           Date() >= adjustedStart && Date() <= task.endTime {
+
+            Button(action: {
+                navigateToCurrentTaskView = true
+                modalCurrentTaskView.toggle()
+            }) {
+                Text("Começar Tarefa")
+            }
+            .buttonStyle(GreenButtonStyle())
+        }
+
+        }
+
         .padding()
-        .background(Color("BackgroundScreenColor"))
+        .background(Color(.secondarySystemBackground))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Detalhes da Tarefa")
         .toolbar {
@@ -139,18 +156,11 @@ struct TaskInfoView: View {
             CurrentTaskView(task: $originalTask)
         })
         
-        // conferir se o horario bate com o da tarefa
-        Button(action: {
-            navigateToCurrentTaskView = true
-            modalCurrentTaskView.toggle()
-        }) {
-          Text("Começar Tarefa")
-        }
-        .buttonStyle(GreenButtonStyle())
-        
         NavigationLink.init("",
                             destination: EditTaskView(task: $originalTask,
-                                                      taskData: task),
+                                                      taskData: task).environmentObject(schedule),
+                                                     // isActive: $navigateToEditTaskView)
+                                                    
                             isActive: $navigateToEditTaskView)
 
     }
