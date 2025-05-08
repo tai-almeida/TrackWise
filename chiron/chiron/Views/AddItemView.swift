@@ -11,19 +11,13 @@ import SwiftUI
 struct AddItemView: View {
     @EnvironmentObject var schedule: Schedule
     @Environment(\.dismiss) var dismiss
-    
-    
+        
         init() {
             UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("AccentColor")).toUIColor(color:Color("AccentColor"))
             UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-
             UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
-
-
         }
       
-
-    
     // Instancias que representam o estado de variaveis que mudam com o input
     
     @State
@@ -36,7 +30,6 @@ struct AddItemView: View {
     @State
     var isTask: Bool = false
     
-
     
     @State
     var completeAndReturn: Bool = false
@@ -64,30 +57,26 @@ struct AddItemView: View {
                     if SelectedPicker == 1 {
                         Form1(task: $task)
                     } else if SelectedPicker == 2 {
-                        VStack(spacing: 0) {
-                            GroupBox {
-                                VStack {
-                                    TextField("Nome do evento", text: $event.title)
-                                    Divider()
-                                    TextField("Localização", text: $event.location)
-                                    Divider()
-                                    DatePicker(selection: $event.date,
+                        Form {
+                            Section {
+                                TextField("Nome do Evento", text: $event.title)
+                                TextField("Localização", text: $event.location)
+
+                            }
+                                                
+                            Section {
+                                DatePicker(selection: $event.date,
                                              in: Date()...,
                                              displayedComponents: [.date]) {
                                         Text("Data")
-                                    }
                                 }
-                            
                             }
-                            .groupBoxStyle(WhiteGroupBoxStyle())
-                            .cornerRadius(10)
-                            .padding()
-                            
-                            Spacer()
-                        }
+
                     }
                 }
+                    Spacer()
 
+                }
                 .onAppear {
                     if SelectedPicker == 1 {
                         isTask = true
@@ -122,7 +111,11 @@ struct AddItemView: View {
                 }
             }
     }
+    
+    
 }
+
+
 
 // Atribuir as funcoes a tarefas e init
 func TagLazer() { }
@@ -139,6 +132,7 @@ struct Form1: View {
     @Binding
     var task:Task
     
+    @State private var newSubitemTitle: String = ""
     
     var body: some View {
         
@@ -146,7 +140,7 @@ struct Form1: View {
             
             Section {
                 TextField("Nome da Tarefa", text: $task.title)
-                TextField("Localizacao", text: $task.location)
+                TextField("Localização", text: $task.location)
                 
             }
             //.listRowBackground(Color(.secondarySystemBackground))
@@ -234,14 +228,45 @@ struct Form1: View {
             }
             //.listRowBackground(Color(hex: 0xF8F6ED))
             
-            Section(header: Text("Checklist")){
-                Text("Subtarefa 1")
-                Text("Subtarefa 2")
-                Text("Subtarefa 3")
+            Section(header: Text("Checklist")) {
+
+                ForEach($task.checklist) { $item in
+                    HStack {
+                        TextField("Subtarefa", text: $item.title)
+                        
+                        Button(action: {
+                            if let index = task.checklist.firstIndex(where: { $0.id == item.id }) {
+                                task.checklist.remove(at: index)
+                                task.updateCompletionStatus()
+                            }
+                        }) {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                
+                // implementar logica para criar um campo vazio que adiciona um chacklistitem no array checklist
+                // se adicionar um novo, aparece outro campo em branco
+                
+                HStack {
+                    TextField("Nova subtarefa", text: $newSubitemTitle, onCommit: {
+                        addNewSubitem()
+                    })
+                    .submitLabel(.done)
+                }
+                
             }
             //.listRowBackground(Color(hex: 0xF8F6ED))
             
         }
+    }
+    
+    func addNewSubitem() {
+        let newItem: ChecklistItem = ChecklistItem(title: newSubitemTitle, isDone: false)
+        task.checklist.append(newItem)
+        newSubitemTitle = ""
     }
     
 }

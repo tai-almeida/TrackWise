@@ -38,7 +38,7 @@ struct EditEventView: View {
             Form {
                 
                 Section {
-                    TextField("Titulo", text: $editableEvent.title)
+                    TextField("Nome do Evento", text: $editableEvent.title)
                     TextField("Localização", text: $editableEvent.location)
                 }
                 .listRowBackground(Color(.white))

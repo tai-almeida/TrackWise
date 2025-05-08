@@ -74,7 +74,7 @@ struct PlannerView: View {
                                                     .padding(.bottom, 10)
                                                     .foregroundColor(.black)
                                                     
-                                                
+    
                                                 
                                             }
 
@@ -205,6 +205,7 @@ struct PlannerView: View {
                     UITableView.appearance().backgroundColor = .clear
                     Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { _ in
                         currentDate = Date()
+                    }
                 }
                 .padding(.horizontal, 10)
                 .background(Color(.secondarySystemBackground))
@@ -218,7 +219,7 @@ struct PlannerView: View {
         //.background(Color(.secondarySystemBackground))
         }
     }
-//}
+
                             
 //    struct PlannerView_Previews: PreviewProvider {
 //        static var previews: some View {

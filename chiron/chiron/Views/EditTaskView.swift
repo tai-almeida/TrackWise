@@ -43,7 +43,7 @@ struct EditTaskView: View {
             Form {
                 
                 Section {
-                    TextField("Titulo", text: $editableTask.title)
+                    TextField("Nome da Tarefa", text: $editableTask.title)
                     TextField("Localização", text: $editableTask.location)
                 }
                     //.listRowBackground(Color(.secondarySystemBackground))
@@ -127,7 +127,7 @@ struct EditTaskView: View {
                                 item.isDone.toggle()
                                 editableTask.updateCompletionStatus()
                             }) {
-                                Image(systemName: item.isDone ? "checkmark.circle" : "circle")
+                                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
                                     .foregroundColor(item.isDone ? .green : .gray)
                             }
                             .buttonStyle(.plain)
