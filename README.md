@@ -24,9 +24,9 @@ TrackWise is an IOS App that helps students better organize and optimize their r
 - 
 
 ### Colaborators
-Tainá Almeida: tai-almeida  
-Ana Beatriz Mota: anabmf  
-Rodrigo Cont: Cjsrodrigo  
-Larissa Palhares: laapalhares  
-Ingrid Silveira: in-gridd  
+Tainá Almeida: tai-almeida (https://github.com/tai-almeida)    
+Ana Beatriz Mota: anabmf (https://github.com/anabmf)    
+Rodrigo Cont: Cjsrodrigo (https://github.com/Cjsrodrigo)  
+Larissa Palhares: laapalhares (https://github.com/laapalhares)    
+Ingrid Silveira: in-gridd (https://github.com/in-gridd)  
 
