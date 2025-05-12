@@ -1,4 +1,4 @@
-# TrackWise: Time Optimization & Habit Tracking for Students ⏱️📚  
+# TrackWise: Time Optimization and Habit Tracking for Students  
 
 ### Overview
 TrackWise is an IOS App that helps students better organize and optimize their routines. It doesn´t just track time — it learns from your habits to make increasingly accurate intelligent suggestions. Here is a demo of it's main functionalities: 
@@ -7,6 +7,10 @@ TrackWise is an IOS App that helps students better organize and optimize their r
   <img src="chiron/chiron/Media/demo.gif" width="300">
 </p>
 
+The apps' intention is to help students estimate the time they should dedicate into their tasks, in order to plan a achievable and eficient routine. 
+
+This app was created as an introduction to SwiftUI and Product Design.
+
 ### Features
 - **Time tracking**
   - The user presses to start a task. TrackWise tracks the time, until the user presses to end the task.
@@ -14,14 +18,11 @@ TrackWise is an IOS App that helps students better organize and optimize their r
   - Analyzes tasks by category and difficulty
   - Improves prediction over time
 
-### How to Run TrackWise 🚀
-**Requirements**
-- Xcode 15+
-- IOS 15 Simulator
-- SwiftUI
 
 ### Future Steps
-- 
+- Save the logs of the tasks completed, to estimate the time os future similar tasks
+- Make a frame of pending tasks
+- Integrate with Apple's calendar
 
 ### Colaborators
 Tainá Almeida: tai-almeida (https://github.com/tai-almeida)    
