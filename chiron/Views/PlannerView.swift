@@ -14,20 +14,6 @@ struct PlannerView: View {
     var schedule: Schedule
     
     @State private var currentDate = Date()
-
-//    init() {
-//            let appearance = UINavigationBarAppearance()
-//            appearance.configureWithOpaqueBackground()
-//            appearance.backgroundColor = UIColor(Color("AccentColor")).toUIColor(color: Color("AccentColor"))
-//            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-//
-//            UINavigationBar.appearance().standardAppearance = appearance
-//            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-//            UINavigationBar.appearance().compactAppearance = appearance
-//            UINavigationBar.appearance().tintColor = .white
-//        }
-    
-    
     
     var body: some View {
         ZStack {
