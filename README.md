@@ -9,7 +9,7 @@ TrackWise is an IOS App that helps students better organize and optimize their r
 
 The apps' intention is to help students estimate the time they should dedicate into their tasks, in order to plan a achievable and eficient routine. 
 
-This app was created as an introduction to SwiftUI and Product Design.
+This app was created as an introduction to SwiftUI and Product Design. You can see our design process on our FigJam (in portuguese): https://www.figma.com/board/9hgbpBi2UGg5thI7chI2EP/-Chiron--Board?node-id=0-1&p=f&t=dt2s41Z0gBkDX5Tf-0
 
 ### Features
 - **Time tracking**
